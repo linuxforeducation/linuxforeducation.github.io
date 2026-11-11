@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GStreamer 1.28.7 a fost lansat: Remedieri critice de securitate și optimizări de redare · Linux for Education</title>
+<meta name="description" content="Publicația Linuxiac informează despre lansarea versiunii GStreamer 1.28.7 , o actualizare de mentenanță extrem de importantă pentru popularul cadru multimedia cross-platform, ce aduce corecții de securitate…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-08">8 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>GStreamer 1.28.7 a fost lansat: Remedieri critice de securitate și optimizări de redare</h1>
+</header>
+<div class="prose">
+<p><br></p><p>Publicația <i>Linuxiac</i> informează despre lansarea versiunii <b>GStreamer 1.28.7</b>, o actualizare de mentenanță extrem de importantă pentru popularul cadru multimedia cross-platform, ce aduce corecții de securitate, rezolvări de regresii la redare și compatibilitate extinsă.</p><p>✨ <b>Punctele cheie ale lansării GStreamer 1.28.7:</b></p><p>🔒 <b>Patch-uri de securitate și stabilitate:</b></p><p>• Include corecții de securitate recomandate pentru actualizare imediată, alături de eliminarea unor scurgeri de memorie (<i>memory leaks</i>) și îmbunătățiri generale de fiabilitate.</p><p>🎬 <b>Remedierea regresiilor de redare (<i>Playback Fixes</i>):</b></p><p>• <b><code>appsrc</code> EOS:</b> Corectează o regresie în gestionarea semnalului <i>End-Of-Stream</i> când sursa este blocată.</p><p>• <b><code>mxfdemux</code>:</b> Rezolvă o problemă de detectare eronată a cadrelor cheie (<i>keyframes</i>), eliminând artefactele vizuale care apăreau la derulare/căutare (<i>seeking</i>).</p><p>• <b><code>glcolorconvert</code>:</b> Remediază problemele de conversie pe versiuni mai vechi de OpenGL și GLSL.</p><p>🧩 <b>Compatibilitate extinsă &amp; SDK-uri noi:</b></p><p>• <b>OpenCV 5:</b> Modulul de integrare cu OpenCV poate fi compilat acum direct cu noua versiune majoră OpenCV 5.</p><p>• <b>AMD HIP &amp; Windows:</b> Optimizări de detectare pentru <code>hipcc</code> și remedierea denumirilor de biblioteci sub HIP SDK 7.x pe Windows.</p><p>• <b>QML6 GL Overlay:</b> Corecții privind gestionarea duratei de viață a texturilor de ieșire.</p><p>⚙️ <b>Mici optimizări la nivel de parsere și formate:</b></p><p>• Corecții de detectare a tipului de date (<i>typefinding</i>) pentru fișiere Ogg și text.</p><p>• Restabilirea gestionării evenimentelor de gol (<i>gap events</i>) în demuxer-ul MPEG-PS.</p><p>• Suport îmbunătățit pentru adâncimi mari de biți (<i>high-bit-depth</i>) în pachetele binare <code>x264enc</code>.</p><p>🔗 <b>Sursă și articol complet:</b></p><p><a href="https://linuxiac.com/gstreamer-1-28-7-released-with-security-and-playback-fixes/" target="_blank" rel="noopener noreferrer">https://linuxiac.com/gstreamer-1-28-7-released-with-security-and-playback-fixes/</a></p><p>📌 <b>Concluzie:</b></p><p>Fiind o lansare concentrată pe stabilitate și securitate fără modificări de API, actualizarea la GStreamer 1.28.7 este ferm recomandată pentru toate sistemele Linux și aplicațiile multimedia dependente! 🚀</p><p>#GStreamer #Multimedia #OpenSource #Linuxiac #Security #Linux #FOSS #TechNews #DevOps</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-bottles-extinde-suportul-pentru.html"><small>← Mai nou</small>Bottles extinde suportul pentru executarea aplicațiilor Windows pe sisteme Linux ARM64</a><a class="r" href="../articole/2026-09-finantarea-proiectului-omarchy-urca-la.html"><small>Mai vechi →</small>Finanțarea proiectului Omarchy urcă la 13M$, cu un buget anual de peste 4M$ alocat dezvoltării</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

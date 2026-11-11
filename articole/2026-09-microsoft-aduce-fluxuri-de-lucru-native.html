@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft aduce fluxuri de lucru native pentru containere Linux în WSL · Linux for Education</title>
+<meta name="description" content="Microsoft a făcut un pas major pentru dezvoltatorii care folosesc mediul Windows, anunțând integrarea nativă a fluxurilor de lucru pentru containere Linux directe în cadrul WSL (Windows Subsystem for Linux)…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-30">30 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Microsoft aduce fluxuri de lucru native pentru containere Linux în WSL</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEicrU3JX7MH8xt3QJejAqnPUkHL1vBHFrMSTt5ULWivMa99t79rmrsSRbO1n0BNxEVaT7O33hXTPgSEcBzzwqlbH5KbsgTJW2kkp5mKblcHOHSOIK9m36QqZH7H2tMOotdu806fa4q5noUZu2TFDgRiFBbyxAwJZn9hrhz6wzQwe1vX8BG4-UKBWQopFAM" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEicrU3JX7MH8xt3QJejAqnPUkHL1vBHFrMSTt5ULWivMa99t79rmrsSRbO1n0BNxEVaT7O33hXTPgSEcBzzwqlbH5KbsgTJW2kkp5mKblcHOHSOIK9m36QqZH7H2tMOotdu806fa4q5noUZu2TFDgRiFBbyxAwJZn9hrhz6wzQwe1vX8BG4-UKBWQopFAM=w606-h341" alt="" loading="lazy" decoding="async"></a></div><p>Microsoft a făcut un pas major pentru dezvoltatorii care folosesc mediul Windows, anunțând integrarea nativă a fluxurilor de lucru pentru containere Linux directe în cadrul <b>WSL (Windows Subsystem for Linux)</b>. Această actualizare elimină necesitatea de a depinde exclusiv de aplicații terțe sau de mașini virtuale greoaie pentru rularea containerelor Docker sau Podman.</p><h3>Cele mai importante noutăți privind containerele în WSL</h3><ul><li><p><b>Execuție directă și nativă:</b> Utilizatorii pot rula engine-uri de containere (precum Docker Engine, Podman sau containerd) direct în kernelul Linux din WSL fără ajustări complexe de configurare.</p></li><li><p><b>Performanță I/O semnificativ îmbunătățită:</b> Prin eliminarea straturilor intermediare de abstractizare, accesul la sistemul de fișiere și timpii de pornire ai containerelor sunt considerabil mai rapizi.</p></li><li><p><b>Integrare mai strânsă cu rețeaua Windows:</b> Containerele pot accesa mai ușor serviciile de rețea ale sistemului gazdă Windows, simplificând dezvoltarea de aplicații web și microservicii locale.</p></li><li><p><b>Gestionare optimizată a resurselor:</b> Consumul de memorie RAM și procesor se adaptează dinamic în funcție de încărcarea containerelor active, eliberând resursele automat când acestea sunt oprite.</p></li></ul><h3>Impactul pentru dezvoltatori</h3><div class="tw"><table><thead><tr><td><strong>Aspect</strong></td><td><strong>Înainte</strong></td><td><strong>Acum (WSL Native Containers)</strong></td></tr></thead><tbody><tr><td><b>Consum Resurse</b></td><td>Ridicat (straturi suplimentare VM/Desktop).</td><td><b>Optimized / Dinamic</b> (rulare directă pe kernelul WSL).</td></tr><tr><td><b>Performanță Fișiere</b></td><td>Viteze reduse pe mount-uri încrucișate.</td><td><b>Viteză nativă I/O</b> în mediul Linux.</td></tr><tr><td><b>Configurare</b></td><td>Necesita aplicații terțe sau medii complexe.</td><td><b>Setup direct</b> din linia de comandă WSL.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/microsoft-brings-native-linux-container-workflows-to-wsl/" target="_blank" rel="noopener noreferrer">Linuxiac – Microsoft Brings Native Linux Container Workflows to WSL</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-archinstall-45-lansat-suport.html"><small>← Mai nou</small>Archinstall 4.5 lansat: Suport îmbunătățit pentru AArch64 și opțiuni pentru kernel-uri Real-Time</a><a class="r" href="../articole/2026-09-tails-714-lansat-sistemul-de-operare.html"><small>Mai vechi →</small>Tails 7.14 lansat: Sistemul de operare anonim actualizează Tor Browser, clientul Tor și kernelul Linux</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What&#x27;s Up Docker? 9.0 lansat: Stocare SQLite, control RBAC și token-uri de API · Linux for Education</title>
+<meta name="description" content="A fost lansată versiunea majoră What&#x27;s Up Docker? 9.0 (WUD) , popularul instrument open-source destinat monitorizării containerelor Docker și notificării automate atunci când sunt disponibile versiuni noi de…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-26">26 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>What&#x27;s Up Docker? 9.0 lansat: Stocare SQLite, control RBAC și token-uri de API</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg-Qx7oCHbJAPPCBMnZ4A25ZOh8phERMhc42PtsEppbQhlpUHoDVUlwj3gsZ6EcaMq07s3WaXwzKDcgKMhKwsg0YfcBbd07zfxzYgUdcPa7tsc55z7p-6l8ucHZyfNoLcaD3vGfnxSYClWQEStoVfbE8w-JL99FKzyFPR1iqDlsX-Ab2aYR_UVcP-cA1mw" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEg-Qx7oCHbJAPPCBMnZ4A25ZOh8phERMhc42PtsEppbQhlpUHoDVUlwj3gsZ6EcaMq07s3WaXwzKDcgKMhKwsg0YfcBbd07zfxzYgUdcPa7tsc55z7p-6l8ucHZyfNoLcaD3vGfnxSYClWQEStoVfbE8w-JL99FKzyFPR1iqDlsX-Ab2aYR_UVcP-cA1mw=w650-h366" alt="" loading="lazy" decoding="async"></a></div><p>A fost lansată versiunea majoră <b>What's Up Docker? 9.0 (WUD)</b>, popularul instrument open-source destinat monitorizării containerelor Docker și notificării automate atunci când sunt disponibile versiuni noi de imagini. Această actualizare aduce schimbări fundamentale de arhitectură, transformând WUD dintr-un simplu utilitar de notificare într-o platformă mai robustă și securizată pentru mediile de producție și homelab-uri.</p><h3>Principalele noutăți din What's Up Docker 9.0</h3><ul><li><p><b>Stocare persistentă pe bază de SQLite:</b> WUD renunță la stocarea stării în memorie/fișiere simple în favoarea unei baze de date <b>SQLite</b>. Aceasta asigură o persistență mult mai fiabilă a datelor, o pornire mai rapidă și posibilitatea de a istorisi eficient modificările containerelor.</p></li><li><p><b>Control al accesului bazat pe roluri (RBAC):</b> Introduce un sistem nativ de permisiuni și autentificare (Role-Based Access Control), permițând administratorilor să definească utilizatori cu drepturi diferite (ex. vizualizare vs. administrare).</p></li><li><p><b>Token-uri de API securizate:</b> Integrările cu alte aplicații sau scripturi terțe se pot realiza acum în siguranță prin intermediul <b>API tokens</b>, fără a mai fi necesară expunerea credențialelor principale.</p></li><li><p><b>Interfață Web actualizată:</b> UI-ul a primit optimizări vizuale și de performanță pentru a reflecta noile opțiuni de gestionare a utilizatorilor, token-urilor și istoricului de actualizări.</p></li></ul><h3>Despre What's Up Docker (WUD)</h3><p>Spre deosebire de instrumente precum <i>Watchtower</i> (care pot actualiza automat containerele imediat ce apare o imagine nouă), <b>WUD</b> se concentrează pe notificări inteligente și control manual, oferind integrări vaste:</p><div class="tw"><table><thead><tr><td><strong>Caracteristică</strong></td><td><strong>Detalii</strong></td></tr></thead><tbody><tr><td><b>Canale de Notificare</b></td><td>Suport pentru Discord, Telegram, Slack, Gotify, Email, Webhooks, Home Assistant etc.</td></tr><tr><td><b>Monitoare de Regiștri</b></td><td>Monitorizează Docker Hub, GitHub Container Registry (GHCR), GitLab, Quay, Harbor etc.</td></tr><tr><td><b>Securitate &amp; Control</b></td><td>Permite filtrarea containerelor prin etichete (<i>labels</i>) și declanșarea de declanșatori (<i>triggers</i>) personalizați.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/whats-up-docker-9-0-released-with-sqlite-backend-rbac-and-api-tokens/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac – What's Up Docker? 9.0 Released with SQLite Backend, RBAC, and API Tokens</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-cosmic-desktop-19-aduce-vizualizatorul.html"><small>← Mai nou</small>COSMIC Desktop 1.9 aduce vizualizatorul COSMIC Viewer și tastatură pe ecran</a><a class="r" href="../articole/2026-09-fwupd-218-lansat-adauga-suport-pentru.html"><small>Mai vechi →</small>fwupd 2.1.8 lansat: Adaugă suport pentru noi echipamente hardware și corecții pentru actualizarea de firmware</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

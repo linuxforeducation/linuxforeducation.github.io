@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>virtio-nvgpu aduce acces partajat la plăci video NVIDIA pentru mașini virtuale Linux KVM · Linux for Education</title>
+<meta name="description" content="Un nou proiect open-source numit virtio-nvgpu promite să revoluționeze virtualizarea pe Linux, oferind mașinilor virtuale ( KVM guests ) acces partajat direct la plăcile video NVIDIA instalate pe sistemul…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-28">28 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>virtio-nvgpu aduce acces partajat la plăci video NVIDIA pentru mașini virtuale Linux KVM</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi27PGlK2ekRpPGAEU-RXQ6s_nIHEEUEUkurWYZ8gq5KngNqBTZ16E_bXNGnOCd9dDcX86ahXxgGtc6TALvcoXermz_yZ1sseEpszLYYy1NRjfcCBE1MOJlcjlRU7NoUtlhl1YUerYUu1LsnZWsBdd9o4bRuN3-q8LvQyGWvffARh2ALvGRAjKc_T1_UHo" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi27PGlK2ekRpPGAEU-RXQ6s_nIHEEUEUkurWYZ8gq5KngNqBTZ16E_bXNGnOCd9dDcX86ahXxgGtc6TALvcoXermz_yZ1sseEpszLYYy1NRjfcCBE1MOJlcjlRU7NoUtlhl1YUerYUu1LsnZWsBdd9o4bRuN3-q8LvQyGWvffARh2ALvGRAjKc_T1_UHo=w634-h357" alt="" loading="lazy" decoding="async"></a></div><p>Un nou proiect open-source numit <b>virtio-nvgpu</b> promite să revoluționeze virtualizarea pe Linux, oferind mașinilor virtuale (<i>KVM guests</i>) acces partajat direct la plăcile video NVIDIA instalate pe sistemul gazdă (<i>host</i>). Tehnologia elimină dependența de un passthrough PCIe dedicat de tip 1:1 sau de soluții proprietare costisitoare de nivel enterprise.</p><h3>Cum funcționează virtio-nvgpu?</h3><p>Spre deosebire de metoda clasică <b>VFIO PCIe Passthrough</b> (care blochează o placă video fizică pentru o singură mașină virtuală), <code>virtio-nvgpu</code> implementează un driver paravirtualizat bazat pe infrastructura standard <b>virtio</b>:</p><ul><li><p><b>Partajare de resurse (Resource Sharing):</b> Mai multe mașini virtuale pot utiliza simultan resursele aceleiași plăci video NVIDIA pentru accelerare hardware, calcule CUDA sau sarcini AI.</p></li><li><p><b>Arhitectură Paravirtualizată:</b> Sistemul oaspete folosește un driver virtual care comunică direct cu kernelul și driverele NVIDIA instalate pe sistemul gazdă.</p></li><li><p><b>Compatibilitate extinsă:</b> Funcționează pe plăci video din gama consumator (GeForce) fără a fi limitat la seriile enterprise (Quadro / Data Center) sau la licențiere de tip NVIDIA vGPU.</p></li></ul><h3>Comparativ: virtio-nvgpu vs. Metode Tradiționale</h3><div class="tw"><table><thead><tr><td><strong>Metodă Virtualizare</strong></td><td><strong>Număr VM-uri per GPU</strong></td><td><strong>Plăci Suportate</strong></td><td><strong>Configurare &amp; Complexitate</strong></td></tr></thead><tbody><tr><td><b>PCIe Passthrough (VFIO)</b></td><td><b>1 VM</b> (placă dedicată)</td><td>Orice GPU</td><td>Necesită IOMMU, restart/sechestrare GPU gazdă.</td></tr><tr><td><b>NVIDIA vGPU (GVT-g / vGPU)</b></td><td><b>Multiple VM-uri</b></td><td>Seriile Enterprise / Data Center</td><td>Câteodată necesită licențe comerciale sau modding complex.</td></tr><tr><td><b>virtio-nvgpu</b></td><td><b>Multiple VM-uri</b></td><td><b>GeForce / Quadro / Data Center</b></td><td>Utilizează stiva standard KVM/QEMU &amp; virtio.</td></tr></tbody></table></div><h3>Cazuri de utilizare ideale</h3><ul><li><p><b>Laboratoare de AI și Machine Learning:</b> Rularea mai multor containere sau VM-uri de testare care au nevoie de accelerare CUDA scăzută/medie fără a consuma plăci video dedicate.</p></li><li><p><b>DevOps și Medii de Testare:</b> Medii de dezvoltare virtualizate ce necesită capacități grafice sau calcule pe GPU.</p></li><li><p><b>Self-Hosting și Servere Casnice:</b> Rularea de servicii precum Plex/Jellyfin (transcodare) și mașini virtuale desktop pe un singur server fără multiple plăci video montate.</p></li></ul><p><b>Sursă articol:</b> <a href="https://linuxiac.com/virtio-nvgpu-brings-shared-nvidia-gpu-access-to-linux-kvm-guests/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac – virtio-nvgpu Brings Shared NVIDIA GPU Access to Linux KVM Guests</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-incus-75-lansat-adauga-retele-copil-ovn.html"><small>← Mai nou</small>Incus 7.5 lansat: Adaugă rețele copil OVN și migrare în timp real a instanțelor între noduri</a><a class="r" href="../articole/2026-09-shelly-315-fost-lansat-managerul-de.html"><small>Mai vechi →</small>Shelly 3.1.5 a fost lansat: Managerul de pachete pentru Arch Linux extinde suportul pentru AUR</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

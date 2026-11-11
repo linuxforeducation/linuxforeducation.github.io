@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kdenlive 26.08.2 a fost lansat: Corecții pentru fluxurile audio din clipurile proxy și stabilitate sporită a proiectelor · Linux for Education</title>
+<meta name="description" content="Echipa din spatele Kdenlive , editorul video open-source neliniar de referință din ecosistemul KDE, a publicat versiunea de mentenanță 26.08.2 . Lansarea face parte din suita extinsă de actualizări KDE Gear și…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-14">14 octombrie 2026</time><a class="chip" href="../software.html">Software</a><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Kdenlive 26.08.2 a fost lansat: Corecții pentru fluxurile audio din clipurile proxy și stabilitate sporită a proiectelor</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQpISuLwmzSsQ5v2_xdbu0UN-rgBcyofg93ztB-KpL0VN-V7_M0CgDewQ3ZT4RwiK-CmSDyDANDQariFaBMS9suQuap4bVbWoIB6HuHvwRkmMdRbFESFvMeHR7LlwEcAZSZ2qLffxMyDu5K-LwkoIx5X-iqcNn_-AlRZgEE-0IJ-xI5uVckpFwyIKMdcU/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQpISuLwmzSsQ5v2_xdbu0UN-rgBcyofg93ztB-KpL0VN-V7_M0CgDewQ3ZT4RwiK-CmSDyDANDQariFaBMS9suQuap4bVbWoIB6HuHvwRkmMdRbFESFvMeHR7LlwEcAZSZ2qLffxMyDu5K-LwkoIx5X-iqcNn_-AlRZgEE-0IJ-xI5uVckpFwyIKMdcU/w594-h375/image.png" alt="" loading="lazy" decoding="async"></a></div><p>Echipa din spatele <b>Kdenlive</b>, editorul video open-source neliniar de referință din ecosistemul KDE, a publicat versiunea de mentenanță <b>26.08.2</b>. Lansarea face parte din suita extinsă de actualizări KDE Gear și se concentrează pe rezolvarea unora dintre cele mai presante erori semnalate de creatori, vizând sincronizarea audio pe fișierele proxy, gestionarea proiectelor complexe și randarea tranzițiilor pe timeline.</p><h3>Punctul central: Repararea fluxurilor audio în clipurile proxy</h3><p>Pentru editorii video care lucrează cu fișiere la rezoluții mari (4K/8K) sau formate comprimate intensiv, generarea de <b>clipuri proxy</b> este esențială pentru a asigura o redare fluidă pe parcursul montajului.</p><p>Kdenlive 26.08.2 rezolvă o problemă critică apărută în versiunile anterioare:</p><ul><li><p><b>Sincronizare și integritate pe canale multiple:</b> A fost remediat un bug care cauza pierderea, coruperea sau maparea incorectă a pistelor audio atunci când se activau clipurile proxy pentru fișiere sursă cu fluxuri audio multiple.</p></li><li><p><b>Comutare predictibilă:</b> Trecerea de la fișierul proxy la cel de rezoluție completă înaintea randării finale se face acum fără discrepanțe de volum sau decalaje temporale între sunet și imagine.</p></li></ul><h3>Stabilitatea proiectelor și îmbunătățiri pe timeline</h3><p>Actualizarea aduce o serie de corecții esențiale pentru integritatea sesiunilor de lucru:</p><ul><li><p><b>Salvarea și redeschiderea proiectelor:</b> Au fost eliminate blocajele apărute la încărcarea fișierelor de proiect vechi sau a celor care utilizează efecte compuse imbricate (<i>nested timelines</i>).</p></li><li><p><b>Tranziții și compoziție grafică:</b> Corectarea erorilor vizuale care apăreau la aplicarea anumitor efecte de transformare și estompare peste piste suprapuse.</p></li><li><p><b>Optimizări de memorie pe timeline:</b> Reducerea consumului nejustificat de memorie RAM în timpul derulării rapide a proiectelor de mari dimensiuni, prevenind crash-urile neașteptate.</p></li><li><p><b>Curățarea fișierelor temporare:</b> Gestionare mai riguroasă a fișierelor cache și a datelor de randare intermediară generate pe disc.</p></li></ul><h3>Disponibilitate și instalare</h3><p>Fiind o versiune axată pe stabilitate și corecturi, actualizarea la Kdenlive 26.08.2 este puternic recomandată tuturor utilizatorilor existenți. Pachetul este disponibil imediat pe Linux în formatele universale oficiale <b>AppImage</b> și <b>Flatpak</b> (prin Flathub), precum și pe Windows și macOS direct de pe site-ul oficial kdenlive.org.</p><p><b>Sursă și detalii complete:</b> <a href="https://linuxiac.com/kdenlive-26-08-2-video-editor-released-with-proxy-audio-and-project-fixes/" target="_blank" rel="noopener noreferrer">Linuxiac — Kdenlive 26.08.2 Video Editor Released with Proxy Audio and Project Fixes</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-actualizare-majora-pentru-clientul.html"><small>← Mai nou</small>Actualizare majoră pentru clientul Steam pe Linux: Compatibilitate extinsă cu Proton și corecții critice pentru Vulkan</a><a class="r" href="../articole/2026-10-mozilla-thunderbird-158-fost-lansat.html"><small>Mai vechi →</small>Mozilla Thunderbird 158 a fost lansat: Filtrare rapidă a mesajelor, îmbunătățiri OpenPGP și corecții critice pentru Linux</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

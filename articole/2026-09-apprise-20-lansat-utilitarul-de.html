@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apprise 2.0 lansat: Utilitarul de notificări aduce reîncercări inteligente și suport asincron · Linux for Education</title>
+<meta name="description" content="Lansarea Apprise 2.0 marchează o actualizare majoră pentru una dintre cele mai populare biblioteci și utilitare open-source folosite pentru trimiterea de notificări push către aproape orice serviciu existent…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-28">28 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Apprise 2.0 lansat: Utilitarul de notificări aduce reîncercări inteligente și suport asincron</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjnNn7CDG5rXK7tCBjvWVMuZWuD9NRMlDEpEyVDlEhdqLihpKZi2_NnTatcYhDTA_RytyEU4qEtoFH92r8J9Y7MZj-OYilTEU42IUNgpEj_QUdw8NsxipyXCtSUgYA3rD5dazkvYQBKKPDjayrVmuUrIJSJ4xvl4WmkbWu2tWjb6F3mkqpQFqOdxikzInI" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjnNn7CDG5rXK7tCBjvWVMuZWuD9NRMlDEpEyVDlEhdqLihpKZi2_NnTatcYhDTA_RytyEU4qEtoFH92r8J9Y7MZj-OYilTEU42IUNgpEj_QUdw8NsxipyXCtSUgYA3rD5dazkvYQBKKPDjayrVmuUrIJSJ4xvl4WmkbWu2tWjb6F3mkqpQFqOdxikzInI=w578-h289" alt="" loading="lazy" decoding="async"></a></div><p>Lansarea <b>Apprise 2.0</b> marchează o actualizare majoră pentru una dintre cele mai populare biblioteci și utilitare open-source folosite pentru trimiterea de notificări push către aproape orice serviciu existent (Discord, Telegram, Gotify, Slack, Email, SMS etc.). Noua versiune introduce suport nativ <code>asyncio</code> și un mecanism mai inteligent de reîncercare a trimiterii mesajelor eșuate.</p><h3>Principalele noutăți din Apprise 2.0</h3><ul><li><p><b>Suport nativ asincron (<code>async</code> / <code>await</code>):</b> Integrarea completă cu arhitectura asincronă <code>asyncio</code> din Python permite trimiterea simultană a sute de notificări fără a bloca firul principal de execuție (<i>non-blocking I/O</i>).</p></li><li><p><b>Mecanism inteligent de reîncercare (<i>Smarter Retries</i>):</b> Gestionare optimizată a erorilor de rețea sau a limitărilor de rată (<i>rate-limiting</i>) impuse de furnizori, cu reîncercări automate bazate pe exponențial backoff.</p></li><li><p><b>Extinderea serviciilor suportate:</b> Adăugarea de noi furnizori de mesagerie și notificări push, precum și actualizarea celor existenți pentru a fi la zi cu ultimele modificări de API.</p></li><li><p><b>Refactorizarea arhitecturii interne:</b> Un cod sursă mai curat și mai eficient, asigurând timpi de răspuns reduși și consum minim de resurse la utilizarea CLI sau din scripturi Python.</p></li></ul><h3>Despre Apprise</h3><p><b>Apprise</b> permite trimiterea notificărilor push către zeci de servicii de mesagerie folosind o singură schemă unificată de URL-uri, simplificând radical integrarea în scripturi Bash, aplicații Python sau containere Docker.</p><div class="tw"><table><thead><tr><td><strong>Caracteristică</strong></td><td><strong>Detalii</strong></td></tr></thead><tbody><tr><td><b>Sintaxă URL unificată</b></td><td>Trimitere către orice serviciu prin formate simple (ex: <code>discord://webhook_id/webhook_token</code> sau <code>tgram://bot_token/chat_id</code>).</td></tr><tr><td><b>Integrări multiple</b></td><td>Peste 80+ de servicii suportate (Discord, Telegram, Signal, WhatsApp, Email, Matrix, Pushover etc.).</td></tr><tr><td><b>Flexibilitate</b></td><td>Disponibil ca utilitar CLI, bibliotecă Python și microserviciu API (Apprise API).</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/apprise-2-0-notification-tool-released-with-smarter-retries-and-async-support/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac – Apprise 2.0 Notification Tool Released with Smarter Retries and Async Support</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-noctalia-52-lansat-shell-ul-pentru.html"><small>← Mai nou</small>Noctalia 5.2 lansat: Shell-ul pentru Wayland aduce un nou comutator de ferestre</a><a class="r" href="../articole/2026-09-solus-linux-adopta-o-politica-oficiala.html"><small>Mai vechi →</small>Solus Linux adoptă o politică oficială privind contribuțiile generate de AI și LLM</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

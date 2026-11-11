@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVIDIA 620.70.06 deschide noua serie de drivere R620 pentru Linux: Optimizări pe Wayland, corecții Vulkan și stabilitate în jocuri · Linux for Education</title>
+<meta name="description" content="NVIDIA a lansat oficial driverul grafic 620.70.06 pentru Linux, marcând debutul noii ramuri R620 . Această actualizare pune accentul pe îmbunătățirea performanței pe sesiunile moderne Wayland, extinderea…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-07">7 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>NVIDIA 620.70.06 deschide noua serie de drivere R620 pentru Linux: Optimizări pe Wayland, corecții Vulkan și stabilitate în jocuri</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjjw9zHqZ0V9RslvzYLZIssuRjSxliPkLlEuc55bK-0Vn8oIHs741yiq6Pr0GQx2wa8IH7SU5oQM3-RBV9K81LmlTRbCnUBICq6ES5cNQB9xB3LkK-dR67EqixfMX3xa7MN1pWnK0wOe4GKVPzd6RVsBVoP2FH5n-BKvfS0_BIwhfXXCTP3IirwdEdgzwg/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjjw9zHqZ0V9RslvzYLZIssuRjSxliPkLlEuc55bK-0Vn8oIHs741yiq6Pr0GQx2wa8IH7SU5oQM3-RBV9K81LmlTRbCnUBICq6ES5cNQB9xB3LkK-dR67EqixfMX3xa7MN1pWnK0wOe4GKVPzd6RVsBVoP2FH5n-BKvfS0_BIwhfXXCTP3IirwdEdgzwg/w635-h357/image.png" alt="" loading="lazy" decoding="async"></a></div><p>NVIDIA a lansat oficial driverul grafic <b>620.70.06</b> pentru Linux, marcând debutul noii ramuri <b>R620</b>. Această actualizare pune accentul pe îmbunătățirea performanței pe sesiunile moderne Wayland, extinderea funcționalităților de monitorizare pe ecran și remedierea unor probleme specifice întâmpinate de utilizatorii care rulează jocuri prin Proton și VKD3D.</p><h3>Sincronizare explicită mai rapidă pe Wayland și remedieri multi-GPU</h3><p>Una dintre cele mai importante îmbunătățiri vizează experiența desktop pe Wayland la rate mari de reîmprospătare a cadrelor:</p><ul><li><p><b>Performanță crescută în sincronizarea explicită (<i>Explicit Sync</i>):</b> Noul driver optimizează transferul cadrelor randate între aplicații, driverul video și compozitor în scenarii de framerate ridicat, oferind o redare mai fluidă și reducând latența pe desktop-urile Linux moderne.</p></li><li><p><b>Corecție pentru configurații multi-GPU:</b> A fost eliminată coruperea imaginii și pâlpâirea ecranului (<i>flickering</i>) apărute în aplicațiile Vulkan pe sistemele cu mai multe plăci grafice atunci când este activată variabila de mediu <code>__VK_ENABLE_DEVICE_GROUPS</code>.</p></li></ul><h3>Extinderea indicatorului OSD și suport Vulkan complet</h3><p>NVIDIA a extins compatibilitatea pentru indicatorul său grafic de pe ecran (OSD), activabil prin intermediul comenzii <code>__GL_SHOW_GRAPHICS_OSD</code>. Acesta funcționează acum pe toate backend-urile Vulkan, inclusiv în sesiunile Wayland și în configurațiile directe către ecran (<i>direct-to-display</i>).</p><h3>Corecții dedicate jocurilor: Assassin's Creed Shadows și Final Fantasy VII Rebirth</h3><p>Pasionații de jocuri pe Linux primesc rezolvări pentru titluri de calibru:</p><ul><li><p><b>Assassin's Creed Shadows:</b> A fost corectată o regresie apărută inițial în ramura de drivere R595, restabilind funcționarea corectă a jocului.</p></li><li><p><b>Final Fantasy VII Rebirth:</b> S-au eliminat blocajele intermitente (<i>crashes</i>) care apăreau la utilizarea alocărilor de descriptori (<i>descriptor heaps</i>) prin <b>VKD3D-Proton</b>. Acesta este stratul critic de compatibilitate care traduce instrucțiunile Direct3D 12 în comenzi native Vulkan, permițând rularea jocurilor moderne de Windows prin Proton/Steam pe Linux.</p></li></ul><p>Driverul NVIDIA 620.70.06 este disponibil pentru descărcare direct de pe serverele oficiale ale companiei și urmează să fie integrat în depozitele distribuțiilor majore orientate pe gaming și pachete de ultimă generație.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-rocky-linux-lanseaza-testrarc-o-noua.html"><small>← Mai nou</small>Rocky Linux lansează Testrarc: O nouă platformă transparentă pentru testarea și validarea versiunilor</a><a class="r" href="../articole/2026-11-apt-336-fost-lansat-remediere-de.html"><small>Mai vechi →</small>APT 3.3.6 a fost lansat: Remediere de securitate pentru ocolirea verificării descărcărilor și rezolvarea erorilor de memorie</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

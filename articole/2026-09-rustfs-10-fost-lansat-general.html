@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RustFS 1.0 a fost lansat (General Availability): Stocare de obiecte compatibilă cu S3, scrisă în Rust · Linux for Education</title>
+<meta name="description" content="Proiectul open-source RustFS a ajuns la prima sa versiune pregătită oficial pentru mediile de producție ( 1.0 GA ). Licențiat sub Apache 2.0, RustFS se poziționează ca o alternativă directă și complet…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-20">20 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>RustFS 1.0 a fost lansat (General Availability): Stocare de obiecte compatibilă cu S3, scrisă în Rust</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhsJ2JWNPNDV-PwWr9dKLTc757XBWVN4wtI49IAEx5quoc8aqQZ5-NcNiCJlA0oNWpb0kU2mUtKKz9Vf0upODbSQfoVIoJ8LY1IHhBvtpVg9dKFkSyAILdT40xJfUEbn4LxdbPCsDiFBD0Au--pK7v7YsjaG49ASITM8nHwgqGz-ac9tBU7QekzOLNcUjw" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhsJ2JWNPNDV-PwWr9dKLTc757XBWVN4wtI49IAEx5quoc8aqQZ5-NcNiCJlA0oNWpb0kU2mUtKKz9Vf0upODbSQfoVIoJ8LY1IHhBvtpVg9dKFkSyAILdT40xJfUEbn4LxdbPCsDiFBD0Au--pK7v7YsjaG49ASITM8nHwgqGz-ac9tBU7QekzOLNcUjw=w682-h384" alt="" loading="lazy" decoding="async"></a></div><p>Proiectul open-source <b>RustFS</b> a ajuns la prima sa versiune pregătită oficial pentru mediile de producție (<b>1.0 GA</b>). Licențiat sub Apache 2.0, RustFS se poziționează ca o alternativă directă și complet open-source la MinIO (după ce acesta din urmă a oprit mentenanța versiunii open-source și a trecut la un model comercial proprietar).</p><h3><b>Punctele cheie ale versiunii RustFS 1.0</b></h3><h4><b>1. Poziționare pe piață și istoric</b></h4><ul><li><p><b>Lansare de producție:</b> RustFS a început dezvoltarea în februarie 2024, a devenit open-source în iulie 2025, a trecut prin fazele Beta și Release Candidate în 2026 și a atins stabilitatea GA în septembrie 2026.</p></li><li><p><b>Adoptare masivă:</b> Peste 32.000 de stele pe GitHub, 10 milioane de descărcări pe Docker Hub și mai mult de 2,7 milioane de instanțe instalate.</p></li><li><p><b>Migrare din MinIO:</b> Include unelte dedicate pentru simplificarea migrării de pe infrastructuri existente MinIO.</p></li></ul><h4><b>2. Funcționalități de stocare &amp; Protocol S3</b></h4><ul><li><p><b>Capabilități S3 complete:</b> Suport pentru ciclul de viață al bucket-urilor și obiectelor, <i>multipart uploads</i>, <i>erasure coding</i>, <i>data tiering</i> și politici de retenție.</p></li><li><p><b>S3 Tables &amp; Iceberg:</b> Integrare nativă cu un catalog Apache Iceberg REST.</p></li><li><p><b>Interfețe multiple:</b> Pe lângă API-ul Amazon S3, datele pot fi accesate prin <b>WebDAV</b>, <b>Swift API</b>, <b>FTP/FTPS</b> și <b>MCP</b>.</p></li></ul><h4><b>3. Arhitectură distribuită și Securitate</b></h4><ul><li><p><b>Scalabilitate:</b> Suportă extinderea pool-urilor de stocare, rebalansarea datelor, noduri cu autovindecare (<i>self-healing</i>) și replicare la nivel de site și bucket.</p></li><li><p><b>Securitate de nivel enterprise:</b> Autentificare IAM și OIDC, integrare KMS, criptare pe server (SSE), token-uri STS, mTLS și auditare de securitate.</p></li><li><p><b>Monitorizare:</b> Suport OpenTelemetry, verificări de sănătate ale clusterului și notificări de evenimente.</p></li></ul><h4><b>4. Suport multi-platformă &amp; Planuri de viitor</b></h4><ul><li><p><b>Compatibilitate:</b> Rulează pe Linux (pachete DEB și RPM), Windows și macOS, cu opțiuni de instalare standalone, Docker și Kubernetes.</p></li><li><p><b>Următorii pași:</b> Pentru versiunea <b>RustFS 2.0</b>, dezvoltatorii intenționează să adauge suport pentru <b>S3 Vectors</b>, extinzând platforma către sarcini de lucru destinate infrastructurilor AI.</p></li></ul><p><b>Sursă:</b> <a href="https://linuxiac.com/rustfs-1-0-s3-compatible-object-storage-reaches-ga/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - RustFS 1.0 S3-Compatible Object Storage Reaches GA</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-pangolin-123-fost-lansat-simplificarea.html"><small>← Mai nou</small>Pangolin 1.23 a fost lansat: Simplificarea arhitecturilor High Availability (HA) și noi funcții de administrare</a><a class="r" href="../articole/2026-09-vlc-3024-fost-lansat-trecerea-la-ffmpeg.html"><small>Mai vechi →</small>VLC 3.0.24 a fost lansat: Trecerea la FFmpeg 8.1.2, suport Flatpak și multiple îmbunătățiri</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

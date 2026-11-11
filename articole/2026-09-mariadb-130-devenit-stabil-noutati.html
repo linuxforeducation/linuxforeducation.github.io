@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MariaDB 13.0 a devenit stabil: Noutăți importante pentru SQL și motorul InnoDB · Linux for Education</title>
+<meta name="description" content="Echipa din spatele serverului de baze de date open-source MariaDB a anunțat atingerea statutului Stable (GA) pentru versiunea MariaDB 13.0 (prin lansarea versiunii 13.0.2)[cite: 1]. Această etapă aduce o serie…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-19">19 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>MariaDB 13.0 a devenit stabil: Noutăți importante pentru SQL și motorul InnoDB</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiGo7UHlwZimr479bgOHbr15t48aPTEGul93Ora7nKBXrpE2G5shLp01ACIzPAnKRM-p6j1FmrLoZ0jWy1UBn8ns0F3kSBw3oA7tFwMIe9OTEwKyn3DAakc4--CMGFTY5chYYTVYv1mWiJe-JyiXJ6TjjmAdIJsgM2hEiXK61Jzcv50RG9Bn5dz_XyOQp0" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiGo7UHlwZimr479bgOHbr15t48aPTEGul93Ora7nKBXrpE2G5shLp01ACIzPAnKRM-p6j1FmrLoZ0jWy1UBn8ns0F3kSBw3oA7tFwMIe9OTEwKyn3DAakc4--CMGFTY5chYYTVYv1mWiJe-JyiXJ6TjjmAdIJsgM2hEiXK61Jzcv50RG9Bn5dz_XyOQp0=w653-h367" alt="" loading="lazy" decoding="async"></a></div><p>Echipa din spatele serverului de baze de date open-source MariaDB a anunțat atingerea statutului <b>Stable (GA)</b> pentru versiunea <b>MariaDB 13.0</b> (prin lansarea versiunii 13.0.2)[cite: 1]. Această etapă aduce o serie de funcționalități noi pentru interogările SQL, optimizatorul de interogări, motorul de stocare InnoDB și replicare[cite: 1].</p><h3><b>Punctele cheie din noua versiune MariaDB 13.0</b></h3><h4><b>1. Noutăți SQL și optimizări</b></h4><ul><li><p><b>Suport pentru <code>UPDATE ... RETURNING</code>:</b> Permite returnarea directă a valorilor modificate într-o tabelă, fără a mai fi necesară executarea unei interogări separate de tip <code>SELECT</code>[cite: 1].</p></li><li><p><b>Comandă atomică <code>CREATE OR REPLACE TABLE</code>:</b> Asigură executarea în siguranță și fără stări intermediare a modificărilor de structură[cite: 1].</p></li><li><p><b>Vizibilitate sporită în Optimizer Trace:</b> Componenta afișează acum exact statisticile folosite pentru generarea planului de execuție a interogărilor[cite: 1].</p></li><li><p><b>Noi indicații de optimizare (hints):</b> A fost adăugat <i>hint-ul</i> <code>QB_NAME()</code> pentru a identifica și viza direct blocuri individuale de interogare[cite: 1].</p></li></ul><h4><b>2. Îmbunătățiri pentru InnoDB și stocare</b></h4><ul><li><p><b>Arhivarea logurilor InnoDB (<code>innodb_log_archive</code>):</b> O opțiune nouă creată pentru a simplifica fluxurile de lucru de tip <i>point-in-time recovery</i> și salvările de rezervă incrementale (cu mențiunea că instrumentul <code>mariadb-backup</code> urmează să primească suport direct pe parcurs)[cite: 1].</p></li><li><p><b>Performanță crescută:</b> Indecșii unici pe coloane de tip <code>CHAR</code> în tabele de tip <code>MEMORY</code> sunt acum mai rapizi, iar <code>Performance Schema</code> folosește algoritmul de hashing <code>XXH3_128</code>[cite: 1].</p></li></ul><h4><b>3. Integrarea experimentală cu DuckDB</b></h4><p>MariaDB 13.0 continuă eforturile de integrare a motorului <b>DuckDB</b> ca motor de stocare conectabil (pluggable storage engine)[cite: 1]. Această funcționalitate combină capacitățile tranzacționale ale MariaDB cu viteza de analiză pe coloane specifică DuckDB (în prezent, această integrare are statutul experimental / gamma)[cite: 1].</p><p><b>Sursă:</b> <a href="https://linuxiac.com/mariadb-13-0-goes-stable-with-new-sql-and-innodb-features/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - MariaDB 13.0 Goes Stable with New SQL and InnoDB Features</a>[cite: 1]</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-libreoffice-268-doboara-recordul-de.html"><small>← Mai nou</small>LibreOffice 26.8 doboară recordul de descărcări: TDF declară că lipsa inteligenței artificiale integrate este un avantaj</a><a class="r" href="../articole/2026-09-wine-1118-fost-lansat-suport-extins.html"><small>Mai vechi →</small>Wine 11.18 a fost lansat: Suport extins pentru driverele de kernel Windows și peste 20 de bug-uri rezolvate</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

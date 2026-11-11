@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pangolin 1.23 a fost lansat: Simplificarea arhitecturilor High Availability (HA) și noi funcții de administrare · Linux for Education</title>
+<meta name="description" content="Platforma open-source de acces la distanță Zero-Trust Pangolin a ajuns la versiunea 1.23 , aducând posibilitatea de a Deploya direct medii în cluster (High Availability), consolidarea CLI-ului, suport pentru…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-20">20 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Pangolin 1.23 a fost lansat: Simplificarea arhitecturilor High Availability (HA) și noi funcții de administrare</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhjIpl1CK6UY8W--n3gcGZbqLQ3NZxvvrPpDW0fH8qe0h8VDE8DELFD8Trw1OokfptxoG45tfWOYIDWBcpmSmUL9xU7KguDFO_JVz6CWfhoT2CiR6Uv_uWWfFFFdB63zUdhZnseBfbfVCW3cVPyM4YemiwIQlnHGfuSwbvuXB5edi_hUQo4Ojq_g7iFDq8" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhjIpl1CK6UY8W--n3gcGZbqLQ3NZxvvrPpDW0fH8qe0h8VDE8DELFD8Trw1OokfptxoG45tfWOYIDWBcpmSmUL9xU7KguDFO_JVz6CWfhoT2CiR6Uv_uWWfFFFdB63zUdhZnseBfbfVCW3cVPyM4YemiwIQlnHGfuSwbvuXB5edi_hUQo4Ojq_g7iFDq8=w660-h371" alt="" loading="lazy" decoding="async"></a></div><p>Platforma open-source de acces la distanță Zero-Trust <b>Pangolin</b> a ajuns la versiunea <b>1.23</b>, aducând posibilitatea de a Deploya direct medii în cluster (High Availability), consolidarea CLI-ului, suport pentru administratori multipli și îmbunătățiri de interfață [source: 1].</p><h3><b>Punctele cheie ale versiunii Pangolin 1.23</b></h3><h4><b>1. High Availability (HA) și clustering self-service</b></h4><ul><li><p><b>Deployment simplificat:</b> Rezolvarea DNS și gestionarea certificatelor au fost mutate direct în containerul principal Pangolin, oferind un ghid public pas cu pas pentru configurarea clusterelor (inclusiv arhitecturi în 2 noduri) [source: 1].</p></li><li><p><b>Stare partajată și failover:</b> Permite funcționarea mai multor instanțe Pangolin ca un singur sistem unificat cu failover automat și distribuție regională [source: 1].</p></li><li><p><b>Licențiere:</b> Opțiunile HA sunt disponibile în planurile <i>Scale</i> și <i>Enterprise</i>, cheile de licență fiind <b>gratuite</b> pentru uz personal și organizații sub pragul de venituri definit de proiect [source: 1].</p></li></ul><h4><b>2. Integrarea CLI și a conectorului Newt</b></h4><ul><li><p><b>Control unificat:</b> <i>Newt</i> (conectorul lightweight pentru rețele private) este acum integrat direct în CLI-ul principal Pangolin și poate fi rulat direct sau prin containerul <code>fosrl/pangolin-cli</code> [source: 1].</p></li><li><p><b>Servicii de sistem permanente:</b> CLI-ul permite instalarea unui site ca serviciu persistent direct din linia de comandă, folosind <code>systemd</code> pe Linux, <code>launchd</code> pe macOS și native service management pe Windows [source: 1].</p></li></ul><h4><b>3. Management multi-admin și vizibilitate pe organizații</b></h4><ul><li><p><b>Panou centralizat de administrare:</b> Administratorii de server pot vizualiza toate organizațiile găzduite pe o instanță (detalii despre proprietari, număr de utilizatori, site-uri și resurse conexe) [source: 1].</p></li><li><p><b>Conturi de administrator multiple:</b> Posibilitatea de a promova alți utilizatori existenți la gradul de administrator de server, eliminând necesitatea partajării unui singur cont de autentificare [source: 1].</p></li></ul><h4><b>4. Îmbunătățiri de interfață (Resource Launcher)</b></h4><ul><li><p>Visualizarea clară în panoul lateral a site-urilor care pot accesa o resursă specifică [source: 1].</p></li><li><p>Generare automată și copiere rapidă a comenzii <code>pangolin ssh</code> pentru resurse private SSH [source: 1].</p></li></ul><p><b>Sursă:</b> <a href="https://linuxiac.com/pangolin-1-23-tunneled-reverse-proxy-makes-high-availability-easier-to-deploy/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - Pangolin 1.23 Tunneled Reverse Proxy Makes High Availability Easier to Deploy</a> [source: 1]</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-kde-plasma-68-intra-in-faza-finala-de.html"><small>← Mai nou</small>KDE Plasma 6.8 intră în faza finală de finisare înainte de lansarea din 14 Octombrie 2026</a><a class="r" href="../articole/2026-09-rustfs-10-fost-lansat-general.html"><small>Mai vechi →</small>RustFS 1.0 a fost lansat (General Availability): Stocare de obiecte compatibilă cu S3, scrisă în Rust</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

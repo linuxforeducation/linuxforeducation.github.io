@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVIDIA 615.71.09 aduce suport Proton out-of-the-box pentru NVIDIA Reflex și optimizări majore pentru Wayland și arhitectura Blackwell · Linux for Education</title>
+<meta name="description" content="Publicația Linuxiac raportează lansarea celei mai noi versiuni din seria New Feature Branch a driverului grafic NVIDIA (615.71.09) pentru Linux, o actualizare de impact pentru ecosistemul de gaming pe Linux și…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-10">10 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>NVIDIA 615.71.09 aduce suport Proton out-of-the-box pentru NVIDIA Reflex și optimizări majore pentru Wayland și arhitectura Blackwell</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjqKDhEzhMEPFWomoO9EyqkCBl6euUpRo7m48mGEfbm6jPf8BOpoQXdixVb4EGc6skSz8TLVdvMkVC-60z0FcqMa_yeDCPCObzjuqB8nFp-7G8g-C_XlnQziNWZ1FwEwAzp4mr3WXvtGGGWheWENtjl3F0_FYX4iZ8r_LcxpM-nrlOQwjHhKGqzrL8Vxw8" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjqKDhEzhMEPFWomoO9EyqkCBl6euUpRo7m48mGEfbm6jPf8BOpoQXdixVb4EGc6skSz8TLVdvMkVC-60z0FcqMa_yeDCPCObzjuqB8nFp-7G8g-C_XlnQziNWZ1FwEwAzp4mr3WXvtGGGWheWENtjl3F0_FYX4iZ8r_LcxpM-nrlOQwjHhKGqzrL8Vxw8=w611-h343" alt="" loading="lazy" decoding="async"></a></div><br>Publicația <i>Linuxiac</i> raportează lansarea celei mai noi versiuni din seria <i>New Feature Branch</i> a driverului grafic <b>NVIDIA (615.71.09)</b> pentru Linux, o actualizare de impact pentru ecosistemul de gaming pe Linux și stabilitatea mediilor desktop moderne.<p>✨ <b>Punctele cheie ale driverului NVIDIA 615.71.09:</b></p><p>🎮 <b>NVIDIA Reflex &amp; Vulkan prin Proton:</b></p><p>• Introduce extensia <code>VK_NV_low_latency</code> (revizia 2), permițând utilizarea tehnologiei <b>NVIDIA Reflex</b> direct prin stratul de compatibilitate <b>Proton</b> (fără configurări suplimentare) în jocurile de Windows rulate pe Linux pentru a reduce latența de intrare (<i>input lag</i>).</p><p>• Rezolvă problemele anterioare legate de funcționarea latenței reduse pe suprafețe de randare native Wayland (<code>VK_KHR_wayland_surface</code>).</p><p>🖥️ <b>Optimizări și rezolvări de erori pe Wayland:</b></p><p>• Remediază eroarea Xid 109 ce apărea la lansarea titlului <i>PRAGMATA</i> sub Wayland.</p><p>• Reperă blocajele (<i>hangs</i>) la pornirea jocurilor sau la comutarea aplicațiilor (<code>Alt+Tab</code>) când funcția <b>NVIDIA Smooth Motion</b> este activată.</p><p>⚡ <b>Suport extins pentru arhitectura Blackwell (RTX 50-series):</b></p><p>• Corectează problemele de artefacte vizuale ce apăreau la scalarea ieșirii de afișare.</p><p>• Rezolvă o problemă rară de execuție în kernel-urile CUDA cu niveluri duble de divergență a firelor de execuție (<i>thread divergence</i>).</p><p>🔋 <b>Consum redus de energie &amp; Gestiune avansată a memoriei:</b></p><p>• Introduce opțiunea de kernel <code>RmDisableDisplayGlitchPerfLimit</code> pentru reducerea consumului de energie la inactivitate (<i>idle power</i>) pe configurațiile multi-monitor.</p><p>• Adaugă suport pentru <b>cgroups</b> în driverul open-source de kernel, permițând o izolare și o alocare mult mai precisă a memoriei VRAM între procese și containere.</p><p>🔗 <b>Sursă și articol complet:</b></p><p><a href="https://linuxiac.com/nvidia-615-71-linux-driver-adds-proton-support-for-nvidia-reflex/" target="_blank" rel="noopener noreferrer">https://linuxiac.com/nvidia-615-71-linux-driver-adds-proton-support-for-nvidia-reflex/</a></p><p>📌 <b>Concluzie:</b></p><p>NVIDIA 615.71 reprezintă un pas imens în eliminarea decalajului de performanță dintre Windows și Linux pentru gaming-ul competitiv, aducând suport nativ pentru latență redusă și stabilitate sporită pe mediile de afișare Wayland! 🚀</p><p>#Nvidia #LinuxGaming #Proton #Wayland #Linuxiac #Reflex #Vulkan #LinuxDriver #FOSS #TechNews</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-midesktop-12-beta-aduce-reinvierea-kde.html"><small>← Mai nou</small>MiDesktop 1.2 Beta aduce reînvierea KDE 1 mai aproape de utilizarea zilnică pe Linux</a><a class="r" href="../articole/2026-09-system76-dezvaluie-thelio-mira-ai.html"><small>Mai vechi →</small>System76 dezvăluie Thelio Mira AI: Desktop-ul dedicat sarcinilor locale de Inteligență Artificială</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

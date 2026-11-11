@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft lansează LiteBox 0.1: O bibliotecă de tip Sandboxing OS scrisă în Rust · Linux for Education</title>
+<meta name="description" content="Microsoft a lansat oficial versiunea 0.1 a proiectului LiteBox , o bibliotecă inovatoare de tip sandboxing library OS dezvoltat în limbajul Rust . Conceput pentru a executa cod neîncrezut în medii strict…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-09">9 octombrie 2026</time><a class="chip" href="../software.html">Software</a><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Microsoft lansează LiteBox 0.1: O bibliotecă de tip Sandboxing OS scrisă în Rust</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjewGSkuH8FBnmhk_ywL0YvVSlGF2A-ANwo__sFjQ5qujeq7-te2z2lWGRq6ZssPeduyO77foMeDcctgs0LD278Aun7nY7FxZALC6Ih8suiNf89mmRcxmzVeKy4hq-L-BhbjmuggliX_w41abusS5IoA_rm0B0Doepd1SeA1ycmp2amzcDNmPIgehx4RPQ/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjewGSkuH8FBnmhk_ywL0YvVSlGF2A-ANwo__sFjQ5qujeq7-te2z2lWGRq6ZssPeduyO77foMeDcctgs0LD278Aun7nY7FxZALC6Ih8suiNf89mmRcxmzVeKy4hq-L-BhbjmuggliX_w41abusS5IoA_rm0B0Doepd1SeA1ycmp2amzcDNmPIgehx4RPQ/w657-h283/image.png" alt="" loading="lazy" decoding="async"></a></div><p>Microsoft a lansat oficial versiunea <b>0.1</b> a proiectului <b>LiteBox</b>, o bibliotecă inovatoare de tip <i>sandboxing library OS</i> dezvoltat în limbajul <b>Rust</b>. Conceput pentru a executa cod neîncrezut în medii strict izolate, LiteBox combină siguranța oferită de limbajul Rust cu o arhitectură minimalistă, oferind o alternativă eficientă și ușoară la mașinile virtuale tradiționale și la containerele clasice.</p><h3>Cele mai importante noutăți din LiteBox 0.1</h3><ul><li><p><b>Arhitectură de tip Library OS:</b></p><ul><li><p>Permite rularea aplicațiilor alături de un set minim de servicii de sistem de operare, direct în interiorul unui spațiu de izolare (<i>sandbox</i>).</p></li><li><p>Reduce drastiac suprafața de atac (<i>attack surface</i>) prin eliminarea componentelor și kernel-urilor mari care nu sunt necesare execuției.</p></li></ul></li><li><p><b>Dezvoltat integral în Rust:</b></p><ul><li><p>Garantează siguranța memoriei (<i>memory safety</i>) la nivel de compilator, prevenind clase întregi de vulnerabilități de securitate (cum ar fi <i>buffer overflows</i> sau <i>use-after-free</i>).</p></li></ul></li><li><p><b>Consum minim de resurse și latență scăzută:</b></p><ul><li><p>Amprentă insignifiantă pe memoria RAM și timpi de lansare aproape instantanei comparativ cu soluțiile bazate auf hipervizoare (precum KVM sau Hyper-V).</p></li></ul></li><li><p><b>Cazuri de utilizare principale:</b></p><ul><li><p>Izolarea microserviciilor cloud, rularea securizată a funcțiilor Serverless (FaaS) și executarea de cod primit de la terți în medii de producție.</p></li></ul></li></ul><h3>Comparativ: LiteBox vs. Container/VM Tradițional</h3><div class="tw"><table><thead><tr><td><strong>Criteriu</strong></td><td><strong>Mașină Virtuală (VM)</strong></td><td><strong>Container (ex. Docker)</strong></td><td><strong>Microsoft LiteBox 0.1</strong></td></tr></thead><tbody><tr><td><b>Limbaj / Bază</b></td><td>C / Assembly / Hipervizor</td><td>Kernel Linux partajat</td><td><b>Rust</b> (Library OS)</td></tr><tr><td><b>Izolare</b></td><td>Hardware (Foarte mare)</td><td>Namespace-uri / Cgroups</td><td><b>Software-Defined / Rust-based Sandbox</b></td></tr><tr><td><b>Consum Resurse</b></td><td>Ridicat (MB/GB RAM)</td><td>Mediu</td><td><b>Minim (Extrem de redus)</b></td></tr><tr><td><b>Timp de Pornire</b></td><td>Secunde / Minute</td><td>Milisecunde</td><td><b>Aproape instantaneu</b></td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/microsoft-releases-litebox-0-1-a-rust-based-sandboxing-library-os/" target="_blank" rel="noopener noreferrer">Linuxiac – Microsoft Releases LiteBox 0.1, a Rust-Based Sandboxing Library OS</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-nu-guix-21-lansat-managerul-de-pachete.html"><small>← Mai nou</small>Nu Guix 2.1 lansat: Managerul de pachete îmbunătățește încărcarea extensiilor și performanța</a><a class="r" href="../articole/2026-10-raspberry-pi-imager-2012-lansat-rezolva.html"><small>Mai vechi →</small>Raspberry Pi Imager 2.0.12 lansat: Rezolvă problemele WPA3 și aduce scriere mai sigură a imaginilor</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

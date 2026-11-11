@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python 3.15 a fost lansat oficial: Compilator JIT accelerat, Lazy Imports și codare UTF-8 implicită · Linux for Education</title>
+<meta name="description" content="Fundația Python Software Foundation (PSF) a marcat un nou reper important în evoluția limbajului prin lansarea versiunii Python 3.15 . Această iterație continuă eforturile intense din cadrul inițiativei pe…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-13">13 octombrie 2026</time><a class="chip" href="../software.html">Software</a><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Python 3.15 a fost lansat oficial: Compilator JIT accelerat, Lazy Imports și codare UTF-8 implicită</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9NzlzHmAQPKRUk9vqpchqGib951JmSroLFh7n0dAeUGEMcHz2QAnphYmXezbWu8rEwPiolnTKcXQT9iS6pGyW7_8rDL4zqLKNkMN8gQbBJvGIr67aVoygNEH-ywc7B6Tiku_eq4kV-_Renu5bemkmHi3SKG-tLlUMoHUz94LCnLQhilRexUKkCAGmOVo/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9NzlzHmAQPKRUk9vqpchqGib951JmSroLFh7n0dAeUGEMcHz2QAnphYmXezbWu8rEwPiolnTKcXQT9iS6pGyW7_8rDL4zqLKNkMN8gQbBJvGIr67aVoygNEH-ywc7B6Tiku_eq4kV-_Renu5bemkmHi3SKG-tLlUMoHUz94LCnLQhilRexUKkCAGmOVo/w647-h364/image.png" alt="" loading="lazy" decoding="async"></a></div><p>Fundația Python Software Foundation (PSF) a marcat un nou reper important în evoluția limbajului prin lansarea versiunii <b>Python 3.15</b>. Această iterație continuă eforturile intense din cadrul inițiativei pe termen lung <i>Faster CPython</i>, aducând optimizări substanțiale de viteză, reducerea consumului de memorie la pornirea aplicațiilor și standardizarea definitivă a gestionării textului la nivel de sistem.</p><h3>Noutățile principale din Python 3.15</h3><ul><li><p><b>Compilator JIT (Just-In-Time) mai rapid și mai matur:</b>
+După introducerea arhitecturii experimentale de compilare JIT (bazată pe <i>copy-and-patch</i>) în versiunile precedente, Python 3.15 aduce îmbunătățiri consistente la nivelul generării de cod mașină. Compilatorul optimizează mai agresiv buclele fierbinți (<i>hot loops</i>) și apelurile de funcții, reducând overhead-ul de execuție în sarcinile intensive de calcul fără a compromite compatibilitatea cu ecosistemul C-API.</p></li><li><p><b>Mecanism nativ de „Lazy Imports” (Încărcare întârziată a modulelor):</b>
+Una dintre cele mai așteptate funcționalități pentru optimizarea timpului de pornire al scripturilor și al aplicațiilor CLI mari este suportul direct pentru importuri amânate. Prin acest mecanism, modulele grele nu mai sunt analizate și executate la lansarea programului, ci doar în momentul precis în care un simbol sau o funcție din acel modul este apelată efectiv, ducând la lansări aproape instantanee ale utilitarelor de linie de comandă.</p></li><li><p><b>UTF-8 activat implicit peste tot (Modul UTF-8 standard):</b>
+Python 3.15 face pasul decisiv în privința codării caracterelor prin activarea implicită a modului UTF-8 pentru toate operațiunile I/O pe fișiere (conform traseului stabilit prin PEP 686). Această schimbare elimină definitiv discrepanțele istorice între platforme (în special pe sistemele Windows, unde codările locale precum <code>cp1252</code> cauzau frecvent erori de tip <code>UnicodeDecodeError</code>) și asigură un comportament uniform pe Linux, macOS și Windows.</p></li><li><p><b>Continuarea tranziției către arhitectura fără GIL (Free-Threaded CPython):</b>
+Varianta fără <i>Global Interpreter Lock</i> (introdusă experimental anterior prin PEP 703) primește noi optimizări pentru gestionarea concurenței, îmbunătățiri la alocatorul de memorie pentru fire de execuție multiple și o mai bună compatibilitate cu bibliotecile native scrise în C/Rust.</p></li><li><p><b>Erori și diagnostice mai clare:</b>
+Mesajele de eroare generate de interpretor la runtime și erorile de sintaxă continuă să devină mai precise, oferind sugestii inteligente și indicarea exactă a coloanelor și expresiilor care au declanșat excepțiile.</p></li></ul><h3>Impactul pentru dezvoltatori</h3><p>Python 3.15 reprezintă o actualizare cheie în special pentru echipele care dezvoltă microservicii, instrumente de linie de comandă și aplicații de analiză de date:</p><ul><li><p><b>Timp redus până la primul răspuns:</b> Combinația dintre <i>Lazy Imports</i> și pornirea optimizată a interpretorului reduce semnificativ latența la pornire a containerelor și scripturilor.</p></li><li><p><b>Cod mai portabil și mai robust:</b> Trecerea completă la UTF-8 implicit previne erorile silențioase de corupere a datelor la procesarea fișierelor pe sisteme de operare eterogene.</p></li></ul><p>Noua versiune este deja disponibilă pentru descărcare pe site-ul oficial Python și începe să fie integrată în depozitele distribuțiilor majore de Linux.</p><p><b>Sursă și detalii complete:</b> <a href="https://linuxiac.com/python-3-15-released-with-faster-jit-lazy-imports-and-utf-8-by-default/" target="_blank" rel="noopener noreferrer">Linuxiac — Python 3.15 Released with Faster JIT, Lazy Imports, and UTF-8 by Default</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-protonup-qt-216-fost-lansat-utilitarul.html"><small>← Mai nou</small>ProtonUp-Qt 2.16 a fost lansat: Utilitarul de gaming pe Linux primește un nou instrument de compatibilitate și îmbunătățiri de interfață</a><a class="r" href="../articole/2026-10-solus-rezolva-blocajele-de-licentiere.html"><small>Mai vechi →</small>Solus rezolvă blocajele de licențiere pentru a permite colaborarea tehnică directă cu aerynOS</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

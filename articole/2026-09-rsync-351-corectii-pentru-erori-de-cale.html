@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rsync 3.5.1: Corecții pentru erori de cale și introducerea Protocolului 33 · Linux for Education</title>
+<meta name="description" content="Utilitarul open-source de sincronizare a fișierelor Rsync a ajuns la versiunea 3.5.1 . Aceasta este o actualizare lansată la aproximativ o lună după versiunea majoră 3.5, având rolul de a rezolva regresiile…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-22">22 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Rsync 3.5.1: Corecții pentru erori de cale și introducerea Protocolului 33</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgyXNaGUghzJU9nmgePyKHgqJJTddica_ni_KalDCx96-dIT9bO2kXoiZmkvRVmaLdHZEGHYSwYF_8d0jyMgYTGnMagshqccXlRkskB0foEn4gLclM4fnAeN3p4uwQIFzWEHcBsfmjInDUTa-ntnOiilkKe2KgLce9Q67hBKQt6p43bC_9LDeoS8V6v57g" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgyXNaGUghzJU9nmgePyKHgqJJTddica_ni_KalDCx96-dIT9bO2kXoiZmkvRVmaLdHZEGHYSwYF_8d0jyMgYTGnMagshqccXlRkskB0foEn4gLclM4fnAeN3p4uwQIFzWEHcBsfmjInDUTa-ntnOiilkKe2KgLce9Q67hBKQt6p43bC_9LDeoS8V6v57g=w615-h346" alt="" loading="lazy" decoding="async"></a></div><p>Utilitarul open-source de sincronizare a fișierelor <b>Rsync</b> a ajuns la versiunea <b>3.5.1</b>. Aceasta este o actualizare lansată la aproximativ o lună după versiunea majoră 3.5, având rolul de a rezolva regresiile apărute în urma modificărilor majore de securitate și de a aduce îmbunătățiri de performanță.</p><h3><b>Noutățile principale din Rsync 3.5.1</b></h3><h4><b>1. Corecții privind gestionarea căilor (Path Handling)</b></h4><ul><li><p><b>Parcurgerea directoarelor părinte symlink:</b> Căile explicite furnizate de expeditor pot parcurge din nou directoarele părinte de tip symlink fără a slăbi protecțiile aplicate căilor descoperite în timpul scanărilor recursive.</p></li><li><p><b>Parametrul <code>--files-from</code>:</b> Căile trimise prin această opțiune pentru transferurile locale sau prin remote-shell sunt tratate corect ca fiind furnizate explicit de operator, și nu ca sub-căi aflate sub rădăcina transferului.</p></li><li><p><b>Acces la fișiere speciale (<code>/dev/std*</code>):</b> A fost restaurat accesul la <code>/dev/stdin</code>, <code>/dev/stdout</code>, <code>/dev/stderr</code> și <code>/dev/fd/N</code> atunci când acestea fac trimitere la pipe-uri sau descriptori de fișiere din cadrul <i>user namespaces</i> (util pentru citirea datelor de tip batch prin FIFO sau substituție de procese).</p></li><li><p><b>Ajustare <code>--max-alloc=0</code>:</b> Opțiunea folosește din nou plafonul maxim de alocare al parser-ului, în loc să dezactiveze complet limita de alocare.</p></li></ul><h4><b>2. Trecerea la Protocolul 33 &amp; Statisici pe blocuri logice</b></h4><ul><li><p>Versiunea crește numărul de protocol la <b>33</b>.</p></li><li><p><b>Statistici noi de 4 KiB:</b> Adaugă un nou indicator în afișajul <code>--stats</code> ce arată numărul exact de blocuri logice de fișiere de 4 KiB care au fost atinse/modificate de către receptor.</p></li><li><p><b>Suport IDN (Internationalized Domain Names):</b> Când este compilat cu bibliotecile necesare, Rsync permite acum procesarea directă a numelor de gazdă (hostnames) care conțin caractere non-ASCII.</p></li></ul><h4><b>3. Alte remedieri și optimizări</b></h4><ul><li><p>Corecții la gestionarea căilor cu acces restricționat (<i>restricted-root</i>) în wrapper-ul <code>rrsync</code>.</p></li><li><p>Detecție mai bună a conexiunilor <code>inetd</code> când daemon-ul primește un socket local prin <i>standard input</i>.</p></li><li><p>Suport pentru <code>--contimeout</code> la conectarea la un daemon rsync prin opțiunea <code>--rsh</code>.</p></li><li><p>Validare mai strictă pentru starea directoarelor parțiale și căile de destinație alternativă (împiedicând urmărirea symlink-urilor din destinații alternative ca fișiere de bază).</p></li><li><p>Rezolvarea erorilor de compilare pe arhitecturi FreeBSD amd64 aferente obiectelor SIMD/Assembly.</p></li></ul><p><b>Sursă:</b> <a href="https://linuxiac.com/rsync-3-5-1-fixes-path-regressions-adds-protocol-33/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - Rsync 3.5.1 Fixes Path Regressions, Adds Protocol 33</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-peppermint-os-incepe-tranzitia-de-la.html"><small>← Mai nou</small>Peppermint OS începe tranziția de la X.Org la XLibre</a><a class="r" href="../articole/2026-09-kitty-049-shading-personalizat-si.html"><small>Mai vechi →</small>Kitty 0.49: Shading personalizat și performanță crescută</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

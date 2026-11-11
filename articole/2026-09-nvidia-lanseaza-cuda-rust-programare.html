@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVIDIA lansează CUDA Rust: Programare nativă pentru kernel-uri GPU în limbajul Rust · Linux for Education</title>
+<meta name="description" content="NVIDIA extinde ecosistemul CUDA prin introducerea suportului nativ pentru limbajul Rust , permițând dezvoltatorilor să scrie kernel-uri GPU directe în Rust, fără a mai fi nevoiți să apeleze la CUDA C++ sau…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-19">19 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>NVIDIA lansează CUDA Rust: Programare nativă pentru kernel-uri GPU în limbajul Rust</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj3gQHvuzD2gv7fYcAKQ-yJI_wQp_FolaJhM0TYu6ilXucde3lbK0KQu63Fu6eGiiZw8DLLiKAnD2o-AQOyjzu2lhWPO3Gx4WR66aWRyx3y5urm_1DP-1SJpLne0jSjoNo9pT-o6ZYul4UvSL7y_Za6jUdt2V13tyTMYTa9hNenqa6HvYuE979NfDDPS-o" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3gQHvuzD2gv7fYcAKQ-yJI_wQp_FolaJhM0TYu6ilXucde3lbK0KQu63Fu6eGiiZw8DLLiKAnD2o-AQOyjzu2lhWPO3Gx4WR66aWRyx3y5urm_1DP-1SJpLne0jSjoNo9pT-o6ZYul4UvSL7y_Za6jUdt2V13tyTMYTa9hNenqa6HvYuE979NfDDPS-o=w642-h361" alt="" loading="lazy" decoding="async"></a></div><p>NVIDIA extinde ecosistemul CUDA prin introducerea suportului nativ pentru limbajul <b>Rust</b>, permițând dezvoltatorilor să scrie kernel-uri GPU directe în Rust, fără a mai fi nevoiți să apeleze la CUDA C++ sau alte limbaje intermediare.</p><p>Până în prezent, aplicațiile scrise în Rust puteau lansa executabile CUDA, însă codul rulat efectiv pe procesorul grafic trebuia scris separat în C++. Noul proiect NVIDIA elimină această barieră compilând codul Rust pentru GPU direct în formatul intermediar <b>PTX</b> (Parallel Thread Execution).</p><h3><b>Cele două direcții principale: <code>cuda-oxide</code> și <code>cutile-rs</code></b></h3><p>NVIDIA dezoltă în paralel două abordări complementare, adaptate diferitelor niveluri de abstractizare:</p><h4><b>1. <code>cuda-oxide</code> (Modelul clasic SIMT)</b></h4><ul><li><p>Utilizează modelul tradițional de programare paralelă <b>SIMT</b> (Single Instruction, Multiple Threads), similar cu cel din CUDA C++.</p></li><li><p>Oferă control direct și detaliat asupra thread-urilor, blocurilor de execuție, indexării și gestionării memoriei.</p></li><li><p>Folosește o linie de compilare dedicată (<code>rustc</code> backend) care trece codul prin intermediarii Rust MIR, Pliron, LLVM IR și, în final, PTX.</p></li></ul><h4><b>2. <code>cutile-rs</code> (Modelul CUDA Tile)</b></h4><ul><li><p>Funcționează la un nivel mai înalt de abstracție bazat pe <b>CUDA Tile</b>.</p></li><li><p>În loc să gestioneze thread-uri individuale, dezvoltatorii lucrează direct cu blocuri (tile-uri) de date, lăsând compilatorul să mapaze automat aceste structuri pe thread-urile fizice ale GPU-ului.</p></li><li><p><b>Siguranță sporită la compilare:</b> Integrează regulile de proprietate (<i>ownership</i>) din Rust și partiționarea tensorilor. Fiecare tile primește acces exclusiv la zona sa de memorie scriibilă, ceea ce permite depistarea și eliminarea erorilor de acces concomitent (<i>race conditions</i>) direct în faza de compilare.</p></li></ul><h3><b>Interoperabilitate și planuri de viitor</b></h3><p>NVIDIA subliniază că cele două proiecte nu se află în competiție, ci se completează reciproc: <code>cutile-rs</code> este recomandat ca punct de plecare pentru majoritatea sarcinilor, în timp ce <code>cuda-oxide</code> rămâne opțiunea ideală pentru aplicațiile ce necesită un control de nivel inferior.</p><p>De asemenea, compania pregătește o <b>interoperabilitate completă</b> între CUDA Rust, CUDA C++ și CUDA Python. Acest lucru va permite dezvoltatorilor să combine componente scrise în limbaje diferite în cadrul aceleiași aplicații.</p><p>Deși funcționalitățile actuale sunt într-o fază incipientă și API-urile pot suferi modificări, NVIDIA intenționează să maturizeze CUDA Rust pe parcursul anilor următori.</p><p><b>Sursă:</b> <a href="https://linuxiac.com/nvidia-introduces-cuda-rust-for-writing-gpu-kernels/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - NVIDIA Introduces CUDA Rust for Writing GPU Kernels</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-limbajul-de-programare-mojo-11-accepta.html"><small>← Mai nou</small>Limbajul de programare Mojo 1.1 acceptă acum contribuții externe pentru propriul compilator</a><a class="r" href="../articole/2026-09-libreoffice-268-doboara-recordul-de.html"><small>Mai vechi →</small>LibreOffice 26.8 doboară recordul de descărcări: TDF declară că lipsa inteligenței artificiale integrate este un avantaj</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

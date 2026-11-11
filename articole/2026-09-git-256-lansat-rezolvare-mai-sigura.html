@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git 2.56 lansat: Rezolvare mai sigură a conflictelor și spor de performanță · Linux for Education</title>
+<meta name="description" content="Sistemul de control al versiunilor Git a ajuns la versiunea 2.56 , aducând o serie de optimizări importante pentru dezvoltatori și echipele de DevOps. Această lansare pune accentul pe îmbunătățirea securității…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-30">30 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Git 2.56 lansat: Rezolvare mai sigură a conflictelor și spor de performanță</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEinJc38od7Dgu5-JmmLRP2wGX2CRyaV2ySaQyKdNtCB5y2ombYQ6Nz9ot_1mElZi2GitjQWzK1othE6NoTkfm-AIaRlZTca5ku0B-rEzejzJ41-0DUsnwUwJf4D9_9JCCLRmm48Op_Mz4gqdyvxsxj21-oeu10ld7XU_mPi1QSeX2-eKaidrlUVBXB4qj8" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEinJc38od7Dgu5-JmmLRP2wGX2CRyaV2ySaQyKdNtCB5y2ombYQ6Nz9ot_1mElZi2GitjQWzK1othE6NoTkfm-AIaRlZTca5ku0B-rEzejzJ41-0DUsnwUwJf4D9_9JCCLRmm48Op_Mz4gqdyvxsxj21-oeu10ld7XU_mPi1QSeX2-eKaidrlUVBXB4qj8=w628-h353" alt="" loading="lazy" decoding="async"></a></div><p>Sistemul de control al versiunilor <b>Git</b> a ajuns la versiunea <b>2.56</b>, aducând o serie de optimizări importante pentru dezvoltatori și echipele de DevOps. Această lansare pune accentul pe îmbunătățirea securității în procesele de rezolvare a conflictelor la îmbinare (<i>merge conflict resolution</i>) și pe eficientizarea operării în depozite (<i>repositories</i>) de dimensiuni mari.</p><h3>Cele mai importante noutăți din Git 2.56</h3><ul><li><p><b>Rezolvare mai sigură a conflictelor (<i>Safer Conflict Resolution</i>):</b></p><ul><li><p>Mecanisme noi de protecție împotriva aplicării accidentale a modificărilor incorecte în timpul operațiunilor de <code>merge</code> sau <code>rebase</code>.</p></li><li><p>Verificări suplimentare ale stării spațiului de lucru (<i>working tree</i>) pentru a preveni pierderea modificărilor nesalvate.</p></li></ul></li><li><p><b>Spor de performanță în depozite mari:</b></p><ul><li><p>Optimizarea timpilor de execuție pentru comenzile de inspecție a istoricului, cum ar fi <code>git log</code> și <code>git status</code>.</p></li><li><p>Eficientizarea utilizării memoriei la parcurgerea grafurilor complexe de commit-uri.</p></li></ul></li><li><p><b>Îmbunătățiri la nivel de comenzi și CLI:</b></p><ul><li><p>Refactorizarea utilitarelor interne pentru o manipulare mai rapidă a fișierelor de index.</p></li><li><p>Afișare mai clară și mai detaliată a mesajelor de avertisment și eroare în timpul proceselor interactive.</p></li></ul></li></ul><h3>Rezumatul îmbunătățirilor cheie</h3><div class="tw"><table><thead><tr><td><strong>Componentă</strong></td><td><strong>Noutăți în Git 2.56</strong></td></tr></thead><tbody><tr><td><b>Gestionare conflicte</b></td><td>Protecție sporită împotriva suprascrierilor accidentale în timpul operațiilor complexe.</td></tr><tr><td><b>Performanță</b></td><td>Răspuns mai rapid pentru comenzile de status și interogare a istoricului.</td></tr><tr><td><b>Depozite masive</b></td><td>Parcurgere mai eficientă a grafurilor de commit-uri și consum redus de memorie.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/git-2-56-released-with-safer-conflict-resolution-and-performance-gains/" target="_blank" rel="noopener noreferrer">Linuxiac – Git 2.56 Released with Safer Conflict Resolution and Performance Gains</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-kde-plasma-68-aduce-un-aer-modern.html"><small>← Mai nou</small>KDE Plasma 6.8 aduce un aer modern legendarului tematic Oxygen</a><a class="r" href="../articole/2026-09-microsoft-exploreaza-un-sistem-in-care.html"><small>Mai vechi →</small>Microsoft explorează un sistem în care reclamele ar putea deveni moneda pentru timpul de joc</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

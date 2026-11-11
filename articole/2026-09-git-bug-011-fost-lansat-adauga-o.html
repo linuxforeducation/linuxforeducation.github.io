@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>git-bug 0.11 a fost lansat: Adaugă o interfață Web completă pentru probleme și navigare în cod · Linux for Education</title>
+<meta name="description" content="Proiectul open-source git-bug a primit o actualizare majoră — versiunea 0.11 . Aceasta aduce o interfață Web completă ( Web UI ) ce permite gestionarea tichetelor/problemelor ( issues ) și explorarea codului…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-26">26 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>git-bug 0.11 a fost lansat: Adaugă o interfață Web completă pentru probleme și navigare în cod</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiKtBi7zDZ93GN5seGjYLj_FdY3GvKfiohv5p479-knSAF6DGicBUnQj4PwYLtpK2e6T6PGXZjiRsRiqToo2Qh8vGYvQFHnLFFQCZK9bi44wvmTFlUtXGeR3P7apfli8v5tCdJr9gkGPYx6C4lha0ZpED3B51SeXFK096fq45Z8NpSnp6ZwgvvTL8wtON4" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiKtBi7zDZ93GN5seGjYLj_FdY3GvKfiohv5p479-knSAF6DGicBUnQj4PwYLtpK2e6T6PGXZjiRsRiqToo2Qh8vGYvQFHnLFFQCZK9bi44wvmTFlUtXGeR3P7apfli8v5tCdJr9gkGPYx6C4lha0ZpED3B51SeXFK096fq45Z8NpSnp6ZwgvvTL8wtON4=w658-h370" alt="" loading="lazy" decoding="async"></a></div><p>Proiectul open-source <b>git-bug</b> a primit o actualizare majoră — <b>versiunea 0.11</b>. Aceasta aduce o interfață Web completă (<i>Web UI</i>) ce permite gestionarea tichetelor/problemelor (<i>issues</i>) și explorarea codului sursă direct din browser, funcționând complet offline și fără dependență de platforme centralizate.</p><h3>Ce este git-bug și cum funcționează?</h3><p>Spre deosebire de sistemele tradiționale de bug-tracking (cum ar fi cele din GitHub, GitLab sau Jira), <b>git-bug</b> stochează toate problemele, comentariile și etichetele direct în interiorul repozitoriului Git ca obiecte native. Această arhitectură oferă avantaje majore:</p><ul><li><p><b>100% Offline:</b> Puteți crea, edita și închide tichete chiar și fără o conexiune la internet.</p></li><li><p><b>Sincronizare automată:</b> Datele despre probleme sunt trimise și preluate odată cu comenzile standard <code>git push</code> și <code>git pull</code>.</p></li><li><p><b>Fără blocare în platformă (Vendor Lock-in):</b> Datele rămân în repozitoriul dumneavoastră, indiferent unde este găzduit proiectul.</p></li></ul><h3>Noutățile principale din git-bug v0.11</h3><ul><li><p><b>Interfață Web încorporată (Web UI):</b> Permite lansarea unui server local care oferă o interfață vizuală intuitivă pentru crearea, filtrarea și gestionarea tichetelor de erori.</p></li><li><p><b>Explorator de cod (Code Browsing):</b> Utilizatorii pot naviga prin ramurile repozitoriului (<i>branches</i>), pot inspecta istoricul commit-urilor și pot vizualiza fișierele din cod direct din interfața Web locală.</p></li><li><p><b>Sincronizare hibridă:</b> Păstrează posibilitatea de import și export al datelor către și dinspre platforme precum GitHub, GitLab, Jira sau Launchpad.</p></li></ul><h3>Exemplu rapid de utilizare</h3><p>Puteți porni interfața Web locală direct din linia de comandă, în cadrul oricărui proiect Git:</p><div><div><div><div>Bash</div><pre><code># Lansarea interfeței Web în browser
+git bug webui
+
+# Sau gestionarea tichetelor direct din terminal (CLI)
+git bug issue create
+git bug issue ls
+</code></pre></div></div></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/git-bug-0-11-adds-a-full-web-ui-for-issues-and-code-browsing/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac – git-bug 0.11 Adds a Full Web UI for Issues and Code Browsing</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-canonical-trece-la-lansari-saptamanale.html"><small>← Mai nou</small>Canonical trece la lansări săptămânale de kernel Ubuntu pentru remedierea mai rapidă a vulnerabilităților CVE</a><a class="r" href="../articole/2026-09-konveyor-aduce-aranjarea-in-tipar-de.html"><small>Mai vechi →</small>Konveyor aduce aranjarea în tipar de tip derulant inspirată de Niri în KDE Plasma</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

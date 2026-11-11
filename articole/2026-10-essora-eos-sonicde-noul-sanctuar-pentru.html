@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essora Eos SonicDE: Noul sanctuar pentru X11 și Qt6 — fără systemd, cu serverul XLibre și managerul ROX-Filer2-Qt · Linux for Education</title>
+<meta name="description" content="Pe măsură ce marile medii grafice (GNOME, KDE Plasma) și distribuțiile mainstream își concentrează eforturile aproape exclusiv pe protocolul Wayland și dependențe strânse de systemd, o parte consistentă a…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html" aria-current="page">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-24">24 octombrie 2026</time><a class="chip" href="../linux-distro.html">Linux Distro</a></div>
+  <h1>Essora Eos SonicDE: Noul sanctuar pentru X11 și Qt6 — fără systemd, cu serverul XLibre și managerul ROX-Filer2-Qt</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoKkUWPAcWGxA2yqoStW3WY4vyLjy9jfLBIi2xm82jYG-aVGnAPZaP5mwgHh6dUgRvKSHTnXh3kdtC6I7UYIGBeu1GXoWSfmTbTzFIPGBADa2h5q1yGoaWPKdgi0V0UD59yPaqNwVQKPqPN20Ut3rF6C1UTQL-dozcBT4w8LWvQIZeCuFKn2gUjnZvc9Y/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoKkUWPAcWGxA2yqoStW3WY4vyLjy9jfLBIi2xm82jYG-aVGnAPZaP5mwgHh6dUgRvKSHTnXh3kdtC6I7UYIGBeu1GXoWSfmTbTzFIPGBADa2h5q1yGoaWPKdgi0V0UD59yPaqNwVQKPqPN20Ut3rF6C1UTQL-dozcBT4w8LWvQIZeCuFKn2gUjnZvc9Y/w616-h346/image.png" alt="" loading="lazy" decoding="async"></a></div><p>Pe măsură ce marile medii grafice (GNOME, KDE Plasma) și distribuțiile mainstream își concentrează eforturile aproape exclusiv pe protocolul Wayland și dependențe strânse de systemd, o parte consistentă a comunității caută soluții moderne care să păstreze robustețea protocolului X11 și libertatea de alegere a init-ului.</p><p>Proiectul independent <b>Essora</b> a anunțat lansarea noii ediții <b>Essora Eos SonicDE</b>, un sistem de operare construit pe un nucleu tehnic inedit ce reunește două proiecte devotate arhitecturii X11: mediul desktop <b>SonicDE</b> (un fork comunitar menținut al familiei Plasma 6 pe Qt6) și serverul de afișaj <b>XLibre</b> (continuarea dezvoltării comunitare a serverului X11 clasic).</p><h3>Arhitectura sistemului: De la BusyBox la Devuan Excalibur, fără systemd</h3><p>Essora Eos SonicDE nu este o simplă temă aplicată peste o instalare standard, ci un sistem asamblat printr-un proces propriu de construcție:</p><ul><li><p><b>Fără systemd (<i>Systemd-free</i>):</b> Sistemul pornește de la o bază minimală cu BusyBox și integrează un ecosistem de pachete provenit din ramura <b>Devuan Excalibur</b>, menținând independența totală față de orice init forțat.</p></li><li><p><b>Kernel &amp; Build propriu:</b> Folosește nucleul optimizat Essora Kernel și propriul lanț de compilare Qt6 pentru a asigura coeziunea componentelor.</p></li><li><p><b>Gestionare hibridă a pachetelor:</b> Administrarea aplicațiilor se bazează pe nucleul clasic <b>APT / dpkg</b>, acompaniat de integrare completă pentru pachete universale <b>Flatpak</b> prin intermediul unei interfețe grafice unificate.</p></li></ul><div><div><div><pre><code>Essora Eos GNU/Linux
+├── Bază independentă de build + Depozite Devuan Excalibur
+├── Essora Kernel (optimizat intern)
+├── XLibre (Server de afișaj X11 menținut activ de comunitate)
+├── SonicDE (Desktop Qt6 derivat din KDE Plasma 6)
+│   ├── sonic-win (Manager de ferestre și compozitor X11)
+│   ├── Sonic Workspace &amp; panou de control
+│   └── Integrare vizuală și funcțională Essora
+├── ROX-Filer2-Qt (Manager de fișiere Qt6 în locul Dolphin)
+│   ├── Navigare prin tab-uri, breadcrumbs și montare partiții
+│   └── Sistem modular opțional de pictograme de discuri pe desktop
+└── Aplicații native din suita Essora
+    ├── Essora Control Center (setări unificate Qt6/GTK)
+    ├── Essora Package Tools (APT/dpkg + Flatpak)
+    ├── Essora Office (suită completă: Writer, Sheet, Slides, Draw, PDF)
+    └── Essora Browser (motor Gecko / bază Firefox)
+</code></pre></div></div></div><h3>Înlocuirea Dolphin: ROX-Filer2-Qt și pictograme modulare pentru discuri</h3><p>Una dintre cele mai radicale decizii tehnice luate de echipa Essora a fost <b>eliminarea completă a managerului clasic Dolphin</b>. În locul său, sistemul vine echipat nativ cu <b>ROX-Filer2-Qt</b>, o adaptare modernă pe <b>Qt6</b> a legendarului utilitar ROX-Filer:</p><ul><li><p><b>Funcționalități moderne de navigare:</b> Tab-uri multiple, bară de unelte contemporană, traseu de navigare (<i>breadcrumb navigation</i>), panou lateral pentru locații favorite (<i>places sidebar</i>) și filtrare rapidă.</p></li><li><p><b>Gestionare directă a stocării:</b> Vizualizarea și controlul direct al partițiilor și dispozitivelor conectate, inclusiv opțiuni dedicate pentru montarea și inspectarea imaginilor ISO, SFS sau IMG, alături de suport integrat pentru partajări Samba.</p></li><li><p><b>Drive Icons pe desktop (Opțional și configurabil):</b> ROX-Filer2-Qt rulează un proces independent în spațiul utilizatorului care poate afișa pictograme directe pentru unitățile de stocare pe desktop (interne, detașabile sau imagini montate), fără a prelua controlul asupra fundalului (<i>wallpaper</i>) gestionat de SonicDE. Utilizatorii pot alege marginea ecranului, orientarea (orizontal/vertical), distanțarea sau pot dezactiva complet această funcție pentru un spațiu de lucru minimalist.</p></li></ul><h3>Suita de aplicații integrate: Control Center, Office și Browser</h3><p>Pentru a oferi o experiență de utilizare completă fără a depinde de zeci de unelte disparate, ediția vine echipată cu propriul set de utilitare:</p><div class="tw"><table><thead><tr><td><strong>Aplicație</strong></td><td><strong>Rol și tehnologie</strong></td></tr></thead><tbody><tr><td><b>Essora Control Center</b></td><td>Panou unificat de configurare a aspectului; controlează atât temele native Qt6, cât și integrarea vizuală a aplicațiilor GTK3 (teme, iconițe, cursoare, fonturi), setările panoului și Essora Desklet.</td></tr><tr><td><b>Essora Office</b></td><td>Aplicație integrată de birou ce reunește într-o singură fereastră instrumente dedicate pentru documente text (<i>Writer</i>), foi de calcul (<i>Sheet</i>), prezentări (<i>Slides</i>), grafică vectorială (<i>Draw</i>) și manipulare PDF.</td></tr><tr><td><b>Essora Browser</b></td><td>Navigator web adaptat mediului Essora, construit pe motorul de randare <b>Gecko</b> și baza de cod <b>Mozilla Firefox</b>.</td></tr></tbody></table></div><h3>Disponibilitate</h3><p>Imaginea oficială de instalare pe 64 de biți (<code>x86_64</code>) este publicată prin intermediul platformei SourceForge (cu suma de control MD5: <code>6291fdf8baa80646529fe789ef1d66c6</code>), distribuția fiind listată și urmărită prin intermediul portalului DistroWatch.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-packrat-pinkpixel-devpackrat-un-nou.html"><small>← Mai nou</small>Packrat (pinkpixel-dev/packrat): Un nou manager de pachete pentru Arch Linux scris în Rust și GPUI</a><a class="r" href="../articole/2026-10-cross-cleaner-instrument-de-curatare.html"><small>Mai vechi →</small>Cross-Cleaner: Instrument de curățare a sistemului scris în Rust, multiplatformă și de înaltă performanță</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nu Guix 2.1 lansat: Managerul de pachete îmbunătățește încărcarea extensiilor și performanța · Linux for Education</title>
+<meta name="description" content="Proiectul Nu Guix , varianta optimizată și extinsă a managerului de pachete funcțional Guix, a primit o actualizare importantă. Această lansare se concentrează pe refacerea mecanismului de încărcare a…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-09">9 octombrie 2026</time><a class="chip" href="../software.html">Software</a><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Nu Guix 2.1 lansat: Managerul de pachete îmbunătățește încărcarea extensiilor și performanța</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbnz8g9EJ9nkZ7cCDovFeWdnQfPouRpcAJ-GCjcutDOBrffKpP2NRzBAbnjxXYSgTyNmG5mltETTAu8WthWi1nqGontRUlmRlUaJgcqPNxpVyJTI07p-jXUrlN8DvhFR2_F-5xrJOf2nW4pEocAp_7g6wHMoeQtEOkE2-ZFYQ88E65iZkpgkT39JPcMDk/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbnz8g9EJ9nkZ7cCDovFeWdnQfPouRpcAJ-GCjcutDOBrffKpP2NRzBAbnjxXYSgTyNmG5mltETTAu8WthWi1nqGontRUlmRlUaJgcqPNxpVyJTI07p-jXUrlN8DvhFR2_F-5xrJOf2nW4pEocAp_7g6wHMoeQtEOkE2-ZFYQ88E65iZkpgkT39JPcMDk/w621-h388/image.png" alt="" loading="lazy" decoding="async"></a></div><p>Proiectul <b>Nu Guix</b>, varianta optimizată și extinsă a managerului de pachete funcțional Guix, a primit o actualizare importantă. Această lansare se concentrează pe refacerea mecanismului de încărcare a extensiilor, reducerea timpilor de execuție a comenzilor și optimizarea gestionării mediilor izolate pentru dezvoltatori.</p><h3>Cele mai importante noutăți din Nu Guix</h3><ul><li><p><b>Sistem optimizat pentru încărcarea extensiilor (<i>Extension Loading</i>):</b></p><ul><li><p>Mecanismul de încărcare modulare a fost rescris pentru a permite parsarea paralelă și la cerere a extensiilor terțe.</p></li><li><p>Eliminarea întârzierilor de pornire (<i>startup latency</i>) cauzate de încărcarea tuturor modulelor la fiecare apelare a comenzii în terminal.</p></li></ul></li><li><p><b>Performanță sporită în gestionarea pachetelor:</b></p><ul><li><p>Algoritmi mai rapizi de rezolvare a graficului de dependențe și evaluare a expresiilor Scheme/Guile.</p></li><li><p>Timpi reduși la compilarea și instalarea profilurilor de utilizator.</p></li></ul></li><li><p><b>Consistență și izolare mai bună:</b></p><ul><li><p>Imbunătățiri ale funcționalităților de <i>reproducible builds</i> (construcții reproductibile de pachete), garantând că aceleași fișiere sursă produc binare identice pe sisteme diferite.</p></li><li><p>Gestionare mai curată a variabilelor de mediu la generarea containerelor temporare de dezvoltare.</p></li></ul></li></ul><h3>Prezentare generală a funcționalităților</h3><div class="tw"><table><thead><tr><td><strong>Criteriu</strong></td><td><strong>Detalii</strong></td></tr></thead><tbody><tr><td><b>Paradigmă</b></td><td>Manager de pachete funcțional, declarativ și reproductibil.</td></tr><tr><td><b>Punct Forte</b></td><td>Încărcare la cerere a extensiilor și latență redusă a comenzilor CLI.</td></tr><tr><td><b>Limbaj / Bază</b></td><td>Guile Scheme / Ecosistemul GNU Guix.</td></tr><tr><td><b>Caz de Utilizare</b></td><td>Medii de dezvoltare izolate, deployments reproductibile și administrare de sistem.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/nu-guix-package-manager-improves-extension-loading/" target="_blank" rel="noopener noreferrer">Linuxiac – Nu Guix Package Manager Improves Extension Loading</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-ventoy-1118-fost-lansat-suport.html"><small>← Mai nou</small>Ventoy 1.1.18 a fost lansat: Suport experimental pentru SteamOS și îmbunătățiri majore la boot-ul pe Linux</a><a class="r" href="../articole/2026-10-microsoft-lanseaza-litebox-01-o.html"><small>Mai vechi →</small>Microsoft lansează LiteBox 0.1: O bibliotecă de tip Sandboxing OS scrisă în Rust</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

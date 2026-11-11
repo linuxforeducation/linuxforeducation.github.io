@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Packrat (pinkpixel-dev/packrat): Un nou manager de pachete pentru Arch Linux scris în Rust și GPUI · Linux for Education</title>
+<meta name="description" content="În mediul Arch Linux, gestionarea pachetelor native (Pacman), a pachetelor comunitare (AUR) și a containerelor izolate (Flatpak) se realizează de obicei prin utilitare de linie de comandă sau interfețe…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-24">24 octombrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Packrat (pinkpixel-dev/packrat): Un nou manager de pachete pentru Arch Linux scris în Rust și GPUI</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyTumQzoxEwtOX1U4Kc3bZgMrFGZcaR0Ot_fBkiWFGVCYVjbf2HMC6pUm6UaNpkGOa5FA1lu-FfdxbLcYwOVNEmNsW2sGiAoWd1gdH2LeRLtefI1lNFQQw4yr3bQXWdydu4R62MVtkB_DCWFtVHBeoxhmHIzWVG-SRaiShwBcHFc0bEJObKamvt6bQ6Lw/s1600/image.png" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyTumQzoxEwtOX1U4Kc3bZgMrFGZcaR0Ot_fBkiWFGVCYVjbf2HMC6pUm6UaNpkGOa5FA1lu-FfdxbLcYwOVNEmNsW2sGiAoWd1gdH2LeRLtefI1lNFQQw4yr3bQXWdydu4R62MVtkB_DCWFtVHBeoxhmHIzWVG-SRaiShwBcHFc0bEJObKamvt6bQ6Lw/w652-h381/image.png" alt="" loading="lazy" decoding="async"></a></div><p>În mediul Arch Linux, gestionarea pachetelor native (Pacman), a pachetelor comunitare (AUR) și a containerelor izolate (Flatpak) se realizează de obicei prin utilitare de linie de comandă sau interfețe separate. Dezvoltat de echipa <b>Pink Pixel</b>, <b>Packrat</b> este un manager de pachete grafic modern, conceput special pentru sistemele bazate pe Arch Linux.</p><p>Construit în întregime în <b>Rust</b> și utilizând kitul de interfețe grafice de înaltă performanță <b>GPUI</b>, Packrat își propune să ofere o experiență unificată, rapidă și sigură.</p><h3>Arhitectură și caracteristici principale</h3><ul><li><p><b>Interfață unificată:</b> Permite căutarea, instalarea, actualizarea și eliminarea pachetelor provenite din surse multiple — <b>Pacman, AUR și Flatpak</b> — dintr-o singură fereastră.</p></li><li><p><b>Performanță nativă în Rust:</b> Construit pentru a oferi un timp de răspuns instantaneu și un consum minim de resurse, eliminând blocajele specifice aplicațiilor grele bazate pe Electron.</p></li><li><p><b>Transparență și control:</b> Nimic nu se instalează sau se elimină în fundal fără știința utilizatorului; fiecare tranzacție este clar afișată și controlată prin GPUI.</p></li></ul><h3>Disponibilitate și instalare pe Arch Linux</h3><p>Packrat este disponibil pentru comunitatea Arch Linux direct prin intermediul <b>AUR</b> (Arch User Repository):</p><ul><li><p>Puteți compila aplicația din sursă folosind pachetul dedicat sau căutând direct în AUR după denumirea <code>packrat</code>.</p></li></ul><p><b>Sursa oficială:</b> <a href="https://github.com/pinkpixel-dev/packrat" target="_blank" rel="noopener noreferrer">GitHub — pinkpixel-dev/packrat</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-fabricad-sistem-cad-3d-parametric-rapid.html"><small>← Mai nou</small>FabriCAD: Sistem CAD 3D parametric rapid și suplu pe Qt 6 și OpenCASCADE</a><a class="r" href="../articole/2026-10-essora-eos-sonicde-noul-sanctuar-pentru.html"><small>Mai vechi →</small>Essora Eos SonicDE: Noul sanctuar pentru X11 și Qt6 — fără systemd, cu serverul XLibre și managerul ROX-Filer2-Qt</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

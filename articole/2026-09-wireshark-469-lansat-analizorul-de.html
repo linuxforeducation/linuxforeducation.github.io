@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireshark 4.6.9 lansat: Analizorul de pachete remediază 19 vulnerabilități de securitate · Linux for Education</title>
+<meta name="description" content="Echipa din spatele popularului analizor de rețea open-source Wireshark a lansat versiunea de mentenanță 4.6.9 . Această actualizare este una critică pentru securitate, rezolvând 19 vulnerabilități care puteau…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-26">26 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>Wireshark 4.6.9 lansat: Analizorul de pachete remediază 19 vulnerabilități de securitate</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjGbaVFucderq9j1Zzu5SBcv2TVC72EE14VSd-_FYzdUshaiKkz49XJfYgZCvbANwpQyTEomd1a3d0zkaSbdInoWauRAz4nBpaFAhCw75sYI-Bp4P8B1m5ZTbO5U7yI4fipnPzPAKZN1FKa0r4W4-Mfz3AtAHkD7bxgypT1mK3rzA6HoPFEYs3L9xxM8CI" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjGbaVFucderq9j1Zzu5SBcv2TVC72EE14VSd-_FYzdUshaiKkz49XJfYgZCvbANwpQyTEomd1a3d0zkaSbdInoWauRAz4nBpaFAhCw75sYI-Bp4P8B1m5ZTbO5U7yI4fipnPzPAKZN1FKa0r4W4-Mfz3AtAHkD7bxgypT1mK3rzA6HoPFEYs3L9xxM8CI=w591-h332" alt="" loading="lazy" decoding="async"></a></div><p>Echipa din spatele popularului analizor de rețea open-source <b>Wireshark</b> a lansat versiunea de mentenanță <b>4.6.9</b>. Această actualizare este una critică pentru securitate, rezolvând 19 vulnerabilități care puteau duce la blocarea aplicației (<i>Denial of Service - DoS</i>) sau la bucle infinite în timpul procesării pachetelor de rețea malțioase.</p><h3>Detaliile actualizării de securitate</h3><p>Marea majoritate a vulnerabilităților remediate afectau disectoarele (<i>dissectors</i>) de protocoale — componentele responsabile de analiza și interpretarea diferitelor tipuri de trafic de rețea.</p><ul><li><p><b>Remedierea a 19 breșe de securitate:</b> Problemele rezolvate includeau erori de tip <i>buffer overflow</i>, scurgeri de memorie și procesări incorecte de pachete create special pentru a destabiliza aplicația.</p></li><li><p><b>Disectoare de protocoale afectate:</b> Au fost actualizate modulele de analiză pentru protocoale precum HTTP/2, Bluetooth, IEEE 802.11 (Wi-Fi), DNS, QUIC și diverse alte protocoale industriale sau de rețea.</p></li><li><p><b>Corecții generale și stabilitate:</b> Pe lângă patch-urile de securitate, versiunea 4.6.9 aduce optimizări ale performanței de captură și actualizări ale bazei de date de adrese MAC și producători.</p></li></ul><h3>Recomandări pentru administratori și specialiști în securitate</h3><p>Deoarece un pachet malțios capturat din rețea poate provoca închiderea neașteptată a aplicației în timpul analizei, utilizatorii sunt sfătuiți să facă upgrade cât mai curând posibil:</p><div class="tw"><table><thead><tr><td><strong>Platformă</strong></td><td><strong>Metodă de actualizare</strong></td></tr></thead><tbody><tr><td><b>Linux (Ubuntu/Debian/Fedora)</b></td><td>Prin managerul de pachete al distribuției (<code>apt update &amp;&amp; apt upgrade wireshark</code> / <code>dnf upgrade wireshark</code>).</td></tr><tr><td><b>Windows &amp; macOS</b></td><td>Descărcarea pachetului oficial de pe site-ul wireshark.org sau prin modulul de actualizare integrat.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/wireshark-4-6-9-packet-analyzer-fixes-19-security-vulnerabilities/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac – Wireshark 4.6.9 Packet Analyzer Fixes 19 Security Vulnerabilities</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-gnome-505-fost-lansat-include-numeroase.html"><small>← Mai nou</small>GNOME 50.5 a fost lansat: Include numeroase corecții de stabilitate și patch-uri de securitate</a><a class="r" href="../articole/2026-09-sparkylinux-202609-fost-lansat-kernel.html"><small>Mai vechi →</small>SparkyLinux 2026.09 a fost lansat: Kernel Linux 7.2 și o nouă ediție cu Labwc</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

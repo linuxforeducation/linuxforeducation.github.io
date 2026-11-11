@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenTofu 1.13 lansat: Suport pentru Windows ARM64 și un proces de planificare mai inteligent · Linux for Education</title>
+<meta name="description" content="Instrumentul open-source de Infrastructure as Code (IaC) OpenTofu a ajuns la versiunea 1.13 , aducând o serie de caracteristici solicitate de comunitatea DevOps. Această lansare extinde suportul pentru…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-10-02">2 octombrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>OpenTofu 1.13 lansat: Suport pentru Windows ARM64 și un proces de planificare mai inteligent</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgZbWBIRJvlN1OSjcQYEJotv5SKPxrHzSzteAoDpkQP5tfv4CSIRxk-j4eklH6zAZ-1X96qjhi7KTwSzeaFOg2TK8mMvrgMawda-5SwQNnLW9pxHMMCeR0tI7HAIhlMxZZuMJr9TUQ-OdNIvgnaITNk94-ywM4sguq6uMbaL3jPCMln8NkEo_LlHOmpqUw" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgZbWBIRJvlN1OSjcQYEJotv5SKPxrHzSzteAoDpkQP5tfv4CSIRxk-j4eklH6zAZ-1X96qjhi7KTwSzeaFOg2TK8mMvrgMawda-5SwQNnLW9pxHMMCeR0tI7HAIhlMxZZuMJr9TUQ-OdNIvgnaITNk94-ywM4sguq6uMbaL3jPCMln8NkEo_LlHOmpqUw=w608-h342" alt="" loading="lazy" decoding="async"></a></div><p>Instrumentul open-source de Infrastructure as Code (IaC) <b>OpenTofu</b> a ajuns la versiunea <b>1.13</b>, aducând o serie de caracteristici solicitate de comunitatea DevOps. Această lansare extinde suportul pentru arhitecturile moderne de calcul prin introducerea binarelor native pentru <b>Windows ARM64</b> și îmbunătățește semnificativ viteza și acuratețea etapei de planificare (<code>tofu plan</code>).</p><h3>Cele mai importante noutăți din OpenTofu 1.13</h3><ul><li><p><b>Suport nativ pentru Windows ARM64:</b></p><ul><li><p>Utilizatorii care folosesc dispozitive Windows bazate pe procesoare ARM64 pot rula acum OpenTofu nativ, fără emulare, beneficiind de performanțe optime și consum redus de energie.</p></li></ul></li><li><p><b>Proces de planificare mai inteligent (<i>Smarter Planning</i>):</b></p><ul><li><p>Optimizarea modului în care OpenTofu evaluează dependențele dintre resurse în timpul executării comenzii <code>tofu plan</code>.</p></li><li><p>Reducerea timpilor de așteptare în configurații complexe de infrastructură cloud prin interogarea mai eficientă a stărilor (<i>state evaluation</i>).</p></li><li><p>Afișare mai clară și mai detaliată a modificărilor propuse, minimizând riscul de modificări neintenționate în medii de producție.</p></li></ul></li><li><p><b>Ecosistem și stabilitate:</b></p><ul><li><p>Îmbunătățiri la nivel de furnizori (<i>providers</i>) și module de stare stocate la distanță (<i>remote state backends</i>).</p></li><li><p>Compatibilitate extinsă cu specificațiile existente din ecosistemul Terraform/OpenTofu.</p></li></ul></li></ul><h3>Sumar al caracteristicilor OpenTofu 1.13</h3><div class="tw"><table><thead><tr><td><strong>Aspect</strong></td><td><strong>Detalii</strong></td></tr></thead><tbody><tr><td><b>Compatibilitate Platforme</b></td><td>Adăugare suport nativ <b>Windows ARM64</b> (alături de Linux, macOS, x86_64).</td></tr><tr><td><b>Performanță IaC</b></td><td>Evaluare mai rapidă a stării și planificare mai precisă a resurselor.</td></tr><tr><td><b>Licență &amp; Model</b></td><td><b>Open Source</b> (sub licență Mozilla Public License 2.0), condus de comunitate.</td></tr></tbody></table></div><p><b>Sursă articol:</b> <a href="https://linuxiac.com/opentofu-1-13-iac-tool-brings-windows-arm64-support-smarter-planning/" target="_blank" rel="noopener noreferrer">Linuxiac – OpenTofu 1.13 IaC Tool Brings Windows ARM64 Support, Smarter </a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-10-qt-612-lts-fost-lansat-aduce-qml-hot.html"><small>← Mai nou</small>Qt 6.12 LTS a fost lansat: Aduce QML Hot Reload și CanvasPainter accelerat GPU</a><a class="r" href="../articole/2026-09-openssl-403-lansat-include-corectii-de.html"><small>Mai vechi →</small>OpenSSL 4.0.3 lansat: Include corecții de securitate pentru vulnerabilități cu severitate ridicată</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

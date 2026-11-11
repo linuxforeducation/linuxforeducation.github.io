@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PipeWire 1.6.9 a fost lansat: Calitate mai bună de reeșantionare și îmbunătățiri multimedia · Linux for Education</title>
+<meta name="description" content="A fost lansată versiunea de mentenanță PipeWire 1.6.9 , aducând optimizări semnificative pentru calitatea audio (resampling), procesarea obiectelor JACK, protocolul RAOP/AirPlay, precum și corecții pentru…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html" aria-current="page">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-09-19">19 septembrie 2026</time><a class="chip" href="../stiri.html">Știri</a></div>
+  <h1>PipeWire 1.6.9 a fost lansat: Calitate mai bună de reeșantionare și îmbunătățiri multimedia</h1>
+</header>
+<div class="prose">
+<div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOfk2ohQAbH9W_PIh2DbCS1fgdVHUCWVT0XSzf2j7NwHE861w27OY0zToIwUnOX_8xsSttRwACwlwjVfCOlzqUuNuai-5jBQX6_TR3bUfm0KFqTiW5BA3Q3HoutTODhjpp1shxSKPUnoH1cEwEuRvd3riM7C2sMFkUw8b4024kldoWreSE41vvqAY0Q0I" target="_blank" rel="noopener noreferrer"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgOfk2ohQAbH9W_PIh2DbCS1fgdVHUCWVT0XSzf2j7NwHE861w27OY0zToIwUnOX_8xsSttRwACwlwjVfCOlzqUuNuai-5jBQX6_TR3bUfm0KFqTiW5BA3Q3HoutTODhjpp1shxSKPUnoH1cEwEuRvd3riM7C2sMFkUw8b4024kldoWreSE41vvqAY0Q0I=w655-h368" alt="" loading="lazy" decoding="async"></a></div><br><br>A fost lansată versiunea de mentenanță <b>PipeWire 1.6.9</b>, aducând optimizări semnificative pentru calitatea audio (resampling), procesarea obiectelor JACK, protocolul RAOP/AirPlay, precum și corecții pentru subsistemele Bluetooth, PulseAudio și GStreamer.<h3><b>Punctele cheie ale versiunii PipeWire 1.6.9</b></h3><h4><b>1. Calitate audio și reeșantionare (Resampling)</b></h4><ul><li><p><b>Conservarea frecvențelor înalte:</b> Frecvențele de tăiere (<i>cutoff</i>) pentru upsampling au fost ajustate pentru a păstra mai bine conținutul de frecvență înaltă, eliminând pierderile de calitate semnalate anterior (în special la sursele audio la 32 kHz).</p></li><li><p><b>Tratare canale &amp; Upmixing:</b> S-a îmbunătățit comportamentul volumului pentru canalele Centru și LFE în timpul procesului de <i>upmixing</i>.</p></li></ul><h4><b>2. Îmbunătățiri JACK și rețea (RAOP / AirPlay)</b></h4><ul><li><p><b>Sistem de căutare JACK optimizat:</b> A fost modificat modul în care sunt gestionate căutările de obiecte, prevenind situațiile în care aplicațiile primeau informații învechite despre porturi/obiecte eliminate ale căror ID-uri au fost reutilizate.</p></li><li><p><b>Corecții RAOP:</b> S-au rezolvat problemele de criptare când se utilizează OpenSSL 3+, erorile la transmisiile RAOP peste TCP și cazurile de trunchiere ale semnalului audio.</p></li><li><p><b>Marcaj <code>node.network=true</code>:</b> Dispozitivele de intrare/ieșire din rețea sunt acum etichetate explicit pentru ca aplicații precum <code>pavucontrol</code> să le recunoască corect și să prevină trezirea (<i>wake up</i>) inutilă a acestora.</p></li></ul><h4><b>3. Integrări și module (SPA, Bluetooth, PulseAudio, CLI)</b></h4><ul><li><p><b>Compatibilitate libcamera:</b> PipeWire necesită acum versiunea <code>libcamera 0.6.0</code> sau mai nouă.</p></li><li><p><b>Bluetooth:</b> S-au rezolvat scurgerile de memorie apărute la eșecul pornirii transportului și posibilele blocaje la curățarea transporturilor ISO I/O.</p></li><li><p><b>PulseAudio Server &amp; GStreamer:</b> Corecție pentru un posibil crash legat de numele portului activ și eliminarea blocajelor provocate de schimbările de stare în GStreamer.</p></li><li><p><b>Instrumente de linie de comandă:</b> <code>pw-cat</code> gestionează corect finalul fișierelor codate, iar <code>pw-record</code> adaugă suport pentru audio A-law și rezolvă codarea MP3.</p></li></ul><p><b>Sursă:</b> <a href="https://linuxiac.com/pipewire-1-6-9-multimedia-framework-released-with-better-resampling-quality/?utm_source=gemini" target="_blank" rel="noopener noreferrer">Linuxiac - PipeWire 1.6.9 Multimedia Framework Released with Better Resampling Quality</a></p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-09-vlc-3024-fost-lansat-trecerea-la-ffmpeg.html"><small>← Mai nou</small>VLC 3.0.24 a fost lansat: Trecerea la FFmpeg 8.1.2, suport Flatpak și multiple îmbunătățiri</a><a class="r" href="../articole/2026-09-rust-coreutils-012-fost-lansat.html"><small>Mai vechi →</small>Rust Coreutils 0.12 a fost lansat: Îmbunătățiri majore de compatibilitate pentru Ubuntu și suitele GNU</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
