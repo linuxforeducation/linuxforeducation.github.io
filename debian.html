@@ -22,8 +22,617 @@
 <header class="page-head">
   <p class="eyebrow"><a href="tutoriale.html">Tutoriale</a></p>
   <h1>Debian</h1>
-  <p class="lead">Niciun articol încă. Revino în curând.</p>
+  <p class="lead">1 articol, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
+  <label class="filter"><span>Caută în Debian</span><input type="search" id="filtru" placeholder="Filtrează după titlu sau text…" autocomplete="off"></label>
 </header>
+<div class="posts" id="lista">
+<article class="post" id="2026-11-manual-de-administrare-debian-linux">
+<details>
+<summary>
+  <span class="pt ph" aria-hidden="true">&gt;_</span>
+  <span class="ps">
+    <span class="meta"><time datetime="2026-11-11">11 noiembrie 2026</time></span>
+    <span class="pt-title" role="heading" aria-level="2">Manual de administrare Debian Linux</span>
+    <span class="excerpt">Ghid complet în limba română pentru instalarea, configurarea și administrarea sistemului Debian, de la bazele terminalului până la servicii web și securitate. 1. Introducere în Debian Debian este una dintre…</span>
+    <span class="more">Citește articolul</span>
+  </span>
+</summary>
+<div class="prose">
+<p>Ghid complet în limba română pentru instalarea, configurarea și administrarea sistemului Debian, de la bazele terminalului până la servicii web și securitate.</p><h2>1. Introducere în Debian</h2><p>Debian este una dintre cele mai vechi și mai stabile distribuții Linux, lansată pentru prima dată în 1993 de Ian Murdock. Renumit pentru fiabilitate, securitate și respectarea standardelor software libere, Debian stă la baza multor alte distribuții populare, inclusiv Ubuntu.</p><p>Debian 12 "Bookworm", lansat în 2023, include kernel Linux 6.1 LTS, suport îmbunătățit pentru firmware proprietar și pachete actualizate. Sistemul de release urmează un ciclu de aproximativ 2 ani, cu ramurile <code>stable</code>, <code>testing</code> și <code>unstable</code>.</p><h3>Ramurile Debian</h3><div class="tw"><table><thead><tr><th>Ramură</th><th>Nume</th><th>Descriere</th><th>Recomandare</th></tr></thead><tbody><tr><td><code>stable</code></td><td>Bookworm</td><td>Pachete testate, maxim stabile</td><td>Producție / servere</td></tr><tr><td><code>testing</code></td><td>Trixie</td><td>Viitoarea versiune stabilă</td><td>Desktop avansat</td></tr><tr><td><code>unstable</code></td><td>Sid</td><td>Cele mai noi pachete, mai puțin testate</td><td>Dezvoltatori</td></tr><tr><td><code>backports</code></td><td>—</td><td>Pachete noi retroportate pe stable</td><td>Pachete specifice noi</td></tr></tbody></table></div><h3>Filozofia Debian</h3><p>Debian urmează <em>Contractul Social Debian</em> și <em>Ghidul Debian pentru Software Liber (DFSG)</em>. Distribuția este condusă de voluntari și nu este deținută de nicio companie. Pachetele sunt împărțite în trei secțiuni: <strong>main</strong> (100% liber), <strong>contrib</strong> (liber, dar depinde de non-free) și <strong>non-free</strong> (software proprietar).</p><h2>2. Instalarea Sistemului</h2><p>Debian oferă mai multe imagini de instalare: <strong>netinst</strong> (~400MB, descarcă pachetele din internet), <strong>DVD</strong> (offline complet) și <strong>live</strong> (testare fără instalare). Pentru servere, netinst este opțiunea recomandată.</p><h3>Descărcarea imaginii</h3><div>bash — verificare integritate ISO</div><pre><code># Descarcă imaginea netinst (amd64)
+wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.x.x-amd64-netinst.iso
+
+# Verifică suma de control SHA512
+sha512sum -c SHA512SUMS 2&gt;/dev/null | grep debian-12
+</code></pre><h3>Crearea unui USB bootabil</h3><div>bash — scriere pe USB (Linux/macOS)</div><pre><code># Identifică dispozitivul USB (atenție la litera corectă!)
+lsblk
+
+# Scrie imaginea — ÎNLOCUIEȘTE /dev/sdX cu dispozitivul tău
+sudo dd if=debian-12-amd64-netinst.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sudo sync
+</code></pre><blockquote><p><strong>⚠ Atenție</strong> Comanda <code>dd</code> va șterge irevocabil toate datele de pe dispozitivul țintă. Verifică de două ori că ai selectat USB-ul și nu discul sistemului tău!</p></blockquote><h3>Partitionare recomandată pentru server</h3><div class="tw"><table><thead><tr><th>Partiție</th><th>Tip</th><th>Dimensiune</th><th>Scop</th></tr></thead><tbody><tr><td><code>/boot/efi</code></td><td>EFI System</td><td>512 MB</td><td>Bootloader UEFI</td></tr><tr><td><code>/boot</code></td><td>ext4</td><td>1 GB</td><td>Kernel și initrd</td></tr><tr><td>swap</td><td>swap</td><td>2× RAM (max 8GB)</td><td>Memorie virtuală</td></tr><tr><td><code>/</code></td><td>ext4 / btrfs</td><td>20–50 GB</td><td>Sistemul de bază</td></tr><tr><td><code>/var</code></td><td>ext4</td><td>20+ GB</td><td>Logs, baze de date</td></tr><tr><td><code>/home</code></td><td>ext4</td><td>Rest</td><td>Date utilizatori</td></tr></tbody></table></div><h3>Configurare post-instalare esențială</h3><div>bash — primii pași după instalare</div><pre><code># Actualizează lista de pachete și sistemul
+apt update &amp;&amp; apt full-upgrade -y
+
+# Instalează unelte esențiale
+apt install -y sudo curl wget git vim htop net-tools lsof
+
+# Adaugă utilizatorul tău în grupul sudo
+usermod -aG sudo numeutilizator
+
+# Setează hostname-ul
+hostnamectl set-hostname debian-server
+</code></pre><h2>3. Gestionarea Pachetelor</h2><p>Debian folosește sistemul de pachete <code>.deb</code> cu instrumentele <strong>apt</strong> (interfață de nivel înalt) și <strong>dpkg</strong> (nivel jos). APT rezolvă automat dependențele și descarcă pachetele din depozite (repositories).</p><h3>Comenzi esențiale APT</h3><div>bash — gestionare pachete cu apt</div><pre><code># Actualizează indexul de pachete
+apt update
+
+# Actualizează pachetele instalate
+apt upgrade
+
+# Actualizare completă (inclusiv schimbări de dependențe)
+apt full-upgrade
+
+# Instalează un pachet
+apt install nginx
+
+# Dezinstalează (păstrează configurația)
+apt remove nginx
+
+# Dezinstalează complet (șterge și configurația)
+apt purge nginx
+
+# Curăță pachete neutilizate
+apt autoremove
+
+# Caută un pachet
+apt search "web server"
+
+# Informații despre un pachet
+apt show nginx
+
+# Listează pachetele instalate
+apt list --installed
+</code></pre><h3>Fișierul sources.list</h3><div>/etc/apt/sources.list — configurare depozite Debian 12</div><pre><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+
+# Backports (pachete mai noi retroportate)
+deb http://deb.debian.org/debian bookworm-backports main contrib non-free
+</code></pre><h3>Lucrul cu dpkg</h3><div>bash — dpkg pentru operații de nivel jos</div><pre><code># Instalează un .deb local
+dpkg -i pachet.deb
+
+# Listează toate pachetele instalate
+dpkg -l
+
+# Verifică dacă un pachet este instalat
+dpkg -l nginx
+
+# Listează fișierele unui pachet
+dpkg -L nginx
+
+# Află cărui pachet îi aparține un fișier
+dpkg -S /usr/sbin/nginx
+
+# Reconfigurează un pachet
+dpkg-reconfigure tzdata
+</code></pre><blockquote><p><strong>💡 Sfat</strong> Folosește <code>apt-cache depends pachet</code> pentru a vedea dependențele unui pachet înainte de instalare, și <code>apt-cache rdepends pachet</code> pentru a vedea ce pachete depind de el.</p></blockquote><h2>4. Configurarea Rețelei</h2><p>Debian 12 folosește în principal <strong>systemd-networkd</strong> sau fișierul tradițional <code>/etc/network/interfaces</code> pentru configurarea rețelei. Pe sisteme desktop, <strong>NetworkManager</strong> este preferat.</p><h3>Configurare cu /etc/network/interfaces</h3><div>/etc/network/interfaces — configurare statică</div><pre><code>source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+# Interfață cu IP static
+auto eth0
+iface eth0 inet static
+    address 192.168.1.100/24
+    gateway 192.168.1.1
+    dns-nameservers 8.8.8.8 1.1.1.1
+
+# Interfață cu DHCP
+# auto eth0
+# iface eth0 inet dhcp
+</code></pre><h3>Instrumente de rețea</h3><div>bash — diagnosticare rețea</div><pre><code># Afișează interfețele și adresele IP (modern)
+ip addr show
+ip a
+
+# Afișează tabela de rutare
+ip route show
+
+# Testează conectivitate
+ping -c 4 8.8.8.8
+
+# Rezolvare DNS
+dig google.com
+nslookup google.com
+
+# Statistici conexiuni rețea
+ss -tuln          # conexiuni TCP/UDP active
+ss -tulnp         # cu PID-uri
+
+# Traseu pachete
+traceroute 8.8.8.8
+
+# Scanare porturi locale
+nmap localhost
+
+# Repornire serviciu rețea
+systemctl restart networking
+</code></pre><h3>Configurare firewall cu nftables</h3><div>bash — firewall de bază cu nftables</div><pre><code># Instalează nftables
+apt install nftables
+
+# Editează regulile
+nano /etc/nftables.conf
+
+# Configurare de bază (în /etc/nftables.conf):
+# table inet filter {
+#   chain input {
+#     type filter hook input priority 0; policy drop;
+#     iif lo accept
+#     ct state established,related accept
+#     tcp dport { ssh, http, https } accept
+#     icmp type echo-request accept
+#   }
+#   chain forward { type filter hook forward priority 0; policy drop; }
+#   chain output  { type filter hook output priority 0; policy accept; }
+# }
+
+systemctl enable --now nftables
+nft list ruleset
+</code></pre><h2>5. Administrarea Utilizatorilor</h2><p>Linux folosește un model de permisiuni bazat pe utilizatori și grupuri. Fiecare fișier are un proprietar (user), un grup și permisiuni pentru others. Contul <strong>root</strong> are acces nelimitat la sistem.</p><h3>Gestiunea utilizatorilor</h3><div>bash — creare și modificare utilizatori</div><pre><code># Creează un utilizator nou cu director home
+useradd -m -s /bin/bash -c "Nume Complet" username
+
+# Setează parola
+passwd username
+
+# Modifică utilizatorul (exemplu: schimbă shell-ul)
+usermod -s /bin/zsh username
+
+# Adaugă în grup suplimentar
+usermod -aG sudo,docker username
+
+# Șterge utilizatorul (și directorul home cu -r)
+userdel -r username
+
+# Blochează/deblochează un cont
+passwd -l username    # blochează
+passwd -u username    # deblochează
+
+# Informații despre utilizator
+id username
+getent passwd username
+</code></pre><h3>Gestiunea grupurilor</h3><div>bash — grupuri Linux</div><pre><code># Creează grup nou
+groupadd devteam
+
+# Adaugă utilizator în grup
+gpasswd -a username devteam
+# sau
+usermod -aG devteam username
+
+# Elimină utilizatorul din grup
+gpasswd -d username devteam
+
+# Listează membrii unui grup
+getent group devteam
+
+# Listează grupurile unui utilizator
+groups username
+id username
+</code></pre><h3>Permisiuni și chmod</h3><div>bash — permisiuni fișiere și directoare</div><pre><code># Sintaxa permisiunilor: rwxrwxrwx (user/group/others)
+# r=4, w=2, x=1
+
+# Setează permisiunile numeric
+chmod 644 fisier.txt       # rw-r--r--
+chmod 755 script.sh        # rwxr-xr-x
+chmod 700 director_privat  # rwx------
+
+# Setează permisiunile simbolic
+chmod u+x script.sh        # adaugă execute pentru user
+chmod go-w fisier.txt      # elimină write pentru group/others
+chmod a+r fisier.txt       # citire pentru toți
+
+# Schimbă proprietarul
+chown user:group fisier.txt
+chown -R www-data:www-data /var/www/html
+
+# Verifică permisiunile
+ls -la /var/www/html
+</code></pre><h3>sudo — privilegii de root</h3><div>bash — configurare sudo</div><pre><code># Editează configurația sudo (mereu cu visudo!)
+visudo
+
+# Exemplu intrare în /etc/sudoers:
+# username ALL=(ALL:ALL) ALL
+# sau fără parolă:
+# username ALL=(ALL) NOPASSWD: ALL
+
+# Grup sudo (Debian) are acces complet implicit
+usermod -aG sudo username
+
+# Execută o comandă ca root
+sudo apt update
+sudo -i          # deschide shell root complet
+sudo -u altuser comandă  # rulează ca alt utilizator
+</code></pre><h2>6. Comenzi Esențiale de Terminal</h2><p>Stăpânirea terminalului este esențială pentru orice administrator Debian. Comenzile de mai jos acoperă navigarea, manipularea fișierelor, căutarea, procesarea textului și monitorizarea sistemului.</p><h3>Navigare și fișiere</h3><div>bash — navigare și gestiune fișiere</div><pre><code># Navigare
+pwd                        # directorul curent
+cd /var/log                # schimbă directorul
+cd ~                       # mergi la home
+cd -                       # directorul anterior
+
+# Listare
+ls -lah                    # listare detaliată + hidden + human-readable
+ls -lt                     # sortare după dată modificare
+tree -L 2                  # arbore directoare, adâncime 2
+
+# Creare
+mkdir -p /opt/app/logs     # creare directoare recursive
+touch fisier.txt           # creează fișier gol / actualizează timestamp
+
+# Copiere / mutare
+cp -r /sursa /destinatie   # copiere recursivă
+mv fisier.txt /tmp/        # mută / redenumește
+rsync -avz src/ dest/      # sincronizare eficientă
+
+# Ștergere (cu atenție!)
+rm fisier.txt              # șterge fișier
+rm -rf /tmp/director       # șterge recursiv (periculos!)
+
+# Legătari simbolice
+ln -s /usr/bin/python3 /usr/local/bin/python
+</code></pre><h3>Căutare și procesare text</h3><div>bash — find, grep, sed, awk</div><pre><code># find — caută fișiere
+find /var/log -name "*.log" -mtime -7      # modificate în ultimele 7 zile
+find /home -type f -size +100M             # fișiere mai mari de 100MB
+find /etc -name "*.conf" -exec ls -la {} \;
+
+# grep — caută în conținut
+grep -r "error" /var/log/                  # recursiv
+grep -n "failed" /var/log/auth.log         # cu numărul liniei
+grep -v "^#" /etc/fstab                    # inversează (exclude comentariile)
+grep -E "ERROR|WARN" app.log              # expresii regulate (extended)
+
+# sed — substituire text
+sed 's/vechi/nou/g' fisier.txt             # înlocuire globală (output)
+sed -i 's/vechi/nou/g' fisier.txt          # înlocuire in-place
+sed '/^#/d' fisier.conf                    # șterge liniile comentariu
+
+# awk — procesare coloane
+awk '{print $1, $3}' fisier.txt            # afișează coloanele 1 și 3
+awk -F: '{print $1}' /etc/passwd           # listează utilizatorii
+df -h | awk 'NR&gt;1 {print $5, $6}'         # utilizare disk
+</code></pre><h3>Monitorizarea sistemului</h3><div>bash — resurse și procese</div><pre><code># Procese
+ps aux                     # toate procesele
+ps aux | grep nginx        # filtrează după nume
+top                        # monitor interactiv
+htop                       # monitor avansat (apt install htop)
+kill -9 PID                # forțează oprirea unui proces
+pkill -f "nume_proces"     # oprire după nume
+
+# Memorie și CPU
+free -h                    # utilizare memorie (human-readable)
+vmstat 1 5                 # statistici la fiecare secundă, de 5 ori
+uptime                     # timp funcționare + load average
+lscpu                      # informații CPU
+
+# Spațiu pe disk
+df -h                      # utilizare partiții
+du -sh /var/log/*          # dimensiunea fiecărui director
+ncdu /                     # navigator interactiv (apt install ncdu)
+
+# I/O disk
+iostat -x 1                # statistici I/O
+iotop                      # monitorizare I/O pe procese
+</code></pre><h2>7. Securitate</h2><p>Securizarea unui sistem Debian implică actualizări regulate, configurarea corectă a SSH, folosirea unui firewall și monitorizarea activității. Un sistem securizat aplică principiul <em>least privilege</em> — fiecare serviciu rulează cu permisiunile minime necesare.</p><h3>Actualizări de securitate automate</h3><div>bash — actualizări automate nesupravegheat</div><pre><code># Instalează unattended-upgrades
+apt install unattended-upgrades apt-listchanges
+
+# Configurează
+dpkg-reconfigure -plow unattended-upgrades
+
+# Editează configurația
+nano /etc/apt/apt.conf.d/50unattended-upgrades
+
+# Activare actualizări zilnice
+nano /etc/apt/apt.conf.d/20auto-upgrades
+# Conținut:
+# APT::Periodic::Update-Package-Lists "1";
+# APT::Periodic::Unattended-Upgrade "1";
+
+# Verifică log-ul
+cat /var/log/unattended-upgrades/unattended-upgrades.log
+</code></pre><h3>Securizarea SSH</h3><div>/etc/ssh/sshd_config — configurare recomandată</div><pre><code># Schimbă portul implicit (optional, dar recomandat)
+Port 2222
+
+# Dezactivează autentificarea cu parolă (folosește chei SSH!)
+PasswordAuthentication no
+PubkeyAuthentication yes
+
+# Dezactivează login-ul direct ca root
+PermitRootLogin no
+
+# Permite doar anumiți utilizatori
+AllowUsers username altuser
+
+# Dezactivează X11 forwarding dacă nu e necesar
+X11Forwarding no
+
+# Setează timeout inactivitate (în secunde)
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+# Versiunea protocolului (doar SSH2)
+Protocol 2
+</code></pre><h3>Generarea și configurarea cheilor SSH</h3><div>bash — autentificare cu chei SSH</div><pre><code># Generează pereche de chei (pe calculatorul client)
+ssh-keygen -t ed25519 -C "comentariu@email.ro"
+# sau RSA pentru compatibilitate mai largă:
+ssh-keygen -t rsa -b 4096
+
+# Copiază cheia publică pe server
+ssh-copy-id -i ~/.ssh/id_ed25519.pub user@server-ip
+
+# Manual — adaugă cheia în authorized_keys
+cat ~/.ssh/id_ed25519.pub &gt;&gt; ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+# Verifică conectarea
+ssh -i ~/.ssh/id_ed25519 user@server-ip
+</code></pre><h3>fail2ban — protecție brute-force</h3><div>bash — instalare și configurare fail2ban</div><pre><code>apt install fail2ban
+
+# Creează configurație locală (nu edita .conf direct)
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+# Editează jail.local — setări de bază
+nano /etc/fail2ban/jail.local
+# [DEFAULT]
+# bantime  = 1h
+# findtime = 10m
+# maxretry = 5
+#
+# [sshd]
+# enabled = true
+# port = 2222
+
+systemctl enable --now fail2ban
+
+# Statusul jail-urilor
+fail2ban-client status
+fail2ban-client status sshd
+
+# Deblochează un IP
+fail2ban-client set sshd unbanip 1.2.3.4
+</code></pre><h3>Verificare integritate cu AIDE</h3><div>bash — sistem de detecție a intruziunilor</div><pre><code>apt install aide
+
+# Inițializează baza de date (după o instalare curată)
+aideinit
+mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+
+# Verifică modificările față de baseline
+aide --check
+
+# Programează verificare zilnică
+# Cron-ul este adăugat automat la instalare
+</code></pre><h2>8. Servicii și Procese cu systemd</h2><p><strong>systemd</strong> este sistemul de init și manager de servicii utilizat de Debian. Înlocuiește SysVinit tradițional și oferă management paralel al serviciilor, logging integrat (journald) și gestionarea dependențelor între servicii.</p><h3>Gestiunea serviciilor</h3><div>bash — comenzi systemctl</div><pre><code># Pornire / oprire / repornire
+systemctl start nginx
+systemctl stop nginx
+systemctl restart nginx
+systemctl reload nginx        # reîncarcă configurația fără oprire
+
+# Activare la boot
+systemctl enable nginx
+systemctl disable nginx
+systemctl enable --now nginx  # activează ȘI pornește imediat
+
+# Verificare stare
+systemctl status nginx
+systemctl is-active nginx
+systemctl is-enabled nginx
+
+# Listare servicii
+systemctl list-units --type=service
+systemctl list-units --type=service --state=failed
+
+# Reîncarcă configurația systemd (după modificarea fișierelor .service)
+systemctl daemon-reload
+</code></pre><h3>Crearea unui serviciu personalizat</h3><div>/etc/systemd/system/myapp.service — unit file</div><pre><code>[Unit]
+Description=Aplicatia mea web
+Documentation=https://example.com/docs
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/myapp
+ExecStart=/opt/myapp/bin/server --port 8080
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Izolare (securitate)
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><h3>Journald — logging centralizat</h3><div>bash — vizualizare log-uri cu journalctl</div><pre><code># Log-urile unui serviciu
+journalctl -u nginx
+journalctl -u nginx -f          # urmărire în timp real (follow)
+journalctl -u nginx --since "1 hour ago"
+journalctl -u nginx -n 50       # ultimele 50 de linii
+
+# Log-urile sistemului
+journalctl -b                   # boot-ul curent
+journalctl -b -1                # boot-ul anterior
+journalctl --since "2024-01-01" --until "2024-01-02"
+journalctl -p err               # doar erorile (err/warning/info/debug)
+
+# Curăță log-urile vechi
+journalctl --vacuum-time=30d    # păstrează ultimele 30 zile
+journalctl --vacuum-size=500M   # limitează la 500MB
+</code></pre><h2>9. Servicii Web, SSH și Baze de Date</h2><p>Un server LAMP (Linux, Apache, MySQL, PHP) sau LEMP (cu Nginx) este una dintre cele mai comune configurații. Debian facilitează instalarea tuturor componentelor prin APT.</p><h3>Apache — instalare și virtual hosts</h3><div>bash — Apache2 pe Debian</div><pre><code>apt install apache2
+
+# Activează module esențiale
+a2enmod rewrite ssl headers deflate
+
+# Creează un virtual host
+nano /etc/apache2/sites-available/exemplu.conf
+</code></pre><div>/etc/apache2/sites-available/exemplu.conf</div><pre><code>&lt;VirtualHost *:80&gt;
+    ServerName exemplu.ro
+    ServerAlias www.exemplu.ro
+    DocumentRoot /var/www/exemplu
+
+    &lt;Directory /var/www/exemplu&gt;
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog  ${APACHE_LOG_DIR}/exemplu-error.log
+    CustomLog ${APACHE_LOG_DIR}/exemplu-access.log combined
+
+    # Redirecționare la HTTPS
+    Redirect permanent / https://exemplu.ro/
+&lt;/VirtualHost&gt;
+</code></pre><div>bash — activare site Apache</div><pre><code>a2ensite exemplu.conf
+a2dissite 000-default.conf
+apache2ctl configtest          # verifică sintaxa
+systemctl reload apache2
+</code></pre><h3>Nginx — configurare de bază</h3><div>/etc/nginx/sites-available/exemplu.conf</div><pre><code>server {
+    listen 80;
+    server_name exemplu.ro www.exemplu.ro;
+    root /var/www/exemplu;
+    index index.html index.php;
+
+    # Securitate headers
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;    # protejează .htaccess
+    }
+}
+</code></pre><h3>SSL cu Let's Encrypt / Certbot</h3><div>bash — certificat SSL gratuit</div><pre><code>apt install certbot python3-certbot-nginx
+
+# Obține și instalează automat certificatul
+certbot --nginx -d exemplu.ro -d www.exemplu.ro
+
+# Sau doar obține certificatul (pentru configurare manuală)
+certbot certonly --webroot -w /var/www/html -d exemplu.ro
+
+# Testează reînnoirea automată
+certbot renew --dry-run
+
+# Certbot creează automat un cron/systemd timer pentru reînnoire
+</code></pre><h3>MySQL / MariaDB</h3><div>bash — instalare și configurare MariaDB</div><pre><code>apt install mariadb-server
+mysql_secure_installation     # configurare inițială de securitate
+
+# Conectare ca root
+mysql -u root -p
+
+# Comenzi SQL de bază:
+# CREATE DATABASE myapp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+# CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'parola_sigura';
+# GRANT ALL PRIVILEGES ON myapp.* TO 'appuser'@'localhost';
+# FLUSH PRIVILEGES;
+# EXIT;
+
+# Backup baza de date
+mysqldump -u root -p myapp &gt; backup_myapp_$(date +%Y%m%d).sql
+
+# Restaurare din backup
+mysql -u root -p myapp &lt; backup_myapp_20240101.sql
+</code></pre><h2>10. Depanare și Diagnostic</h2><p>Depanarea sistemelor Linux necesită o abordare sistematică: identifică simptomele, verifică log-urile, izolează componenta problematică și testează soluțiile. Instrumentele de mai jos acoperă cele mai frecvente scenarii.</p><h3>Analiza log-urilor</h3><div>bash — localizarea problemelor prin log-uri</div><pre><code># Log-uri principale pe Debian
+/var/log/syslog              # mesaje generale sistem
+/var/log/auth.log            # autentificări și sudo
+/var/log/kern.log            # mesaje kernel
+/var/log/dpkg.log            # operații APT/dpkg
+/var/log/apache2/            # log-uri Apache
+/var/log/nginx/              # log-uri Nginx
+/var/log/mysql/              # log-uri MySQL/MariaDB
+
+# Urmărire în timp real
+tail -f /var/log/syslog
+tail -f /var/log/auth.log
+
+# Caută erori în log-uri
+grep -i "error\|fail\|crit" /var/log/syslog | tail -50
+journalctl -p err -b          # erori din boot-ul curent
+
+# Mesaje kernel recente
+dmesg | tail -30
+dmesg | grep -i "error\|fail\|warn"
+</code></pre><h3>Diagnosticare spațiu pe disk</h3><div>bash — probleme de spațiu</div><pre><code># Verifică utilizarea diskului
+df -h
+
+# Găsește directoarele mari
+du -sh /* 2&gt;/dev/null | sort -hr | head -10
+du -sh /var/* | sort -hr | head -10
+
+# Găsește fișierele mari
+find / -type f -size +500M 2&gt;/dev/null | sort -k 5 -n
+
+# Curăță cache-ul APT
+apt clean
+apt autoclean
+
+# Curăță log-uri journald vechi
+journalctl --vacuum-time=7d
+
+# Elimină pachete neutilizate
+apt autoremove --purge
+
+# Verifică inode-uri (altă cauză "disk full")
+df -i
+</code></pre><h3>Diagnosticare servicii care nu pornesc</h3><div>bash — debugging servicii systemd</div><pre><code># Verifică statusul detaliat
+systemctl status nginx.service -l
+
+# Log-urile serviciului
+journalctl -u nginx --no-pager -n 100
+
+# Verifică configurația (exemplu Nginx)
+nginx -t
+
+# Verifică ce proces ocupă un port
+ss -tlnp | grep :80
+lsof -i :80
+
+# Repornire forțată
+systemctl stop nginx
+sleep 2
+systemctl start nginx
+systemctl status nginx
+</code></pre><h3>Probleme de boot</h3><div>bash — diagnosticare boot și recovery</div><pre><code># Verifică timpul de boot și unele lente
+systemd-analyze blame | head -20
+systemd-analyze critical-chain
+
+# Verifică fstab (montare filesystem)
+cat /etc/fstab
+mount -a                      # testează montarea tuturor din fstab
+
+# Repară filesystem (dezmontat)
+fsck -y /dev/sda1             # NUMAI dacă partiția e demontată!
+
+# Reconstruiește initramfs (dacă kernelul nu pornește)
+update-initramfs -u -k all
+
+# Actualizează GRUB (dacă bootloader-ul e defect)
+update-grub
+grub-install /dev/sda
+</code></pre><h3>Referință rapidă — comenzi de urgență</h3><div class="tw"><table><thead><tr><th>Problemă</th><th>Comandă de diagnostic</th><th>Soluție comună</th></tr></thead><tbody><tr><td>Disk plin</td><td><code>df -h</code></td><td><code>apt clean &amp;&amp; journalctl --vacuum-time=7d</code></td></tr><tr><td>Memorie epuizată</td><td><code>free -h</code></td><td><code>sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches</code></td></tr><tr><td>Load mare</td><td><code>top</code> / <code>htop</code></td><td>identifică procesul cu CPU mare, <code>kill</code></td></tr><tr><td>Port ocupat</td><td><code>ss -tlnp | grep PORT</code></td><td>oprește serviciul conflictual</td></tr><tr><td>SSH refuzat</td><td><code>journalctl -u ssh</code></td><td>verifică <code>sshd_config</code> și <code>fail2ban</code></td></tr><tr><td>Serviciu crashed</td><td><code>systemctl status serviciu</code></td><td><code>journalctl -u serviciu -n 50</code></td></tr><tr><td>DNS nu merge</td><td><code>dig google.com</code></td><td>verifică <code>/etc/resolv.conf</code></td></tr><tr><td>Pachete sparte</td><td><code>apt -f install</code></td><td><code>dpkg --configure -a</code></td></tr></tbody></table></div><blockquote><p><strong>💡 Metodologie de depanare</strong> Urmează pașii: (1) Reproduce problema consistent; (2) Verifică log-urile relevante; (3) Izolează componenta; (4) Testează o singură modificare odată; (5) Documentează soluția. Nu face modificări multiple simultan — nu vei ști ce a rezolvat problema.</p></blockquote>
+</div>
+<p class="post-foot"><a class="chip" href="debian.html">Debian</a><a href="articole/2026-11-manual-de-administrare-debian-linux.html">Pagina articolului</a></p>
+</details>
+</article>
+</div>
+<p class="none" id="nimic" hidden>Niciun articol nu se potrivește căutării.</p>
+<p class="more-wrap"><button class="btn" id="mai-multe" type="button" hidden>Arată mai multe</button></p>
 </main>
 <footer class="site-footer"><div class="wrap">
   <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
