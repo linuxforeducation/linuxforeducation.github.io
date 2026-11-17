@@ -321,26 +321,40 @@ async function getFile(path){
 async function commitFiles(files, message, onProgress){
   var paths = Object.keys(files);
   if(!paths.length) return null;
-  var ref  = await ghFetch('GET','/repos/'+REPO+'/git/ref/heads/main');
-  var head = ref.object.sha;
-  var cm   = await ghFetch('GET','/repos/'+REPO+'/git/commits/'+head);
-  var items = [], BATCH = 8;
+  // Step 1: create all blobs (once — reused on retry)
+  var blobItems = [], BATCH = 8;
+  var initRef = await ghFetch('GET','/repos/'+REPO+'/git/ref/heads/main');
+  var parentSha = initRef.object.sha;
   for(var i=0;i<paths.length;i+=BATCH){
     var batch = paths.slice(i, i+BATCH);
     var res = await Promise.all(batch.map(async function(p){
       var blob = await ghFetch('POST','/repos/'+REPO+'/git/blobs',{content:utf8b64(files[p]),encoding:'base64'});
       return {path:p, mode:'100644', type:'blob', sha:blob.sha};
     }));
-    items = items.concat(res);
+    blobItems = blobItems.concat(res);
     if(onProgress) onProgress(10 + Math.round((i+batch.length)/paths.length*70));
   }
-  var tree = await ghFetch('POST','/repos/'+REPO+'/git/trees',{base_tree:cm.tree.sha, tree:items});
-  if(onProgress) onProgress(85);
-  var newCm = await ghFetch('POST','/repos/'+REPO+'/git/commits',{message:message, tree:tree.sha, parents:[head], author:{...AUTHOR, date:new Date().toISOString()}});
-  if(onProgress) onProgress(95);
-  await ghFetch('PATCH','/repos/'+REPO+'/git/refs/heads/main',{sha:newCm.sha});
-  if(onProgress) onProgress(100);
-  return newCm.sha;
+  // Step 2: tree + commit + ref update — retry up to 3× on fast-forward conflict
+  for(var attempt=0; attempt<3; attempt++){
+    if(attempt>0){
+      status('Conflict de versiune, se reîncearcă… ('+attempt+')','',80+attempt*3);
+      var newRef = await ghFetch('GET','/repos/'+REPO+'/git/ref/heads/main');
+      parentSha = newRef.object.sha;
+    }
+    var cm = await ghFetch('GET','/repos/'+REPO+'/git/commits/'+parentSha);
+    var tree = await ghFetch('POST','/repos/'+REPO+'/git/trees',{base_tree:cm.tree.sha,tree:blobItems});
+    if(onProgress) onProgress(85+attempt*2);
+    var newCm = await ghFetch('POST','/repos/'+REPO+'/git/commits',{message:message,tree:tree.sha,parents:[parentSha],author:{...AUTHOR,date:new Date().toISOString()}});
+    if(onProgress) onProgress(95);
+    try{
+      await ghFetch('PATCH','/repos/'+REPO+'/git/refs/heads/main',{sha:newCm.sha});
+      if(onProgress) onProgress(100);
+      return newCm.sha;
+    }catch(e){
+      if(attempt<2&&e.status===422) continue; // not a fast forward — retry
+      throw e;
+    }
+  }
 }
 
 /* ── Publish ── */
