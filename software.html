@@ -22,10 +22,27 @@
 <header class="page-head">
   <p class="eyebrow">Etichetă</p>
   <h1>Software</h1>
-  <p class="lead">95 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
+  <p class="lead">96 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
   <label class="filter"><span>Caută în Software</span><input type="search" id="filtru" placeholder="Filtrează după titlu sau text…" autocomplete="off"></label>
 </header>
 <div class="posts" id="lista">
+<article class="post" id="2026-11-apt-3-3-8-a-fost-lansat-optimizari-de-performanta-in-verific">
+<details>
+<summary>
+  <img class="pt" src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/apt338-1024x576.jpg" alt="" loading="lazy" decoding="async">
+  <span class="ps">
+    <span class="meta"><time datetime="2026-11-17">17 noiembrie 2026</time></span>
+    <span class="pt-title" role="heading" aria-level="2">APT 3.3.8 a fost lansat: Optimizări de performanță în verificarea pachetelor, generarea cache-ului și rezolvarea dependențelor</span>
+    <span class="excerpt">Managerul de pachete APT a primit versiunea 3.3.8 , o actualizare axată pe reducerea timpilor de execuție și a consumului de resurse CPU/rețea. O particularitate notabilă a acestei ediții este că majoritatea…</span>
+    <span class="more">Citește articolul</span>
+  </span>
+</summary>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/apt338-1024x576.jpg" alt="APT 3.3.8 Package Manager Gets Performance Improvements" loading="lazy" decoding="async"></p><p>Managerul de pachete <b>APT</b> a primit versiunea <b>3.3.8</b>, o actualizare axată pe reducerea timpilor de execuție și a consumului de resurse CPU/rețea. O particularitate notabilă a acestei ediții este că majoritatea optimizărilor provin din contribuțiile proiectului <b>PikaOS</b>, fiind integrate în codul oficial upstream al APT.</p><h3>Verificare criptografică mai rapidă și procesare paralelă</h3><p>La verificarea și stocarea pachetelor descărcate, APT elimină operațiunile redundante:</p><ul><li><p><b>Calcularea unui singur hash:</b> În loc să calculeze toate tipurile de sume de control (hash-uri) listate în metadate pentru un fișier descărcat, APT calculează acum <b>doar cel mai puternic hash criptografic de încredere</b> (ex. SHA256/SHA512), reducând semnificativ sarcina pe procesor fără a compromite securitatea.</p></li><li><p><b>Execuție paralelă (<code>store</code> și <code>sqv</code>):</b> Metodele interne de stocare (<code>store</code>) și de verificare a semnăturilor OpenPGP (<code>sqv</code> — <i>Sequoia PGP</i>) pot rula acum în paralel, eliminând timpii de așteptare secvențiali dintre cele două etape.</p></li></ul><h3>Accelerarea generării cache-ului și a rezolvării dependențelor</h3><p>Două dintre cele mai consumatoare operațiuni interne ale managerului de pachete au fost optimizate algoritmic:</p><ul><li><p><b>Generarea cache-ului de pachete:</b> Constantele care erau anterior procesate repetitiv în interiorul buclei pentru fiecare bloc de metadate (<i>package stanza</i>) au fost mutate în afara buclei principale, tăind o cantitate considerabilă de muncă redundantă la fiecare rulare a <code>apt update</code>.</p></li><li><p><b>Memoizarea dependențelor (<i>Dependency Resolution</i>):</b> Rezolvitorul de dependențe reține acum rezultatele verificărilor anterioare privind compatibilitatea versiunilor (dacă o anumită versiune a unui pachet satisface o dependență), evitând reevaluarea repetată a acelorași condiții în grafuri complexe de pachete.</p></li></ul><h3>Rețelistică, formatul deb822 și disponibilitate</h3><ul><li><p><b>Reducerea interogărilor DNS:</b> APT solicită acum înregistrările <b>DNS SRV</b> pentru o gazdă o singură dată per sesiune, eliminând interogările DNS duplicate la accesarea depozitelor.</p></li><li><p><b>Suport îmbunătățit pentru fișiere <code>.sources</code> (deb822):</b> Verificarea marcajelor de timp (<i>timestamps</i>) ale surselor de software ia acum în calcul și fișierele moderne <code>.sources</code> în format <b>deb822</b>, asigurând detectarea corectă a modificărilor din configurația depozitelor.</p></li><li><p><b>Documentație actualizată:</b> Paginile de manual clarifică faptul că <code>apt-get update</code> regenerează întotdeauna cache-ul de pachete și detaliază funcționarea înregistrărilor DNS SRV în transportul HTTP al APT.</p></li></ul><p>Ca și în cazul versiunii 3.3.6, <b>APT 3.3.8</b> face parte din ramura de dezvoltare <b>Debian Unstable (Sid)</b> și nu va fi împins automat ca versiune completă în depozitele stabile din Debian Stable sau Ubuntu.</p>
+</div>
+<p class="post-foot"><a class="chip" href="software.html">Software</a> <a href="articole/2026-11-apt-3-3-8-a-fost-lansat-optimizari-de-performanta-in-verific.html">Pagina articolului</a></p>
+</details>
+</article>
 <article class="post" id="2026-11-phosh-0-59-a-fost-lansat-introducere-vocala-offline-in-tasta">
 <details>
 <summary>
