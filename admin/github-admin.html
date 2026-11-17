@@ -653,7 +653,7 @@ async function doLogin(tok){
     var res = await getFile(DPATH);
     data = JSON.parse(res.content);
     data.posts = data.posts||[]; data.deleted = data.deleted||[];
-    try{lastBuilt=LFE.build(data).files;}catch(e){lastBuilt={};}
+    lastBuilt = {}; // start empty — first publish commits all changed pages
     sessionStorage.setItem('gh_token',tok);
     $('connect').hidden=true; $('app').hidden=false;
     $('b-import').hidden=!data.blog; $('b-rebuild').hidden=false; $('b-logout').hidden=false;
