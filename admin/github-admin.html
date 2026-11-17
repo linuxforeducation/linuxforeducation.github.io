@@ -568,7 +568,7 @@ $('form').onsubmit=async function(e){
   }
   var t0=title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim()||title;
   try{
-    await publish((isNew?'Adaugă: ':'Actualizează: ')+t0);
+    await publish((isNew?'Adaugă: ':'Actualizează: ')+t0, current.page ? null : [slug]);
     showForm(current,false);
   }catch(err){}
 };
