@@ -102,16 +102,16 @@ textarea.fc{resize:vertical;min-height:90px}
 .src:focus{outline:none;border-color:var(--acc)}
 
 /* Label picker */
-.lp-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;display:flex;flex-direction:column;gap:7px}
-.lp-wrap:focus-within{border-color:var(--acc)}
-.lp-chips{display:flex;flex-wrap:wrap;gap:5px;min-height:22px}
-.lp-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--acc);border:1px solid var(--acc);border-radius:20px;font-size:13px;color:#fff}
-.lp-chip button{background:none;border:none;color:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0 0 0 2px;opacity:.8}
+.lp-chips{display:flex;flex-wrap:wrap;gap:5px;min-height:28px;margin-bottom:6px}
+.lp-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--acc);border:1px solid var(--acc2);border-radius:20px;font-size:13px;color:#fff}
+.lp-chip button{background:none;border:none;color:#fff;cursor:pointer;font-size:15px;line-height:1;padding:0;opacity:.75}
 .lp-chip button:hover{opacity:1}
-.lp-row{display:flex;gap:6px}
-.lp-sel{flex:1;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
+.lp-empty{font-size:12px;color:var(--muted);align-self:center}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.lp-sel{width:100%;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px;cursor:pointer}
 .lp-sel:focus{outline:none;border-color:var(--acc)}
-.lp-new{flex:1;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
+.lp-add-row{display:flex;gap:6px}
+.lp-new{flex:1;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
 .lp-new:focus{outline:none;border-color:var(--acc)}
 .lp-new::placeholder{color:var(--muted)}
 
@@ -262,15 +262,21 @@ textarea.fc{resize:vertical;min-height:90px}
         </div>
       </div>
       <div class="fg">
-        <label>Etichete</label>
-        <div class="lp-wrap">
-          <div id="lp-chips" class="lp-chips"></div>
-          <div class="lp-row">
+        <label>Etichete selectate</label>
+        <div id="lp-chips" class="lp-chips"><span class="lp-empty">Nicio etichetă selectată</span></div>
+        <div class="lp-grid">
+          <div>
+            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Alege din lista existentă</label>
             <select id="lp-sel" class="lp-sel">
-              <option value="">+ Alege etichetă existentă…</option>
+              <option value="">— selectează —</option>
             </select>
-            <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă…" autocomplete="off">
-            <button class="btn btn-s btn-sm" id="btn-addlbl">Adaugă</button>
+          </div>
+          <div>
+            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Sau adaugă etichetă nouă</label>
+            <div class="lp-add-row">
+              <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă…" autocomplete="off">
+              <button class="btn btn-s btn-sm" id="btn-addlbl">+</button>
+            </div>
           </div>
         </div>
       </div>
@@ -775,6 +781,11 @@ function _syncLabelPicker() {
   // Render chips
   const chips = document.getElementById('lp-chips');
   chips.innerHTML = '';
+  if (!_pickedLabels.length) {
+    const em = document.createElement('span');
+    em.className = 'lp-empty'; em.textContent = 'Nicio etichetă selectată';
+    chips.appendChild(em);
+  }
   _pickedLabels.forEach(l => {
     const chip = document.createElement('span');
     chip.className = 'lp-chip';
