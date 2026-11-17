@@ -735,7 +735,7 @@ function openEditor(slug) {
     document.getElementById('f-date').value = new Date(n - n.getTimezoneOffset()*60000).toISOString().slice(0,16);
   }
 
-  renderLabelCbs(post ? (post.labels||[]) : []);
+  _pickedLabels = post ? [...(post.labels||[])] : [];
 
   const html = post ? (post.html||'') : '';
   document.getElementById('ec').innerHTML = html;
@@ -747,7 +747,11 @@ function openEditor(slug) {
   document.getElementById('eprog').hidden = true;
 
   document.getElementById('eov').hidden = false;
-  setTimeout(() => document.getElementById('f-title').focus(), 50);
+  // Render labels AFTER overlay is visible so DOM is active
+  setTimeout(() => {
+    _syncLabelPicker();
+    document.getElementById('f-title').focus();
+  }, 0);
 }
 
 function closeEditor() {
