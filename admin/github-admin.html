@@ -101,11 +101,19 @@ textarea.fc{resize:vertical;min-height:90px}
 .src{min-height:280px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;line-height:1.5;color:var(--text);resize:vertical}
 .src:focus{outline:none;border-color:var(--acc)}
 
-/* Labels */
-.lbg{display:flex;flex-wrap:wrap;gap:5px}
-.lbcb{display:flex;align-items:center;gap:4px;padding:3px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:13px;user-select:none}
-.lbcb:has(input:checked){background:var(--acc);border-color:var(--acc);color:#fff}
-.lbcb input{display:none}
+/* Label picker */
+.lp-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;display:flex;flex-direction:column;gap:7px}
+.lp-wrap:focus-within{border-color:var(--acc)}
+.lp-chips{display:flex;flex-wrap:wrap;gap:5px;min-height:22px}
+.lp-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--acc);border:1px solid var(--acc);border-radius:20px;font-size:13px;color:#fff}
+.lp-chip button{background:none;border:none;color:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0 0 0 2px;opacity:.8}
+.lp-chip button:hover{opacity:1}
+.lp-row{display:flex;gap:6px}
+.lp-sel{flex:1;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
+.lp-sel:focus{outline:none;border-color:var(--acc)}
+.lp-new{flex:1;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
+.lp-new:focus{outline:none;border-color:var(--acc)}
+.lp-new::placeholder{color:var(--muted)}
 
 /* Toast */
 .tc{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:7px;z-index:200}
@@ -255,10 +263,15 @@ textarea.fc{resize:vertical;min-height:90px}
       </div>
       <div class="fg">
         <label>Etichete</label>
-        <div id="lbcbs" class="lbg"></div>
-        <div style="margin-top:7px;display:flex;gap:6px">
-          <input type="text" id="newlbl" class="fc" placeholder="Etichetă nouă…" style="flex:1;max-width:200px" autocomplete="off">
-          <button class="btn btn-s btn-sm" id="btn-addlbl">+ Adaugă</button>
+        <div class="lp-wrap">
+          <div id="lp-chips" class="lp-chips"></div>
+          <div class="lp-row">
+            <select id="lp-sel" class="lp-sel">
+              <option value="">+ Alege etichetă existentă…</option>
+            </select>
+            <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă…" autocomplete="off">
+            <button class="btn btn-s btn-sm" id="btn-addlbl">Adaugă</button>
+          </div>
         </div>
       </div>
       <div class="fg" style="flex:1;display:flex;flex-direction:column">
@@ -521,30 +534,69 @@ async function loadSiteData() {
 }
 
 /* ───────── Build + publish ───────── */
-async function publish(newData, commitMsg, progressEl) {
+// Paths to never overwrite — design files managed outside the admin panel
+const PROTECTED = /^assets\//;
+
+async function publish(newData, commitMsg, progressEl, changedSlugs) {
+  // changedSlugs: array of slugs affected (undefined = full rebuild for settings/import)
   if (pubBusy) { toast('Se publică deja, așteaptă…', 'err'); throw new Error('busy'); }
   pubBusy = true;
   _pb = progressEl;
   setProgress(2);
 
   try {
-    const newFiles = LFE.build(newData).files;
-    setProgress(8);
+    const toCommit = { [DPATH]: JSON.stringify(newData, null, 2) };
 
-    // Diff with last build
-    const changed = {};
-    for (const [p, c] of Object.entries(newFiles)) {
-      if ((lastBuilt || {})[p] !== c) changed[p] = c;
+    if (changedSlugs !== undefined) {
+      // Targeted rebuild: only regenerate pages for the affected article(s)
+      // + index.html + label pages for those articles + group pages
+      const built = LFE.build(newData);
+      setProgress(8);
+
+      const affectedPaths = new Set();
+      affectedPaths.add('index.html');
+      if (built.files['despre.html']) affectedPaths.add('despre.html');
+
+      // Pages for affected slugs
+      changedSlugs.forEach(slug => {
+        affectedPaths.add('articole/' + slug + '.html');
+      });
+
+      // Label and group pages for affected articles
+      const affected = newData.posts.filter(p => changedSlugs.includes(p.slug));
+      const allLabels = new Set(affected.flatMap(p => p.labels || []));
+      // Also include old labels (from previous version) — stored in lastBuilt keys
+      for (const path of Object.keys(lastBuilt || {})) {
+        if (path.endsWith('.html') && !path.startsWith('articole/') && path !== 'index.html' && path !== 'despre.html') {
+          // label/group pages: include if related to affected labels
+          // We include all label/group pages to be safe (they're small)
+          affectedPaths.add(path);
+        }
+      }
+
+      for (const [p, c] of Object.entries(built.files)) {
+        if (PROTECTED.test(p)) continue;
+        if (affectedPaths.has(p) && (lastBuilt || {})[p] !== c) {
+          toCommit[p] = c;
+        }
+      }
+
+      siteData  = newData;
+      lastBuilt = built.files;
+    } else {
+      // Full rebuild (import / settings) — diff-based, skip unchanged + protected
+      const built = LFE.build(newData);
+      setProgress(8);
+      for (const [p, c] of Object.entries(built.files)) {
+        if (PROTECTED.test(p)) continue;
+        if ((lastBuilt || {})[p] !== c) toCommit[p] = c;
+      }
+      siteData  = newData;
+      lastBuilt = built.files;
     }
-    // Always include site-data.json
-    const toCommit = { [DPATH]: JSON.stringify(newData), ...changed };
 
     const n = Object.keys(toCommit).length;
     const sha = await commitFiles(toCommit, commitMsg);
-
-    siteData  = newData;
-    lastBuilt = newFiles;
-
     return { sha, n };
   } finally {
     pubBusy = false;
@@ -712,23 +764,45 @@ function closeEditor() {
   editSlug = null;
 }
 
+let _pickedLabels = [];
+
 function renderLabelCbs(selected) {
-  const c = document.getElementById('lbcbs');
-  c.innerHTML = '';
-  getAllLabels().forEach(l => {
-    const lb = document.createElement('label');
-    lb.className = 'lbcb';
-    const inp = document.createElement('input');
-    inp.type = 'checkbox'; inp.name = 'lbl'; inp.value = l;
-    inp.checked = selected.includes(l);
-    lb.appendChild(inp);
-    lb.appendChild(document.createTextNode(l));
-    c.appendChild(lb);
+  _pickedLabels = [...selected];
+  _syncLabelPicker();
+}
+
+function _syncLabelPicker() {
+  // Render chips
+  const chips = document.getElementById('lp-chips');
+  chips.innerHTML = '';
+  _pickedLabels.forEach(l => {
+    const chip = document.createElement('span');
+    chip.className = 'lp-chip';
+    chip.textContent = l;
+    const rm = document.createElement('button');
+    rm.type = 'button'; rm.textContent = '×'; rm.title = 'Elimină';
+    rm.addEventListener('click', () => {
+      _pickedLabels = _pickedLabels.filter(x => x !== l);
+      _syncLabelPicker();
+    });
+    chip.appendChild(rm);
+    chips.appendChild(chip);
   });
+
+  // Repopulate dropdown — only labels not already picked
+  const sel = document.getElementById('lp-sel');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">+ Alege etichetă existentă…</option>';
+  getAllLabels().filter(l => !_pickedLabels.includes(l)).forEach(l => {
+    const o = document.createElement('option');
+    o.value = l; o.textContent = l;
+    sel.appendChild(o);
+  });
+  if (prev && [...sel.options].some(o => o.value === prev)) sel.value = prev;
 }
 
 function getCheckedLabels() {
-  return [...document.querySelectorAll('#lbcbs input:checked')].map(i => i.value);
+  return [..._pickedLabels];
 }
 
 function getEditorHtml() {
@@ -784,7 +858,8 @@ async function saveAndPublish() {
       '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01XVjnnWfxL1eNtNSq5DnKUQ';
 
     stat.textContent = 'Se publică…';
-    const { sha, n } = await publish(newData, msg, pb);
+    const finalSlug = editSlug || newData.posts[newData.posts.length - 1].slug;
+    const { sha, n } = await publish(newData, msg, pb, [finalSlug]);
 
     toast(`✅ Publicat! ${n} fișiere · ${sha.slice(0,7)}`, 'ok');
     closeEditor();
@@ -815,7 +890,7 @@ async function deletePost(slug) {
   try {
     // Use temp progress
     const { sha, n } = await publish(newData, 'Șterge: ' + t0 +
-      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null);
+      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null, [slug]);
     toast(`🗑 Șters și publicat · ${sha.slice(0,7)}`, 'ok');
     closeEditor();
     renderList();
@@ -1122,16 +1197,18 @@ function init() {
   document.getElementById('f-slug').addEventListener('input', e => {
     e.target.dataset.manual = e.target.value ? '1' : '';
   });
-  document.getElementById('btn-addlbl').addEventListener('click', () => {
-    const inp = document.getElementById('newlbl');
-    const lbl = inp.value.trim(); if (!lbl) return;
-    const c = document.getElementById('lbcbs');
-    const lb = document.createElement('label'); lb.className = 'lbcb';
-    const ci = document.createElement('input'); ci.type = 'checkbox'; ci.name = 'lbl'; ci.value = lbl; ci.checked = true;
-    lb.appendChild(ci); lb.appendChild(document.createTextNode(lbl));
-    c.appendChild(lb); inp.value = '';
+  document.getElementById('lp-sel').addEventListener('change', e => {
+    const val = e.target.value; if (!val) return;
+    if (!_pickedLabels.includes(val)) { _pickedLabels.push(val); _syncLabelPicker(); }
+    e.target.value = '';
   });
-  document.getElementById('newlbl').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-addlbl').click(); } });
+  document.getElementById('btn-addlbl').addEventListener('click', () => {
+    const inp = document.getElementById('lp-new');
+    const lbl = inp.value.trim(); if (!lbl) return;
+    if (!_pickedLabels.includes(lbl)) { _pickedLabels.push(lbl); _syncLabelPicker(); }
+    inp.value = '';
+  });
+  document.getElementById('lp-new').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-addlbl').click(); } });
 
   initToolbar();
 
