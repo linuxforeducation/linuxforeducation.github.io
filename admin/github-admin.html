@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin · Linux for Education</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--acc:#0f6b4f;--acc2:#1a9e76;--red:#da3633;--radius:6px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font:14px/1.5 system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text)}
+a{color:var(--acc2);text-decoration:none}
+a:hover{text-decoration:underline}
+code,kbd{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+
+/* Login */
+.lw{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.lc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;width:100%;max-width:420px}
+.lc h1{font-size:19px;margin-bottom:6px}
+.lc p{color:var(--muted);font-size:13px;margin-bottom:20px}
+.lc .err{color:var(--red);font-size:13px;margin-bottom:10px;display:none}
+
+/* Layout */
+.app{display:flex;height:100vh;overflow:hidden}
+.sb{width:220px;min-width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+
+/* Sidebar */
+.sb-logo{padding:14px 16px;border-bottom:1px solid var(--border)}
+.sb-logo a{color:var(--text);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.sb-nav{flex:1;padding:6px 0}
+.sb-nav a{display:flex;align-items:center;gap:10px;padding:8px 16px;color:var(--muted);font-size:14px;transition:color .15s,background .15s}
+.sb-nav a:hover{color:var(--text);background:var(--bg3);text-decoration:none}
+.sb-nav a.on{color:var(--text);background:var(--bg3);font-weight:500}
+.sb-foot{padding:14px 16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+.sb-foot a{color:var(--acc2)}
+
+/* Forms */
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:13px;font-weight:500;margin-bottom:5px;color:var(--muted)}
+.fc{width:100%;padding:7px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:14px}
+.fc:focus{outline:none;border-color:var(--acc)}
+.fc::placeholder{color:var(--muted)}
+textarea.fc{resize:vertical;min-height:90px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:var(--radius);font:inherit;font-size:14px;cursor:pointer;border:1px solid transparent;transition:all .15s;white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-p{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn-p:not(:disabled):hover{background:var(--acc2);border-color:var(--acc2)}
+.btn-s{background:var(--bg3);color:var(--text);border-color:var(--border)}
+.btn-s:not(:disabled):hover{border-color:#6e7681}
+.btn-d{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-d:not(:disabled):hover{opacity:.85}
+.btn-sm{padding:4px 10px;font-size:12px}
+
+/* View container */
+.view{padding:24px;max-width:1100px}
+.vh{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.vh h2{font-size:18px;flex:1}
+
+/* Stats */
+.stats{display:flex;gap:16px;margin-bottom:16px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
+.stat-n{font-size:20px;font-weight:700;display:block}
+.stat-l{font-size:11px;color:var(--muted)}
+
+/* Article list */
+.al{display:flex;flex-direction:column;gap:2px}
+.ar{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);min-width:0}
+.ar:hover{border-color:#6e7681}
+.ar .tit{flex:1;font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.ar .tit:hover{color:var(--acc2)}
+.ar .dt{font-size:12px;color:var(--muted);white-space:nowrap}
+.ar .lbs{display:flex;gap:3px;flex-shrink:0;flex-wrap:nowrap;overflow:hidden;max-width:220px}
+.ar .acts{display:flex;gap:4px;flex-shrink:0}
+.chip{font-size:11px;padding:2px 7px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;color:var(--muted);white-space:nowrap}
+
+/* Editor overlay */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:stretch;justify-content:flex-end}
+.ep{background:var(--bg);width:min(820px,100%);display:flex;flex-direction:column;overflow:hidden}
+.eh{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.eh h3{flex:1;font-size:16px}
+.eb{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px}
+.ef{padding:10px 18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ef-right{display:flex;gap:8px;align-items:center}
+
+/* Toolbar + editor */
+.tb{display:flex;gap:2px;padding:5px;background:var(--bg3);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0;flex-wrap:wrap}
+.tb button{padding:4px 8px;background:none;border:1px solid transparent;border-radius:4px;color:var(--text);cursor:pointer;font:13px/1 system-ui,sans-serif}
+.tb button:hover{background:var(--border);border-color:var(--border)}
+.tb .sep{width:1px;background:var(--border);margin:2px 2px;align-self:stretch}
+.ec{min-height:280px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);outline:none;line-height:1.65;overflow-y:auto}
+.ec:focus{border-color:var(--acc)}
+.ec h2,.ec h3{margin:1em 0 .4em}
+.ec p{margin:.5em 0}
+.ec pre{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:10px;overflow-x:auto;margin:.8em 0}
+.ec pre code{background:none;border:none;padding:0;font-size:13px}
+.ec blockquote{border-left:3px solid var(--border);padding-left:12px;margin:.8em 0;color:var(--muted)}
+.ec img{max-width:100%;height:auto;border-radius:4px;margin:.5em 0}
+.ec ul,.ec ol{padding-left:20px;margin:.5em 0}
+.src{min-height:280px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;line-height:1.5;color:var(--text);resize:vertical}
+.src:focus{outline:none;border-color:var(--acc)}
+
+/* Labels */
+.lbg{display:flex;flex-wrap:wrap;gap:5px}
+.lbcb{display:flex;align-items:center;gap:4px;padding:3px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:13px;user-select:none}
+.lbcb:has(input:checked){background:var(--acc);border-color:var(--acc);color:#fff}
+.lbcb input{display:none}
+
+/* Toast */
+.tc{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:7px;z-index:200}
+.toast{padding:9px 15px;border-radius:var(--radius);font-size:13px;animation:si .2s;max-width:360px}
+.t-ok{background:#1a3d2e;border:1px solid #2ea069;color:#3fb884}
+.t-err{background:#3d1d1d;border:1px solid #da3633;color:#f85149}
+.t-inf{background:var(--bg3);border:1px solid var(--border)}
+@keyframes si{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
+
+/* Progress */
+.pw{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;height:5px;margin:6px 0}
+.pb{height:100%;background:var(--acc);transition:width .25s}
+
+/* Pagination */
+.pag{display:flex;justify-content:center;gap:5px;margin-top:18px;flex-wrap:wrap}
+.pag button{padding:5px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);cursor:pointer;font:inherit;font-size:13px}
+.pag button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.pag button:hover:not(.on){border-color:#6e7681}
+
+/* Import log */
+.ilog{margin-top:14px;font-size:13px;line-height:1.9;color:var(--muted);max-height:300px;overflow-y:auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px}
+
+/* Settings rows */
+.sr{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.gc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px}
+
+@media(max-width:620px){
+  .sb{width:48px;min-width:48px}
+  .sb-nav a span:not(.ico){display:none}
+  .sb-logo a span:not(:first-child){display:none}
+  .sb-logo a{justify-content:center}
+  .sb-nav a{justify-content:center;padding:10px}
+  .ar .lbs{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- Login -->
+<div id="login-screen" class="lw">
+  <div class="lc">
+    <h1>&gt;_ Linux for Education · Admin</h1>
+    <p>Autentificare prin <strong>GitHub Personal Access Token</strong> cu permisiunea <code>contents: write</code> pe depozitul <code>linuxforeducation.github.io</code>.</p>
+    <div class="fg">
+      <label>Token GitHub</label>
+      <input type="password" id="tok" class="fc" placeholder="ghp_…" autocomplete="off">
+    </div>
+    <div id="lerr" class="err"></div>
+    <button class="btn btn-p" id="lbtn" style="width:100%">Conectează</button>
+    <p style="margin-top:14px;font-size:12px;color:var(--muted)">Tokenul este stocat în sessionStorage și se șterge la închiderea tab-ului. Nu se salvează nicăieri.</p>
+    <p style="margin-top:6px;font-size:12px;color:var(--muted)">Generează un token la: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a></p>
+  </div>
+</div>
+
+<!-- Admin UI -->
+<div id="admin-ui" class="app" hidden>
+  <aside class="sb">
+    <div class="sb-logo">
+      <a href="https://linuxforeducation.github.io" target="_blank">
+        <span class="ico" style="font-family:monospace">&gt;_</span>
+        <span>LfE Admin</span>
+      </a>
+    </div>
+    <nav class="sb-nav">
+      <a href="#" class="on" data-view="list"><span class="ico">📄</span><span>Articole</span></a>
+      <a href="#" data-view="import"><span class="ico">⬇</span><span>Import Blog</span></a>
+      <a href="#" data-view="settings"><span class="ico">⚙</span><span>Setări</span></a>
+    </nav>
+    <div class="sb-foot" id="sbfoot">
+      <a href="https://linuxforeducation.github.io" target="_blank">↗ Vezi site-ul</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <!-- Articles -->
+    <div id="view-list" class="view">
+      <div class="vh">
+        <h2>Articole</h2>
+        <input type="search" id="srch" class="fc" placeholder="🔍 Caută…" style="width:200px">
+        <select id="flbl" class="fc" style="width:160px"><option value="">Toate etichetele</option></select>
+        <button class="btn btn-p" id="btn-new">+ Articol nou</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-n" id="st-tot">–</span><span class="stat-l">articole</span></div>
+        <div class="stat"><span class="stat-n" id="st-lbl">–</span><span class="stat-l">etichete</span></div>
+        <div class="stat"><span class="stat-n" id="st-ed">–</span><span class="stat-l">editate local</span></div>
+      </div>
+      <div id="alist" class="al"></div>
+      <div id="pag" class="pag"></div>
+    </div>
+
+    <!-- Import -->
+    <div id="view-import" class="view" hidden>
+      <div class="vh"><h2>Import din Blogger</h2></div>
+      <p style="color:var(--muted);margin-bottom:14px">
+        Importă articolele din <a href="https://linuxforeducation.blogspot.com" target="_blank">linuxforeducation.blogspot.com</a>.<br>
+        Articolele marcate ca <em>editate local</em> nu vor fi suprascrise. Cele din lista de excluse sunt sărite.
+      </p>
+      <button class="btn btn-s" id="btn-imp">⬇ Pornește importul</button>
+      <div id="ilog" class="ilog" hidden></div>
+    </div>
+
+    <!-- Settings -->
+    <div id="view-settings" class="view" hidden>
+      <div class="vh"><h2>Setări site</h2></div>
+
+      <h3 style="font-size:15px;margin-bottom:10px">Linkuri sociale</h3>
+      <div id="soclist"></div>
+      <button class="btn btn-s btn-sm" id="btn-addsoc" style="margin-top:6px">+ Adaugă link</button>
+
+      <h3 style="font-size:15px;margin:22px 0 8px">Grupuri meniu</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:10px">Fiecare grup apare ca submeniu cu dropdown. Etichetele din grup sunt afișate în submeniu.</p>
+      <div id="grplist"></div>
+      <button class="btn btn-s btn-sm" id="btn-addgrp" style="margin-top:6px">+ Adaugă grup</button>
+
+      <div style="margin-top:22px;display:flex;gap:10px;align-items:center">
+        <button class="btn btn-p" id="btn-saveset">💾 Salvează și publică</button>
+        <span id="setst" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Editor overlay -->
+<div id="eov" class="ov" hidden>
+  <div class="ep">
+    <div class="eh">
+      <h3 id="etitle">Articol nou</h3>
+      <button class="btn btn-s btn-sm" id="btn-src">◧ HTML</button>
+      <button class="btn btn-s btn-sm" id="eclose">✕</button>
+    </div>
+    <div class="eb">
+      <div class="fg">
+        <label>Titlu <span style="color:var(--red)">*</span></label>
+        <input type="text" id="f-title" class="fc" placeholder="Titlul articolului…" autocomplete="off">
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="fg" style="flex:1">
+          <label>Data publicării</label>
+          <input type="datetime-local" id="f-date" class="fc">
+        </div>
+        <div class="fg" style="flex:1">
+          <label>Slug (URL)</label>
+          <input type="text" id="f-slug" class="fc" placeholder="auto-generat…" autocomplete="off">
+        </div>
+      </div>
+      <div class="fg">
+        <label>Etichete</label>
+        <div id="lbcbs" class="lbg"></div>
+        <div style="margin-top:7px;display:flex;gap:6px">
+          <input type="text" id="newlbl" class="fc" placeholder="Etichetă nouă…" style="flex:1;max-width:200px" autocomplete="off">
+          <button class="btn btn-s btn-sm" id="btn-addlbl">+ Adaugă</button>
+        </div>
+      </div>
+      <div class="fg" style="flex:1;display:flex;flex-direction:column">
+        <label>Conținut</label>
+        <div class="tb" id="tb">
+          <button data-cmd="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+          <button data-cmd="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+          <div class="sep"></div>
+          <button data-cmd="h2">H2</button>
+          <button data-cmd="h3">H3</button>
+          <div class="sep"></div>
+          <button data-cmd="ul">• Listă</button>
+          <button data-cmd="ol">1. Listă</button>
+          <button data-cmd="quote">" Citat</button>
+          <button data-cmd="code">⌨ Cod</button>
+          <div class="sep"></div>
+          <button data-cmd="link">🔗 Link</button>
+          <button data-cmd="img">🖼 Imagine</button>
+          <div class="sep"></div>
+          <button data-cmd="clr" title="Curăță formatare">✗</button>
+        </div>
+        <div id="ec" class="ec" contenteditable="true" spellcheck="false"></div>
+        <textarea id="esrc" class="src" hidden spellcheck="false"></textarea>
+      </div>
+    </div>
+    <div class="ef">
+      <div>
+        <button class="btn btn-d btn-sm" id="btn-del" hidden>🗑 Șterge</button>
+      </div>
+      <div class="ef-right">
+        <span id="est" style="font-size:13px;color:var(--muted)"></span>
+        <div id="eprog" hidden><div class="pw" style="width:200px"><div class="pb" id="epb" style="width:0%"></div></div></div>
+        <button class="btn btn-s" id="ecancel">Anulează</button>
+        <button class="btn btn-p" id="btn-pub">💾 Salvează și publică</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="tc" id="tc"></div>
+</div><!-- #app -->
+
+<!-- ═══════════ Generator (inlined) ═══════════ -->
+<script>
+/* Generatorul site-ului Linux for Education.
+   Primește datele (_sursa/site-data.json) și întoarce toate paginile HTML ca text.
+   Rulează atât în browser (panoul de administrare), cât și în Node. */
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory();else root.LFE=factory();})(typeof self!=='undefined'?self:this,function(){
+'use strict';
+var TOKEN='%%ROOT%%';
+var LUNI=['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
+var RESERVED={index:1,despre:1,admin:1,articole:1,assets:1,imagini:1};
+var DEF_DESC='Știri, tutoriale și resurse despre Linux și software open source, în limba română.';
+var FAV="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+var fmt=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Bucharest',year:'numeric',month:'2-digit',day:'2-digit'});
+function slugify(s){s=String(s).replace(/[șş]/g,'s').replace(/[țţ]/g,'t').replace(/[ȘŞ]/g,'S').replace(/[ȚŢ]/g,'T');return s.normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');}
+function unesc(s){return s.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#x27;/g,"'").replace(/&amp;/g,'&');}
+function dateParts(iso){var o={};fmt.formatToParts(new Date(iso)).forEach(function(p){o[p.type]=p.value;});return{y:+o.year,m:+o.month,d:+o.day,iso:o.year+'-'+o.month+'-'+o.day};}
+function textOf(h){return unesc(h.replace(/<pre>[\s\S]*?<\/pre>/g,' ').replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim();}
+function excerpt(t,n){n=n||210;if(t.length<=n)return t;var cut=t.slice(0,n),i=cut.lastIndexOf(' ');if(i>=0)cut=cut.slice(0,i);return cut.replace(/[,.;:—\- ]+$/,'')+'…';}
+function thumb(src){if(src.indexOf('googleusercontent.com')>-1)return src.replace(/\/(?:s\d+|w\d+-h\d+)(?:-[a-z0-9-]+)?\/(?=[^\/]+$)/,'/w480/');return src;}
+function nr(n){return n+' '+(n===1?'articol':'articole');}
+function build(data){
+var SITE=data.title||'Linux for Education',BLOG=data.blog||'';
+var posts=data.posts.map(function(p){
+var d=dateParts(p.published),html=p.html||'';
+html=html.replace(/<p><b>Sursa articolului:<\/b>[\s\S]*?<\/p>/g,'');
+html=html.replace(/<h3>📌\s*Surse și detalii:<\/h3>/g,'').replace(/<li><strong>Articol original<\/strong>:[\s\S]*?<\/li>/g,'').replace(/<ul>\s*<\/ul>/g,'');
+var text=textOf(html),m=/<img src="([^"]+)"/.exec(html);
+return{src:p,title:(String(p.title).replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim()||p.title),labels:p.page?[]:(p.labels||[]),url:p.url||'',slug:p.slug,html:html,page:p.page||'',ts:Date.parse(p.published),iso:d.iso,date:d.d+' '+LUNI[d.m-1]+' '+d.y,path:p.page==='despre'?'despre.html':'articole/'+p.slug+'.html',text:text,excerpt:excerpt(text),thumb:m?thumb(unesc(m[1])):''};
+});
+posts.sort(function(a,b){return b.ts-a.ts;});
+var about=posts.filter(function(p){return p.page==='despre';})[0]||null;
+var labeled=posts.filter(function(p){return !p.page&&p.labels.length;});
+var counts={},first={},k=0;
+labeled.forEach(function(p){p.labels.forEach(function(l){counts[l]=(counts[l]||0)+1;if(!(l in first))first[l]=k++;});});
+var GROUPS=(data.groups||[]).map(function(g){return{name:g.name,labels:(g.labels||[]).slice()};});
+var inGroup={};
+GROUPS.forEach(function(g){g.labels.forEach(function(l){inGroup[l]=g;if(!(l in counts))counts[l]=0;});});
+var TOP=Object.keys(counts).filter(function(l){return !inGroup[l];}).sort(function(a,b){return counts[b]-counts[a]||first[a]-first[b];});
+var LABELS=TOP.slice();
+GROUPS.forEach(function(g){LABELS=LABELS.concat(g.labels);});
+var LSLUG={},usedSlugs={};
+function uniq(s){s=s||'eticheta';if(RESERVED[s])s='eticheta-'+s;while(usedSlugs[s])s+='-2';usedSlugs[s]=1;return s;}
+LABELS.forEach(function(l){LSLUG[l]=uniq(slugify(l));});
+GROUPS.forEach(function(g){g.slug=uniq(slugify(g.name));g.count=g.labels.reduce(function(n,l){return n+counts[l];},0);});
+var files={};
+var SOCIAL=(data.social||[]).map(function(s){return'<a href="'+esc(s.url)+'" target="_blank" rel="me noopener">'+esc(s.name)+'</a>';});
+function page(title,body,root,active,desc){
+var cur=' aria-current="page"';
+var nav='<a href="'+root+'index.html"'+(active==='@home'?cur:'')+'>Acasă</a>';
+TOP.forEach(function(l){nav+='<a href="'+root+LSLUG[l]+'.html"'+(active===l?cur:'')+'>'+esc(l)+'</a>';});
+GROUPS.forEach(function(g){var here=active==='@group:'+g.name,inside=g.labels.indexOf(active)>-1;nav+='<div class="dd"><a class="dd-top'+(inside?' on':'')+'" href="'+root+g.slug+'.html"'+(here?cur:'')+'>'+esc(g.name)+' <span aria-hidden="true">▾</span></a><div class="dd-menu">'+g.labels.map(function(l){return'<a href="'+root+LSLUG[l]+'.html"'+(active===l?cur:'')+'>'+esc(l)+'</a>';}).join('')+'</div></div>';});
+var full=title===SITE?SITE:title+' · '+SITE;
+var out='<!doctype html>\n<html lang="ro">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>'+esc(full)+'</title>\n<meta name="description" content="'+esc(desc||DEF_DESC)+'">\n<link rel="icon" href="'+FAV+'">\n<link rel="stylesheet" href="'+root+'assets/style.css">\n</head>\n<body>\n<a class="skip" href="#continut">Sari la conținut</a>\n<header class="site-header">\n  <div class="wrap bar">\n    <a class="brand" href="'+root+'index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>'+esc(SITE)+'</span></a>\n'+(SOCIAL.length?'    <div class="social">'+SOCIAL.join('')+'</div>\n':'')+'    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>\n  </div>\n  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in">'+nav+'</div></nav>\n</header>\n<main id="continut" class="wrap">\n'+body+'\n</main>\n<footer class="site-footer"><div class="wrap">\n  <p><strong>'+esc(SITE)+'</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>\n'+(SOCIAL.length?'  <p>Urmărește-ne: '+SOCIAL.join(' · ')+'</p>\n':'')+'</div></footer>\n<script src="'+root+'assets/site.js" defer><\/script>\n</body>\n</html>\n';
+return out.split(TOKEN).join(root);
+}
+function chips(p,root){return p.labels.map(function(l){return'<a class="chip" href="'+root+LSLUG[l]+'.html">'+esc(l)+'</a>';}).join('');}
+function time(p){return'<time datetime="'+p.iso+'">'+p.date+'</time>';}
+function card(p,root){var img=p.thumb?'<img src="'+esc(p.thumb)+'" alt="" loading="lazy" decoding="async">':'<span class="ph" aria-hidden="true">&gt;_</span>';return'<article class="card">\n  <a class="card-img" href="'+root+p.path+'" tabindex="-1" aria-hidden="true">'+img+'</a>\n  <div class="card-body">\n    <div class="meta">'+time(p)+chips(p,root)+'</div>\n    <h3><a href="'+root+p.path+'">'+esc(p.title)+'</a></h3>\n    <p>'+esc(p.excerpt)+'</p>\n  </div>\n</article>';}
+function orig(p){return'';}
+function cat(href,name,note){return'<a class="cat" href="'+href+'.html"><span class="cat-name">'+esc(name)+'</span><span class="cat-n">'+note+'</span></a>';}
+var cats=TOP.map(function(l){return cat(LSLUG[l],l,nr(counts[l]));}).join('')+GROUPS.map(function(g){return cat(g.slug,g.name,g.labels.length+' categorii');}).join('');
+GROUPS.forEach(function(g){files[g.slug+'.html']=page(g.name,'<header class="page-head">\n  <p class="eyebrow">Secțiune</p>\n  <h1>'+esc(g.name)+'</h1>\n  <p class="lead">Alege o categorie.</p>\n</header>\n<div class="cats">'+g.labels.map(function(l){return cat(LSLUG[l],l,counts[l]?nr(counts[l]):'Niciun articol încă');}).join('')+'</div>','','@group:'+g.name,g.name+' Linux for Education.');});
+files['index.html']=page(SITE,'<section class="hero">\n  <p class="eyebrow">Platformă educațională · Linux și open source</p>\n  <h1>'+esc(SITE)+'</h1>\n  <p class="lead">'+(about?esc(excerpt(about.text,400)):DEF_DESC)+'</p>\n'+(about?'  <p><a class="btn" href="despre.html">Despre proiect</a></p>\n':'')+'</section>\n<section>\n  <h2 class="sec">Etichete</h2>\n  <div class="cats">'+cats+'</div>\n</section>\n<section>\n  <h2 class="sec">Cele mai noi articole</h2>\n  <div class="grid">'+labeled.slice(0,3).map(function(p){return card(p,'');}).join('')+'</div>\n</section>','','@home');
+LABELS.forEach(function(l){var ps=labeled.filter(function(p){return p.labels.indexOf(l)>-1;});var items=ps.map(function(p){var img=p.thumb?'<img class="pt" src="'+esc(p.thumb)+'" alt="" loading="lazy" decoding="async">':'<span class="pt ph" aria-hidden="true">&gt;_</span>';return'<article class="post" id="'+p.slug+'">\n<details>\n<summary>\n  '+img+'\n  <span class="ps">\n    <span class="meta">'+time(p)+'</span>\n    <span class="pt-title" role="heading" aria-level="2">'+esc(p.title)+'</span>\n    <span class="excerpt">'+esc(p.excerpt)+'</span>\n    <span class="more">Citește articolul</span>\n  </span>\n</summary>\n<div class="prose">\n'+p.html+'\n</div>\n<p class="post-foot">'+chips(p,'')+' <a href="'+p.path+'">Pagina articolului</a>'+orig(p)+'</p>\n</details>\n</article>';}).join('\n');var g=inGroup[l],eyebrow=g?'<a href="'+g.slug+'.html">'+esc(g.name)+'</a>':'Etichetă';if(!ps.length){files[LSLUG[l]+'.html']=page(l,'<header class="page-head">\n  <p class="eyebrow">'+eyebrow+'</p>\n  <h1>'+esc(l)+'</h1>\n  <p class="lead">Niciun articol încă. Revino în curând.</p>\n</header>','',l,'Articole Linux for Education cu eticheta '+l+'.');return;}files[LSLUG[l]+'.html']=page(l,'<header class="page-head">\n  <p class="eyebrow">'+eyebrow+'</p>\n  <h1>'+esc(l)+'</h1>\n  <p class="lead">'+nr(ps.length)+', de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>\n  <label class="filter"><span>Caută în '+esc(l)+'</span><input type="search" id="filtru" placeholder="Filtrează după titlu sau text…" autocomplete="off"></label>\n</header>\n<div class="posts" id="lista">\n'+items+'\n</div>\n<p class="none" id="nimic" hidden>Niciun articol nu se potrivește căutării.</p>\n<p class="more-wrap"><button class="btn" id="mai-multe" type="button" hidden>Arată mai multe</button></p>','',l,'Articole Linux for Education cu eticheta '+l+'.');});
+labeled.forEach(function(p,i){var newer=labeled[i-1],older=labeled[i+1];var pn='<nav class="pn" aria-label="Alte articole">'+(newer?'<a href="../'+newer.path+'"><small>← Mai nou</small>'+esc(newer.title)+'</a>':'<span></span>')+(older?'<a class="r" href="../'+older.path+'"><small>Mai vechi →</small>'+esc(older.title)+'</a>':'<span></span>')+'</nav>';var o=orig(p);files[p.path]=page(p.title,'<article class="single">\n<header class="page-head">\n  <div class="meta">'+time(p)+chips(p,'../')+'</div>\n  <h1>'+esc(p.title)+'</h1>\n</header>\n<div class="prose">\n'+p.html+'\n</div>\n'+(o?'<p class="post-foot">'+o+'</p>\n':'')+'</article>\n'+pn,'../',p.labels[0],p.excerpt);});
+if(about){files['despre.html']=page('Despre','<article class="single">\n<header class="page-head"><h1>'+esc(about.title)+'</h1></header>\n<div class="prose">\n'+about.html+'\n</div>\n</article>','',null,about.excerpt);}
+return{files:files,labels:LABELS.map(function(l){return{name:l,slug:LSLUG[l],count:counts[l]};})};
+}
+return{build:build,slugify:slugify,esc:esc,dateParts:dateParts,TOKEN:TOKEN};
+});
+</script>
+
+<!-- ═══════════ Admin Application ═══════════ -->
+<script>
+'use strict';
+/* ───────── Config ───────── */
+const REPO     = 'linuxforeducation/linuxforeducation.github.io';
+const API      = 'https://api.github.com';
+const DPATH    = '_sursa/site-data.json';
+const GIT_AUTHOR = { name: 'Adrian Stan', email: 'adi.stan@upb.ro' };
+
+/* ───────── State ───────── */
+let token     = '';
+let siteData  = null;   // current parsed site-data.json
+let lastBuilt = null;   // files from latest build (for diff)
+let editSlug  = null;   // slug of article being edited (null = new)
+let curPage   = 0;
+let srchQ     = '';
+let fltrLbl   = '';
+const PAGE_SZ = 50;
+let pubBusy   = false;
+
+/* ───────── Utilities ───────── */
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function utf8b64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+}
+
+function b64utf8(b64) {
+  const bin = atob(b64.replace(/\s/g,''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+/* ───────── Toast ───────── */
+function toast(msg, type = 'inf', dur = 4000) {
+  const c = document.getElementById('tc');
+  const el = document.createElement('div');
+  el.className = 'toast t-' + type;
+  el.textContent = msg;
+  c.appendChild(el);
+  setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, dur);
+}
+
+/* ───────── Progress ───────── */
+let _pb = null;
+function setProgress(pct) { if (_pb) _pb.style.width = pct + '%'; }
+
+/* ───────── GitHub API ───────── */
+async function ghFetch(method, path, body) {
+  const r = await fetch(API + path, {
+    method,
+    headers: {
+      Authorization: 'Bearer ' + token,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json'
+    },
+    body: body != null ? JSON.stringify(body) : undefined
+  });
+  if (!r.ok) {
+    let msg = r.statusText;
+    try { msg = (await r.json()).message || msg; } catch(e) {}
+    const err = new Error(msg);
+    err.status = r.status;
+    throw err;
+  }
+  return r.status === 204 ? null : r.json();
+}
+
+async function getFile(path) {
+  // Try Contents API first (works for files ≤ 1 MB)
+  let sha, content;
+  try {
+    const d = await ghFetch('GET', `/repos/${REPO}/contents/${path}`);
+    sha = d.sha;
+    if (d.content) { content = b64utf8(d.content); return { content, sha }; }
+  } catch(e) {
+    if (e.status !== 403 && e.status !== 422) throw e;
+  }
+  // Large file — get SHA from tree, then fetch blob
+  if (!sha) {
+    const ref = await ghFetch('GET', `/repos/${REPO}/git/ref/heads/main`);
+    const cm  = await ghFetch('GET', `/repos/${REPO}/git/commits/${ref.object.sha}`);
+    const tr  = await ghFetch('GET', `/repos/${REPO}/git/trees/${cm.tree.sha}?recursive=1`);
+    const item = tr.tree.find(i => i.path === path);
+    if (!item) throw new Error('Fișierul nu există în repo: ' + path);
+    sha = item.sha;
+  }
+  const blob = await ghFetch('GET', `/repos/${REPO}/git/blobs/${sha}`);
+  content = b64utf8(blob.content);
+  return { content, sha };
+}
+
+async function commitFiles(files, message) {
+  // files = { [repoPath]: string }
+  const paths = Object.keys(files);
+  if (!paths.length) return null;
+
+  const ref  = await ghFetch('GET', `/repos/${REPO}/git/ref/heads/main`);
+  const headSha = ref.object.sha;
+  const cm   = await ghFetch('GET', `/repos/${REPO}/git/commits/${headSha}`);
+  const treeSha = cm.tree.sha;
+
+  // Create blobs in batches of 8 parallel requests
+  const treeItems = [];
+  const BATCH = 8;
+  for (let i = 0; i < paths.length; i += BATCH) {
+    const batch = paths.slice(i, i + BATCH);
+    const results = await Promise.all(batch.map(async p => {
+      const blob = await ghFetch('POST', `/repos/${REPO}/git/blobs`, {
+        content: utf8b64(files[p]), encoding: 'base64'
+      });
+      return { path: p, mode: '100644', type: 'blob', sha: blob.sha };
+    }));
+    treeItems.push(...results);
+    setProgress(10 + Math.round((i + batch.length) / paths.length * 70));
+  }
+
+  const tree = await ghFetch('POST', `/repos/${REPO}/git/trees`, { base_tree: treeSha, tree: treeItems });
+  setProgress(85);
+
+  const newCm = await ghFetch('POST', `/repos/${REPO}/git/commits`, {
+    message,
+    tree: tree.sha,
+    parents: [headSha],
+    author: { ...GIT_AUTHOR, date: new Date().toISOString() }
+  });
+  setProgress(95);
+
+  await ghFetch('PATCH', `/repos/${REPO}/git/refs/heads/main`, { sha: newCm.sha });
+  setProgress(100);
+  return newCm.sha;
+}
+
+/* ───────── Load data ───────── */
+async function loadSiteData() {
+  const { content } = await getFile(DPATH);
+  siteData = JSON.parse(content);
+  try { lastBuilt = LFE.build(siteData).files; } catch(e) { lastBuilt = {}; console.error(e); }
+}
+
+/* ───────── Build + publish ───────── */
+async function publish(newData, commitMsg, progressEl) {
+  if (pubBusy) { toast('Se publică deja, așteaptă…', 'err'); throw new Error('busy'); }
+  pubBusy = true;
+  _pb = progressEl;
+  setProgress(2);
+
+  try {
+    const newFiles = LFE.build(newData).files;
+    setProgress(8);
+
+    // Diff with last build
+    const changed = {};
+    for (const [p, c] of Object.entries(newFiles)) {
+      if ((lastBuilt || {})[p] !== c) changed[p] = c;
+    }
+    // Always include site-data.json
+    const toCommit = { [DPATH]: JSON.stringify(newData), ...changed };
+
+    const n = Object.keys(toCommit).length;
+    const sha = await commitFiles(toCommit, commitMsg);
+
+    siteData  = newData;
+    lastBuilt = newFiles;
+
+    return { sha, n };
+  } finally {
+    pubBusy = false;
+    _pb = null;
+  }
+}
+
+/* ───────── HTML Sanitizer ───────── */
+function sanitize(html) {
+  const KEEP = new Set(['p','br','strong','em','b','i','u','s','del','mark',
+    'h1','h2','h3','h4','h5','h6','ul','ol','li',
+    'blockquote','pre','code','kbd','samp','var',
+    'a','img','figure','figcaption',
+    'table','thead','tbody','tfoot','tr','th','td',
+    'hr','div','span','details','summary','aside','section','article']);
+  const CUSTOM = ['response-element','source-footnote','elicitations','gem-icon','mat-icon',
+    'google-sheets-html-origin','annotation','thinking-block','search-suggestion',
+    'search-result-block','message-turn','model-response'];
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+
+  CUSTOM.forEach(tag => doc.querySelectorAll(tag).forEach(el => {
+    const p = el.parentNode; if (!p) return;
+    while (el.firstChild) p.insertBefore(el.firstChild, el);
+    el.remove();
+  }));
+  doc.querySelectorAll('script,style,iframe,link,meta,object,embed,noscript').forEach(el => el.remove());
+
+  function cleanNode(node) {
+    if (node.nodeType !== 1) return;
+    for (const a of [...node.attributes]) {
+      const n = a.name.toLowerCase();
+      if (n === 'style' || n.startsWith('on')) { node.removeAttribute(a.name); continue; }
+      if (n === 'class' && node.tagName !== 'PRE' && node.tagName !== 'CODE') { node.removeAttribute('class'); continue; }
+      if (n === 'href' && a.value.trim().toLowerCase().startsWith('javascript')) { node.removeAttribute('href'); continue; }
+    }
+    const tag = node.tagName.toLowerCase();
+    if (!KEEP.has(tag)) {
+      const p = node.parentNode;
+      if (p) { while (node.firstChild) p.insertBefore(node.firstChild, node); node.remove(); return; }
+    }
+    for (const c of [...node.childNodes]) cleanNode(c);
+  }
+  for (const c of [...doc.body.childNodes]) cleanNode(c);
+  doc.querySelectorAll('p').forEach(p => { if (!p.innerHTML.replace(/&nbsp;|\s/g,'').trim()) p.remove(); });
+  return doc.body.innerHTML.trim();
+}
+
+/* ───────── Article list ───────── */
+function getAllLabels() {
+  const s = new Set();
+  (siteData.posts||[]).forEach(p => (p.labels||[]).forEach(l => s.add(l)));
+  (siteData.groups||[]).forEach(g => (g.labels||[]).forEach(l => s.add(l)));
+  return [...s].sort((a,b) => a.localeCompare(b,'ro'));
+}
+
+function getFiltered() {
+  let posts = (siteData.posts||[]).filter(p => !p.page);
+  if (fltrLbl) posts = posts.filter(p => (p.labels||[]).includes(fltrLbl));
+  if (srchQ) {
+    const q = srchQ.toLowerCase();
+    posts = posts.filter(p => (p.title||'').toLowerCase().includes(q) || (p.slug||'').toLowerCase().includes(q));
+  }
+  return posts.sort((a,b) => new Date(b.published) - new Date(a.published));
+}
+
+function renderList() {
+  const posts = getFiltered();
+  const allPosts = (siteData.posts||[]).filter(p => !p.page);
+
+  document.getElementById('st-tot').textContent = allPosts.length;
+  document.getElementById('st-lbl').textContent = getAllLabels().length;
+  document.getElementById('st-ed').textContent  = allPosts.filter(p => p.edited).length;
+
+  // Label filter options
+  const sel = document.getElementById('flbl');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Toate etichetele</option>';
+  getAllLabels().forEach(l => {
+    const o = document.createElement('option');
+    o.value = l; o.textContent = l;
+    if (l === cur) o.selected = true;
+    sel.appendChild(o);
+  });
+
+  const list = document.getElementById('alist');
+  list.innerHTML = '';
+  const page = posts.slice(curPage * PAGE_SZ, (curPage + 1) * PAGE_SZ);
+
+  if (!page.length) {
+    list.innerHTML = '<p style="color:var(--muted);padding:20px;text-align:center">Niciun articol găsit.</p>';
+  } else {
+    page.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'ar';
+      const lbs = (p.labels||[]).slice(0,3).map(l => `<span class="chip">${esc(l)}</span>`).join('');
+      const badge = p.edited ? '<span class="chip" style="background:var(--acc);color:#fff;border-color:var(--acc)">editat</span>' : '';
+      row.innerHTML = `
+        <div class="tit" data-slug="${esc(p.slug)}" title="${esc(p.title)}">${esc(p.title)}</div>
+        <div class="dt">${(p.published||'').slice(0,10)}</div>
+        <div class="lbs">${lbs}${badge}</div>
+        <div class="acts">
+          <button class="btn btn-s btn-sm" data-action="edit" data-slug="${esc(p.slug)}" title="Editează">✏</button>
+          <button class="btn btn-d btn-sm" data-action="del"  data-slug="${esc(p.slug)}" title="Șterge">🗑</button>
+        </div>`;
+      list.appendChild(row);
+    });
+  }
+
+  // Pagination
+  const pages = Math.ceil(posts.length / PAGE_SZ);
+  const pag = document.getElementById('pag');
+  pag.innerHTML = '';
+  if (pages > 1) {
+    for (let i = 0; i < pages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i + 1;
+      if (i === curPage) btn.classList.add('on');
+      btn.addEventListener('click', () => { curPage = i; renderList(); });
+      pag.appendChild(btn);
+    }
+  }
+
+  document.getElementById('sbfoot').innerHTML =
+    `<div>${allPosts.length} articole · ${getAllLabels().length} etichete</div>
+     <div style="margin-top:4px"><a href="https://linuxforeducation.github.io" target="_blank">↗ Vezi site-ul</a></div>`;
+}
+
+/* ───────── Editor ───────── */
+function openEditor(slug) {
+  editSlug = slug || null;
+  const post = slug ? (siteData.posts||[]).find(p => p.slug === slug) : null;
+
+  document.getElementById('etitle').textContent = post ? 'Editează articol' : 'Articol nou';
+  document.getElementById('btn-del').hidden = !post;
+
+  document.getElementById('f-title').value = post ? post.title : '';
+  delete document.getElementById('f-slug').dataset.manual;
+  document.getElementById('f-slug').value = post ? post.slug : '';
+
+  if (post && post.published) {
+    const d = new Date(post.published);
+    document.getElementById('f-date').value = new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  } else {
+    const n = new Date();
+    document.getElementById('f-date').value = new Date(n - n.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  }
+
+  renderLabelCbs(post ? (post.labels||[]) : []);
+
+  const html = post ? (post.html||'') : '';
+  document.getElementById('ec').innerHTML = html;
+  document.getElementById('esrc').value = html;
+  document.getElementById('esrc').hidden = true;
+  document.getElementById('ec').hidden = false;
+  document.getElementById('btn-src').textContent = '◧ HTML';
+  document.getElementById('est').textContent = '';
+  document.getElementById('eprog').hidden = true;
+
+  document.getElementById('eov').hidden = false;
+  setTimeout(() => document.getElementById('f-title').focus(), 50);
+}
+
+function closeEditor() {
+  document.getElementById('eov').hidden = true;
+  editSlug = null;
+}
+
+function renderLabelCbs(selected) {
+  const c = document.getElementById('lbcbs');
+  c.innerHTML = '';
+  getAllLabels().forEach(l => {
+    const lb = document.createElement('label');
+    lb.className = 'lbcb';
+    const inp = document.createElement('input');
+    inp.type = 'checkbox'; inp.name = 'lbl'; inp.value = l;
+    inp.checked = selected.includes(l);
+    lb.appendChild(inp);
+    lb.appendChild(document.createTextNode(l));
+    c.appendChild(lb);
+  });
+}
+
+function getCheckedLabels() {
+  return [...document.querySelectorAll('#lbcbs input:checked')].map(i => i.value);
+}
+
+function getEditorHtml() {
+  const src  = document.getElementById('esrc');
+  const rich = document.getElementById('ec');
+  return src.hidden ? rich.innerHTML : src.value;
+}
+
+/* ───────── Save + Publish ───────── */
+async function saveAndPublish() {
+  if (pubBusy) return;
+  const btn  = document.getElementById('btn-pub');
+  const stat = document.getElementById('est');
+  const prog = document.getElementById('eprog');
+  const pb   = document.getElementById('epb');
+
+  const title = document.getElementById('f-title').value.trim();
+  if (!title) { toast('Titlul este obligatoriu.', 'err'); return; }
+
+  btn.disabled = true;
+  stat.textContent = 'Se construiește…';
+  prog.hidden = false;
+  pb.style.width = '0%';
+
+  try {
+    const dateVal   = document.getElementById('f-date').value;
+    const published = dateVal ? new Date(dateVal).toISOString() : new Date().toISOString();
+    const labels    = getCheckedLabels();
+    const rawHtml   = getEditorHtml();
+    const html      = sanitize(rawHtml);
+    let   slugVal   = document.getElementById('f-slug').value.trim();
+
+    const newData = JSON.parse(JSON.stringify(siteData));
+
+    if (editSlug) {
+      const idx = newData.posts.findIndex(p => p.slug === editSlug);
+      if (idx === -1) throw new Error('Articolul nu a fost găsit.');
+      newData.posts[idx] = { ...newData.posts[idx], title, published, labels, html, slug: slugVal || editSlug, edited: true };
+    } else {
+      const datePart = published.slice(0,10);
+      if (!slugVal) slugVal = datePart + '-' + LFE.slugify(title);
+      const slugSet = new Set((newData.posts||[]).map(p => p.slug));
+      let finalSlug = slugVal; let n = 2;
+      while (slugSet.has(finalSlug)) finalSlug = slugVal + '-' + (n++);
+      newData.posts = [...(newData.posts||[]), {
+        id: 'local-' + Date.now(), bid: null, slug: finalSlug,
+        title, published, labels, html, url: '', edited: true
+      }];
+    }
+
+    const t0 = title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim() || title;
+    const msg = (editSlug ? 'Actualizează: ' : 'Adaugă: ') + t0 +
+      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01XVjnnWfxL1eNtNSq5DnKUQ';
+
+    stat.textContent = 'Se publică…';
+    const { sha, n } = await publish(newData, msg, pb);
+
+    toast(`✅ Publicat! ${n} fișiere · ${sha.slice(0,7)}`, 'ok');
+    closeEditor();
+    renderList();
+  } catch(e) {
+    if (e.message !== 'busy') {
+      toast('Eroare: ' + e.message, 'err', 7000);
+      stat.textContent = '⚠ ' + e.message;
+      console.error(e);
+    }
+  } finally {
+    btn.disabled = false;
+    prog.hidden = true;
+  }
+}
+
+/* ───────── Delete ───────── */
+async function deletePost(slug) {
+  const post = (siteData.posts||[]).find(p => p.slug === slug);
+  if (!post) return;
+  if (!confirm(`Ștergi articolul "${post.title}"?\n\nVa fi eliminat din site și adăugat în lista de excluse (nu va fi reimportat din blog).`)) return;
+
+  const newData = JSON.parse(JSON.stringify(siteData));
+  newData.posts = newData.posts.filter(p => p.slug !== slug);
+  if (post.bid) newData.deleted = [...(newData.deleted||[]), post.bid];
+
+  const t0 = post.title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim() || post.title;
+  try {
+    // Use temp progress
+    const { sha, n } = await publish(newData, 'Șterge: ' + t0 +
+      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null);
+    toast(`🗑 Șters și publicat · ${sha.slice(0,7)}`, 'ok');
+    closeEditor();
+    renderList();
+  } catch(e) {
+    toast('Eroare la ștergere: ' + e.message, 'err', 7000);
+  }
+}
+
+/* ───────── Toolbar ───────── */
+function initToolbar() {
+  document.getElementById('tb').addEventListener('click', e => {
+    const btn = e.target.closest('[data-cmd]');
+    if (!btn) return;
+    const ec = document.getElementById('ec');
+    ec.focus();
+    switch (btn.dataset.cmd) {
+      case 'bold':  document.execCommand('bold'); break;
+      case 'italic':document.execCommand('italic'); break;
+      case 'h2':    document.execCommand('formatBlock', false, 'h2'); break;
+      case 'h3':    document.execCommand('formatBlock', false, 'h3'); break;
+      case 'ul':    document.execCommand('insertUnorderedList'); break;
+      case 'ol':    document.execCommand('insertOrderedList'); break;
+      case 'quote': document.execCommand('formatBlock', false, 'blockquote'); break;
+      case 'code': {
+        const sel = window.getSelection();
+        if (sel && !sel.isCollapsed) {
+          document.execCommand('insertHTML', false, '<code>' + sel.toString().replace(/</g,'&lt;') + '</code>');
+        } else {
+          document.execCommand('insertHTML', false, '<pre><code>cod...</code></pre>');
+        }
+        break;
+      }
+      case 'link': {
+        const url = prompt('URL link:');
+        if (url) document.execCommand('createLink', false, url);
+        break;
+      }
+      case 'img': {
+        const url = prompt('URL imagine (gol = upload fișier):');
+        if (url) {
+          document.execCommand('insertHTML', false, `<img src="${url.replace(/"/g,'&quot;')}" alt="">`);
+        } else {
+          const inp = document.createElement('input');
+          inp.type = 'file'; inp.accept = 'image/*';
+          inp.onchange = () => {
+            const file = inp.files[0]; if (!file) return;
+            const fr = new FileReader();
+            fr.onload = ev => document.execCommand('insertHTML', false,
+              `<img src="${ev.target.result.replace(/"/g,'&quot;')}" alt="${esc(file.name)}">`);
+            fr.readAsDataURL(file);
+          };
+          inp.click();
+        }
+        break;
+      }
+      case 'clr': document.execCommand('removeFormat'); break;
+    }
+  });
+
+  document.getElementById('btn-src').addEventListener('click', () => {
+    const ec  = document.getElementById('ec');
+    const src = document.getElementById('esrc');
+    const btn = document.getElementById('btn-src');
+    if (src.hidden) {
+      src.value = ec.innerHTML; src.hidden = false; ec.hidden = true; btn.textContent = '◩ Vizual';
+    } else {
+      ec.innerHTML = src.value; ec.hidden = false; src.hidden = true; btn.textContent = '◧ HTML';
+    }
+  });
+}
+
+/* ───────── Import from Blogger ───────── */
+function startImport() {
+  const log  = document.getElementById('ilog');
+  const btn  = document.getElementById('btn-imp');
+  log.innerHTML = ''; log.hidden = false;
+  btn.disabled  = true;
+
+  let page = 0, newCnt = 0, updCnt = 0, skipCnt = 0;
+  const newData   = JSON.parse(JSON.stringify(siteData));
+  const deleted   = new Set(newData.deleted || []);
+  const byBid     = new Map((newData.posts||[]).filter(p => p.bid).map(p => [p.bid, p]));
+  const bySlug    = new Set((newData.posts||[]).map(p => p.slug));
+
+  function addLog(msg, color) {
+    const p = document.createElement('p');
+    p.textContent = msg;
+    if (color) p.style.color = color;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function fetchPage() {
+    const startIdx = page * 25 + 1;
+    const url = `https://linuxforeducation.blogspot.com/feeds/posts/default?alt=json&max-results=25&start-index=${startIdx}&orderby=published`;
+    const cbName = '_lfe_imp_' + Date.now();
+
+    const timer = setTimeout(() => {
+      delete window[cbName];
+      addLog('Eroare: timeout la pagina ' + (page + 1), 'var(--red)');
+      finalize();
+    }, 15000);
+
+    window[cbName] = function(feed) {
+      clearTimeout(timer);
+      delete window[cbName];
+      const entries = (feed.feed && feed.feed.entry) || [];
+      addLog(`Pagina ${page + 1}: ${entries.length} articole`);
+      if (!entries.length) { finalize(); return; }
+
+      entries.forEach(entry => {
+        const bid = entry.id.$t.split('.post-').pop() || entry.id.$t;
+        if (deleted.has(bid)) { skipCnt++; return; }
+
+        const title     = entry.title.$t;
+        const published = entry.published.$t;
+        const labels    = (entry.category || []).map(c => c.term);
+        const url       = ((entry.link || []).find(l => l.rel === 'alternate') || {}).href || '';
+        const rawHtml   = (entry.content ? entry.content.$t : entry.summary ? entry.summary.$t : '') || '';
+        const html      = sanitize(rawHtml);
+
+        if (byBid.has(bid)) {
+          const ex = byBid.get(bid);
+          if (ex.edited) { skipCnt++; return; }
+          ex.title = title; ex.published = published; ex.labels = labels; ex.html = html; ex.url = url;
+          updCnt++;
+        } else {
+          const dp = published.slice(0,10);
+          let slug = dp + '-' + LFE.slugify(title);
+          let n = 2; while (bySlug.has(slug)) slug = dp + '-' + LFE.slugify(title) + '-' + (n++);
+          bySlug.add(slug);
+          const np = { id: 'blog-' + bid, bid, slug, title, published, labels, html, url };
+          newData.posts.push(np);
+          byBid.set(bid, np);
+          newCnt++;
+        }
+      });
+
+      if (entries.length < 25) finalize(); else { page++; setTimeout(fetchPage, 400); }
+    };
+
+    const sc = document.createElement('script');
+    sc.src = url + '&callback=' + cbName;
+    sc.onerror = () => { clearTimeout(timer); delete window[cbName]; addLog('Eroare JSONP la pagina ' + (page + 1), 'var(--red)'); finalize(); };
+    document.head.appendChild(sc);
+    setTimeout(() => { try { sc.remove(); } catch(e) {} }, 20000);
+  }
+
+  async function finalize() {
+    addLog(`Import terminat: ${newCnt} noi, ${updCnt} actualizate, ${skipCnt} sărite.`, 'var(--acc2)');
+    if (newCnt + updCnt > 0) {
+      addLog('Se publică pe GitHub…', 'var(--muted)');
+      try {
+        const { sha, n } = await publish(newData,
+          `Import Blogger: +${newCnt} noi, ~${updCnt} actualizate\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`, null);
+        addLog(`✅ Publicat! ${n} fișiere · ${sha.slice(0,7)}`, 'var(--acc2)');
+        renderList();
+        toast(`Import publicat: ${newCnt} articole noi!`, 'ok');
+      } catch(e) {
+        addLog('Eroare publicare: ' + e.message, 'var(--red)');
+        toast('Eroare la publicare: ' + e.message, 'err', 8000);
+      }
+    }
+    btn.disabled = false;
+  }
+
+  fetchPage();
+}
+
+/* ───────── Settings ───────── */
+function renderSettings() {
+  // Social links
+  const sl = document.getElementById('soclist');
+  sl.innerHTML = '';
+  (siteData.social || []).forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'sr';
+    row.innerHTML = `
+      <input class="fc" type="text" placeholder="Nume (ex: Facebook)" value="${esc(s.name)}" data-si="${i}" data-sf="name" style="flex:1">
+      <input class="fc" type="text" placeholder="https://…" value="${esc(s.url)}" data-si="${i}" data-sf="url" style="flex:2">
+      <button class="btn btn-d btn-sm" data-rmsoc="${i}">✕</button>`;
+    sl.appendChild(row);
+  });
+
+  // Groups
+  const gl = document.getElementById('grplist');
+  gl.innerHTML = '';
+  (siteData.groups || []).forEach((g, gi) => {
+    const card = document.createElement('div');
+    card.className = 'gc';
+    card.innerHTML = `
+      <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
+        <input class="fc" type="text" placeholder="Nume grup (ex: Tutoriale)" value="${esc(g.name)}" data-gi="${gi}" data-gf="name" style="flex:1">
+        <button class="btn btn-d btn-sm" data-rmgrp="${gi}">✕ Grup</button>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:5px">Etichete (una per rând):</div>
+      <textarea class="fc" data-gi="${gi}" data-gf="labels" style="min-height:70px;font-size:13px">${esc((g.labels||[]).join('\n'))}</textarea>`;
+    gl.appendChild(card);
+  });
+}
+
+function collectSettings() {
+  const nd = JSON.parse(JSON.stringify(siteData));
+  const socMap = {};
+  document.querySelectorAll('[data-si]').forEach(inp => {
+    const i = inp.dataset.si;
+    if (!socMap[i]) socMap[i] = {};
+    socMap[i][inp.dataset.sf] = inp.value;
+  });
+  nd.social = Object.values(socMap).filter(s => s.name && s.url);
+
+  const groups = [];
+  document.querySelectorAll('[data-gf="name"]').forEach(inp => {
+    const name = inp.value.trim(); if (!name) return;
+    const labEls = document.querySelectorAll(`[data-gi="${inp.dataset.gi}"][data-gf="labels"]`);
+    const labels = labEls.length ? labEls[0].value.split('\n').map(l => l.trim()).filter(Boolean) : [];
+    groups.push({ name, labels });
+  });
+  nd.groups = groups;
+  return nd;
+}
+
+/* ───────── Init ───────── */
+function init() {
+  /* ── Login ── */
+  const lbtn = document.getElementById('lbtn');
+  const lerr  = document.getElementById('lerr');
+
+  async function doLogin(t) {
+    if (!t) return;
+    lbtn.disabled = true; lbtn.textContent = 'Se verifică…'; lerr.style.display = 'none';
+    token = t;
+    try {
+      await ghFetch('GET', '/repos/' + REPO);  // verify access
+      sessionStorage.setItem('gh_token', t);
+      await loadSiteData();
+      document.getElementById('login-screen').hidden = true;
+      document.getElementById('admin-ui').hidden = false;
+      renderList();
+    } catch(e) {
+      token = '';
+      lerr.textContent = e.status === 401 ? 'Token invalid sau fără drepturi.' : 'Eroare: ' + e.message;
+      lerr.style.display = 'block';
+    } finally {
+      lbtn.disabled = false; lbtn.textContent = 'Conectează';
+    }
+  }
+
+  lbtn.addEventListener('click', () => doLogin(document.getElementById('tok').value.trim()));
+  document.getElementById('tok').addEventListener('keydown', e => { if (e.key === 'Enter') lbtn.click(); });
+
+  const saved = sessionStorage.getItem('gh_token');
+  if (saved) { document.getElementById('tok').value = saved; doLogin(saved); }
+
+  /* ── Navigation ── */
+  document.querySelectorAll('[data-view]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('on'));
+      a.classList.add('on');
+      document.querySelectorAll('.view').forEach(v => v.hidden = true);
+      document.getElementById('view-' + a.dataset.view).hidden = false;
+      if (a.dataset.view === 'settings') renderSettings();
+      if (a.dataset.view === 'list') renderList();
+    });
+  });
+
+  /* ── List controls ── */
+  let srchTimer;
+  document.getElementById('srch').addEventListener('input', e => {
+    clearTimeout(srchTimer);
+    srchTimer = setTimeout(() => { srchQ = e.target.value; curPage = 0; renderList(); }, 250);
+  });
+  document.getElementById('flbl').addEventListener('change', e => { fltrLbl = e.target.value; curPage = 0; renderList(); });
+  document.getElementById('btn-new').addEventListener('click', () => openEditor(null));
+
+  document.getElementById('alist').addEventListener('click', e => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'edit') openEditor(btn.dataset.slug);
+    if (btn.dataset.action === 'del')  deletePost(btn.dataset.slug);
+    const tit = e.target.closest('.tit');
+    if (tit) openEditor(tit.dataset.slug);
+  });
+  document.getElementById('alist').addEventListener('click', e => {
+    const tit = e.target.closest('.tit');
+    if (tit && !e.target.closest('[data-action]')) openEditor(tit.dataset.slug);
+  });
+
+  /* ── Editor controls ── */
+  document.getElementById('eclose').addEventListener('click', closeEditor);
+  document.getElementById('ecancel').addEventListener('click', closeEditor);
+  document.getElementById('btn-pub').addEventListener('click', saveAndPublish);
+  document.getElementById('btn-del').addEventListener('click', () => { if (editSlug) deletePost(editSlug); });
+  document.getElementById('eov').addEventListener('click', e => { if (e.target === document.getElementById('eov')) closeEditor(); });
+
+  document.getElementById('f-title').addEventListener('input', e => {
+    const sf = document.getElementById('f-slug');
+    if (!sf.dataset.manual) {
+      const dp = (document.getElementById('f-date').value || '').slice(0,10) || new Date().toISOString().slice(0,10);
+      sf.value = dp + '-' + LFE.slugify(e.target.value);
+    }
+  });
+  document.getElementById('f-slug').addEventListener('input', e => {
+    e.target.dataset.manual = e.target.value ? '1' : '';
+  });
+  document.getElementById('btn-addlbl').addEventListener('click', () => {
+    const inp = document.getElementById('newlbl');
+    const lbl = inp.value.trim(); if (!lbl) return;
+    const c = document.getElementById('lbcbs');
+    const lb = document.createElement('label'); lb.className = 'lbcb';
+    const ci = document.createElement('input'); ci.type = 'checkbox'; ci.name = 'lbl'; ci.value = lbl; ci.checked = true;
+    lb.appendChild(ci); lb.appendChild(document.createTextNode(lbl));
+    c.appendChild(lb); inp.value = '';
+  });
+  document.getElementById('newlbl').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-addlbl').click(); } });
+
+  initToolbar();
+
+  /* ── Import ── */
+  document.getElementById('btn-imp').addEventListener('click', startImport);
+
+  /* ── Settings ── */
+  document.getElementById('btn-saveset').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-saveset');
+    const st  = document.getElementById('setst');
+    btn.disabled = true; st.textContent = 'Se publică…';
+    try {
+      const nd = collectSettings();
+      const { sha, n } = await publish(nd,
+        'Actualizează setările site-ului\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null);
+      st.textContent = `✅ Salvat · ${sha.slice(0,7)}`;
+      renderList();
+      toast('Setările au fost salvate și publicate.', 'ok');
+    } catch(e) {
+      st.textContent = '⚠ ' + e.message;
+      toast('Eroare: ' + e.message, 'err', 7000);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('btn-addsoc').addEventListener('click', () => {
+    const sl = document.getElementById('soclist');
+    const i  = sl.children.length;
+    const row = document.createElement('div'); row.className = 'sr';
+    row.innerHTML = `<input class="fc" type="text" placeholder="Nume" data-si="${i}" data-sf="name" style="flex:1">
+      <input class="fc" type="text" placeholder="https://…" data-si="${i}" data-sf="url" style="flex:2">
+      <button class="btn btn-d btn-sm" data-rmsoc="${i}">✕</button>`;
+    sl.appendChild(row);
+  });
+  document.getElementById('soclist').addEventListener('click', e => {
+    if (e.target.closest('[data-rmsoc]')) e.target.closest('.sr').remove();
+  });
+
+  document.getElementById('btn-addgrp').addEventListener('click', () => {
+    const gl = document.getElementById('grplist');
+    const i  = Date.now();
+    const c  = document.createElement('div'); c.className = 'gc';
+    c.innerHTML = `<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
+      <input class="fc" type="text" placeholder="Nume grup" data-gi="${i}" data-gf="name" style="flex:1">
+      <button class="btn btn-d btn-sm" data-rmgrp="${i}">✕ Grup</button></div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:5px">Etichete (una per rând):</div>
+      <textarea class="fc" data-gi="${i}" data-gf="labels" style="min-height:70px;font-size:13px" placeholder="o etichetă per rând…"></textarea>`;
+    gl.appendChild(c);
+  });
+  document.getElementById('grplist').addEventListener('click', e => {
+    if (e.target.closest('[data-rmgrp]')) e.target.closest('.gc').remove();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
