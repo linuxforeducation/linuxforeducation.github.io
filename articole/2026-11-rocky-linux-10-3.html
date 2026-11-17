@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rocky Linux 10.3 · Linux for Education</title>
+<meta name="description" content="1. Nucleul Linux și suportul hardware Deși distribuția rămâne ancorată pe seria LTS Linux 6.12 (versiunea exactă 6.12.0-264.16.1 ), au fost integrate subsisteme critice din generații mai noi: Subsisteme…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html" aria-current="page">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-17">17 noiembrie 2026</time><a class="chip" href="../linux-distro.html">Linux Distro</a></div>
+  <h1>Rocky Linux 10.3</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/rocky103-1024x576.jpg" alt="Rocky Linux 10.3 Released with Kernel 6.12, GCC 16, and Security Updates" loading="lazy" decoding="async"></p><h3>1. Nucleul Linux și suportul hardware</h3><p>Deși distribuția rămâne ancorată pe seria LTS <b>Linux 6.12</b> (versiunea exactă <code>6.12.0-264.16.1</code>), au fost integrate subsisteme critice din generații mai noi:</p><ul><li><p><b>Subsisteme rebased la Linux 6.19:</b> Modulul <b>eBPF</b> și suita de profilare <b>perf</b> au fost aduse la nivelul nucleului 6.19, oferind unelte mai avansate pentru observabilitate și filtrarea traficului de rețea.</p></li><li><p><b>Memorie și CXL:</b> Suport îmbunătățit pentru interconectările <b>CXL</b> (<i>Compute Express Link</i>) și optimizări în mecanismul de swap comprimat.</p></li><li><p><b>Accelerare AI și platforme noi:</b> Compatibilitate extinsă pentru cele mai recente procesoare Intel și introducerea driverului AMD <b><code>amdxdna</code></b> pentru unitățile de procesare neurală (<b>NPU</b>), disponibil în stadiu <i>Technology Preview</i>.</p></li></ul><h3>2. Unelte de dezvoltare (Toolchain) și monitorizare</h3><p>Dezvoltatorii primesc actualizări substanțiale pentru compilatoare și medii de execuție:</p><ul><li><p><b>GCC Toolset 16:</b> Include <b>GCC 16.2</b>, <b>Binutils 2.46</b>, alături de <b>LLVM 22.1.8</b> și depanatorul <b>GDB 17.2</b>.</p></li><li><p><b>Limbaje de programare:</b> <b>Rust 1.97</b> și <b>Go 1.27.3</b>.</p></li><li><p><b>Observabilitate și telemetrie:</b> <b>Grafana 12.4.3</b> introduce o arhitectură reproiectată pentru dashboard-uri și alerte unificate, iar <b>Performance Co-Pilot 7.1.5</b> adaugă repararea automată a arhivelor de date.</p></li></ul><h3>3. Securitate și criptografie post-cuantică</h3><p>Rocky Linux 10.3 integrează măsuri moderne de protecție pentru mediile enterprise:</p><ul><li><p><b>Schimb de chei post-cuantic (PQC):</b> <b>Libreswan 5.4</b> adaugă suport pentru algoritmii post-cuantici <b>ML-KEM-768</b> și <b>ML-KEM-1024</b>. Totodată, conexiunile <b>SSH care rulează în modul FIPS</b> preferă acum în mod implicit algoritmii hibrizi post-cuantici.</p></li><li><p><b>Atestare și politici de execuție:</b> <b>Keylime 7.14.3</b> îmbunătățește atestarea de la distanță a integrității nodurilor; <b>fapolicyd 2.0.1</b> introduce evaluarea paralelă a politicilor de execuție și actualizări tranzacționale; <b>OpenSC 0.27.1</b> aduce suport PKCS #11 3.2; iar <b>Audit 4.2.1</b> securizează jurnalizarea la distanță.</p></li></ul><h3>4. Imagini de sistem (<code>bootc</code>), cerințe hardware și upgrade</h3><ul><li><p><b>Image Builder &amp; <code>bootc</code>:</b> Utilitarul CLI <code>image-builder</code> a atins statutul de disponibilitate generală (<i>General Availability</i>), iar versiunea web poate genera <b>imagini compatibile <code>bootc</code></b> (containere bootabile) direct din imaginile locale de bază.</p></li><li><p><b>Funcții retrase:</b> Au fost eliminate protocoalele învechite de securitate wireless <b>WEP</b> și alocatorul de pagini comprimate <b>ZBUD</b>. De asemenea, Grafana renunță la vechiul sistem de alertare și la plugin-urile bazate pe AngularJS.</p></li><li><p><b>Cerințe CPU:</b> Suportă arhitecturile <b>x86-64-v3</b>, <b>ARM64</b>, <b>RISC-V</b>, <b>POWER10+</b> (<code>ppc64le</code>) și <b>IBM z15+</b>. La fel ca în întregul ciclu Rocky Linux 10, procesoarele mai vechi limitate la microarhitectura <code>x86-64-v2</code> nu sunt suportate.</p></li><li><p><b>Actualizare:</b> Sistemele aflate deja pe ramura Rocky Linux 10 pot trece la versiunea 10.3 prin comanda <code>sudo dnf -y upgrade</code> (upgrade-ul direct de la versiunile 8 sau 9 nu este suportat oficial).</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><span></span><a class="r" href="../articole/2026-11-apt-3-3-8-a-fost-lansat-optimizari-de-performanta-in-verific.html"><small>Mai vechi →</small>APT 3.3.8 a fost lansat: Optimizări de performanță în verificarea pachetelor, generarea cache-ului și rezolvarea dependențelor</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
