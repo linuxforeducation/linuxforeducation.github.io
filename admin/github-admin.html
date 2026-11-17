@@ -2,315 +2,192 @@
 <html lang="ro">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin · Linux for Education</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administrare · Linux for Education</title>
+<meta name="robots" content="noindex">
 <style>
-:root{color-scheme:dark;--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--acc:#0f6b4f;--acc2:#1a9e76;--red:#da3633;--radius:6px}
-*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f6f4ee;--surface:#fffdf8;--ink:#1c2420;--muted:#5d6861;--line:#dedacd;--accent:#0f6b4f;--accent-ink:#fff;--accent-soft:#e2efe8;--danger:#b3261e;--code:#efece2;--radius:10px}
+@media(prefers-color-scheme:dark){:root{--bg:#121614;--surface:#1a201d;--ink:#e8ece9;--muted:#9aa69f;--line:#2c3530;--accent:#5fd0a4;--accent-ink:#0b1f17;--accent-soft:#1d3229;--danger:#ff8a80;--code:#222a26}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{height:100%}
-body{font:14px/1.5 system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text)}
-a{color:var(--acc2);text-decoration:none}
-a:hover{text-decoration:underline}
-code,kbd{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-radius:4px}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:600;font-size:.9rem;white-space:nowrap;text-decoration:none;color:var(--ink);display:inline-block}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.danger{color:var(--danger)}
+.btn.danger.sure{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+header.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;margin-right:auto}
+.logo{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;background:var(--accent);color:var(--accent-ink);font:700 13px/1 ui-monospace,Consolas,monospace}
+#status{padding:7px 16px;font-size:.88rem;color:var(--muted);border-bottom:1px solid var(--line);min-height:34px;display:flex;align-items:center;gap:10px}
+#status.ok{color:var(--accent)}#status.err{color:var(--danger)}
+.prog-bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden;width:160px;flex-shrink:0}
+.prog-fill{height:100%;background:var(--accent);transition:width .2s;width:0%}
 
 /* Login */
-.lw{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-.lc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;width:100%;max-width:420px}
-.lc h1{font-size:19px;margin-bottom:6px}
-.lc p{color:var(--muted);font-size:13px;margin-bottom:20px}
-.lc .err{color:var(--red);font-size:13px;margin-bottom:10px;display:none}
+#connect{max-width:560px;margin:8vh auto;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+#connect h1{margin:0 0 .4em;font-size:1.5rem}
+#connect p{color:var(--muted);margin:.5em 0}
+#connect input[type=password]{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin:8px 0}
+#connect input[type=password]:focus{outline:2px solid var(--accent);outline-offset:-1px}
+#connect .err-msg{color:var(--danger);font-size:.88rem;min-height:1.4em}
 
 /* Layout */
-.app{display:flex;height:100vh;overflow:hidden}
-.sb{width:220px;min-width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
-.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+#app{flex:1;display:grid;grid-template-columns:320px 1fr;min-height:0;overflow:hidden}
+aside{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--surface)}
+.tools{padding:12px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
+.tools input,.tools select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.tools input:focus,.tools select:focus{outline:2px solid var(--accent);outline-offset:-1px}
+#count{padding:6px 12px;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--line)}
+#list{overflow:auto;flex:1;margin:0;padding:0;list-style:none}
+#list li{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+#list li:hover{background:var(--accent-soft)}
+#list li.on{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+#list .t{font-weight:600;font-size:.92rem;line-height:1.3;display:block}
+#list .m{color:var(--muted);font-size:.8rem}
 
-/* Sidebar */
-.sb-logo{padding:14px 16px;border-bottom:1px solid var(--border)}
-.sb-logo a{color:var(--text);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
-.sb-nav{flex:1;padding:6px 0}
-.sb-nav a{display:flex;align-items:center;gap:10px;padding:8px 16px;color:var(--muted);font-size:14px;transition:color .15s,background .15s}
-.sb-nav a:hover{color:var(--text);background:var(--bg3);text-decoration:none}
-.sb-nav a.on{color:var(--text);background:var(--bg3);font-weight:500}
-.sb-foot{padding:14px 16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
-.sb-foot a{color:var(--acc2)}
+/* Main area */
+main{overflow:auto;padding:20px 24px 60px;min-width:0}
+form{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+form h2{margin:0;font-size:1.3rem}
+.field>label,.field>.lab{display:block;font-weight:600;font-size:.86rem;margin-bottom:5px}
+.row{display:grid;grid-template-columns:1fr 240px;gap:14px}
+.field input[type=text],.field input[type=datetime-local]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.field input:focus{outline:2px solid var(--accent);outline-offset:-1px}
 
-/* Forms */
-.fg{margin-bottom:14px}
-.fg label{display:block;font-size:13px;font-weight:500;margin-bottom:5px;color:var(--muted)}
-.fc{width:100%;padding:7px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:14px}
-.fc:focus{outline:none;border-color:var(--acc)}
-.fc::placeholder{color:var(--muted)}
-textarea.fc{resize:vertical;min-height:90px}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:var(--radius);font:inherit;font-size:14px;cursor:pointer;border:1px solid transparent;transition:all .15s;white-space:nowrap}
-.btn:disabled{opacity:.5;cursor:default}
-.btn-p{background:var(--acc);color:#fff;border-color:var(--acc)}
-.btn-p:not(:disabled):hover{background:var(--acc2);border-color:var(--acc2)}
-.btn-s{background:var(--bg3);color:var(--text);border-color:var(--border)}
-.btn-s:not(:disabled):hover{border-color:#6e7681}
-.btn-d{background:var(--red);color:#fff;border-color:var(--red)}
-.btn-d:not(:disabled):hover{opacity:.85}
-.btn-sm{padding:4px 10px;font-size:12px}
-
-/* View container */
-.view{padding:24px;max-width:1100px}
-.vh{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.vh h2{font-size:18px;flex:1}
-
-/* Stats */
-.stats{display:flex;gap:16px;margin-bottom:16px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
-.stat-n{font-size:20px;font-weight:700;display:block}
-.stat-l{font-size:11px;color:var(--muted)}
-
-/* Article list */
-.al{display:flex;flex-direction:column;gap:2px}
-.ar{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);min-width:0}
-.ar:hover{border-color:#6e7681}
-.ar .tit{flex:1;font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
-.ar .tit:hover{color:var(--acc2)}
-.ar .dt{font-size:12px;color:var(--muted);white-space:nowrap}
-.ar .lbs{display:flex;gap:3px;flex-shrink:0;flex-wrap:nowrap;overflow:hidden;max-width:220px}
-.ar .acts{display:flex;gap:4px;flex-shrink:0}
-.chip{font-size:11px;padding:2px 7px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;color:var(--muted);white-space:nowrap}
-
-/* Editor overlay */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:stretch;justify-content:flex-end}
-.ep{background:var(--bg);width:min(820px,100%);display:flex;flex-direction:column;overflow:hidden}
-.eh{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.eh h3{flex:1;font-size:16px}
-.eb{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px}
-.ef{padding:10px 18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
-.ef-right{display:flex;gap:8px;align-items:center}
+/* Label chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer;font-size:.88rem}
+.chips label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chips input{position:absolute;opacity:0;width:0;height:0}
+.addlabel{display:flex;gap:8px;margin-top:8px;max-width:360px}
+.addlabel input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.addlabel input:focus{outline:2px solid var(--accent);outline-offset:-1px}
 
 /* Toolbar + editor */
-.tb{display:flex;gap:2px;padding:5px;background:var(--bg3);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0;flex-wrap:wrap}
-.tb button{padding:4px 8px;background:none;border:1px solid transparent;border-radius:4px;color:var(--text);cursor:pointer;font:13px/1 system-ui,sans-serif}
-.tb button:hover{background:var(--border);border-color:var(--border)}
-.tb .sep{width:1px;background:var(--border);margin:2px 2px;align-self:stretch}
-.ec{min-height:280px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);outline:none;line-height:1.65;overflow-y:auto}
-.ec:focus{border-color:var(--acc)}
-.ec h2,.ec h3{margin:1em 0 .4em}
-.ec p{margin:.5em 0}
-.ec pre{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:10px;overflow-x:auto;margin:.8em 0}
-.ec pre code{background:none;border:none;padding:0;font-size:13px}
-.ec blockquote{border-left:3px solid var(--border);padding-left:12px;margin:.8em 0;color:var(--muted)}
-.ec img{max-width:100%;height:auto;border-radius:4px;margin:.5em 0}
-.ec ul,.ec ol{padding-left:20px;margin:.5em 0}
-.src{min-height:280px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;line-height:1.5;color:var(--text);resize:vertical}
-.src:focus{outline:none;border-color:var(--acc)}
+.bar{display:flex;flex-wrap:wrap;gap:4px;padding:6px;border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;background:var(--surface)}
+.bar button{border:1px solid transparent;background:none;border-radius:6px;padding:4px 9px;cursor:pointer;font-size:.86rem;min-width:30px}
+.bar button:hover{background:var(--accent-soft)}
+.bar button.on{background:var(--accent);color:var(--accent-ink)}
+.bar .sep{width:1px;background:var(--line);margin:2px 4px}
+#editor,#source{border:1px solid var(--line);border-radius:0 0 8px 8px;background:var(--surface);min-height:340px;padding:16px 18px;width:100%}
+#editor{font-size:1rem;line-height:1.65;overflow-wrap:break-word}
+#editor:focus{outline:2px solid var(--accent);outline-offset:-2px}
+#editor img{max-width:100%;height:auto;border-radius:6px}
+#editor pre{background:var(--code);border-radius:6px;padding:10px 12px;overflow:auto;font:.88rem/1.5 ui-monospace,Consolas,monospace}
+#editor code{background:var(--code);border-radius:4px;padding:0 .3em;font:.9em ui-monospace,Consolas,monospace}
+#editor blockquote{margin:0 0 1em;padding-left:14px;border-left:3px solid var(--accent);color:var(--muted)}
+#editor table{border-collapse:collapse}#editor td,#editor th{border:1px solid var(--line);padding:4px 8px}
+#source{font:.86rem/1.5 ui-monospace,Consolas,monospace;resize:vertical;background:var(--bg)}
+#source:focus{outline:2px solid var(--accent);outline-offset:-1px}
 
-/* Label picker */
-.lp-all{display:flex;flex-wrap:wrap;gap:5px;max-height:160px;overflow-y:auto;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none}
-.lp-pill{padding:4px 11px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--muted);user-select:none;transition:all .12s}
-.lp-pill:hover{border-color:#6e7681;color:var(--text)}
-.lp-pill.on{background:var(--acc);border-color:var(--acc2);color:#fff}
-.lp-add-row{display:flex;gap:0;border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
-.lp-new{flex:1;padding:7px 11px;background:var(--bg3);border:none;color:var(--text);font:inherit;font-size:13px}
-.lp-new:focus{outline:none}
-.lp-new::placeholder{color:var(--muted)}
-
-/* Toast */
-.tc{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:7px;z-index:200}
-.toast{padding:9px 15px;border-radius:var(--radius);font-size:13px;animation:si .2s;max-width:360px}
-.t-ok{background:#1a3d2e;border:1px solid #2ea069;color:#3fb884}
-.t-err{background:#3d1d1d;border:1px solid #da3633;color:#f85149}
-.t-inf{background:var(--bg3);border:1px solid var(--border)}
-@keyframes si{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
-
-/* Progress */
-.pw{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;height:5px;margin:6px 0}
-.pb{height:100%;background:var(--acc);transition:width .25s}
-
-/* Pagination */
-.pag{display:flex;justify-content:center;gap:5px;margin-top:18px;flex-wrap:wrap}
-.pag button{padding:5px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);cursor:pointer;font:inherit;font-size:13px}
-.pag button.on{background:var(--acc);border-color:var(--acc);color:#fff}
-.pag button:hover:not(.on){border-color:#6e7681}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.actions .sp{margin-left:auto}
+.hint{color:var(--muted);font-size:.84rem;margin:4px 0 0}
+#empty{color:var(--muted);text-align:center;margin-top:18vh}
 
 /* Import log */
-.ilog{margin-top:14px;font-size:13px;line-height:1.9;color:var(--muted);max-height:300px;overflow-y:auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px}
+#ilog{max-height:260px;overflow-y:auto;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:.88rem;line-height:1.9;color:var(--muted);margin-top:10px}
 
-/* Settings rows */
-.sr{display:flex;gap:8px;margin-bottom:8px;align-items:center}
-.gc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px}
-
-@media(max-width:620px){
-  .sb{width:48px;min-width:48px}
-  .sb-nav a span:not(.ico){display:none}
-  .sb-logo a span:not(:first-child){display:none}
-  .sb-logo a{justify-content:center}
-  .sb-nav a{justify-content:center;padding:10px}
-  .ar .lbs{display:none}
-}
+@media(max-width:820px){#app{grid-template-columns:1fr;overflow:visible}aside{max-height:40vh;border-right:0;border-bottom:1px solid var(--line)}.row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div id="app">
+
+<header class="top">
+  <div class="brand"><span class="logo" aria-hidden="true">&gt;_</span><span>Administrare · Linux for Education</span></div>
+  <button class="btn" id="b-import" hidden>Importă din blog</button>
+  <button class="btn" id="b-rebuild" hidden>Regenerează site-ul</button>
+  <a class="btn" href="https://linuxforeducation.github.io" target="_blank">Deschide site-ul</a>
+  <button class="btn" id="b-logout" hidden>Deconectează</button>
+</header>
+<div id="status" role="status" aria-live="polite">
+  <span id="status-text"></span>
+  <div class="prog-bar" id="prog-bar" hidden><div class="prog-fill" id="prog-fill"></div></div>
+</div>
 
 <!-- Login -->
-<div id="login-screen" class="lw">
-  <div class="lc">
-    <h1>&gt;_ Linux for Education · Admin</h1>
-    <p>Autentificare prin <strong>GitHub Personal Access Token</strong> cu permisiunea <code>contents: write</code> pe depozitul <code>linuxforeducation.github.io</code>.</p>
-    <div class="fg">
-      <label>Token GitHub</label>
-      <input type="password" id="tok" class="fc" placeholder="ghp_…" autocomplete="off">
-    </div>
-    <div id="lerr" class="err"></div>
-    <button class="btn btn-p" id="lbtn" style="width:100%">Conectează</button>
-    <p style="margin-top:14px;font-size:12px;color:var(--muted)">Tokenul este stocat în sessionStorage și se șterge la închiderea tab-ului. Nu se salvează nicăieri.</p>
-    <p style="margin-top:6px;font-size:12px;color:var(--muted)">Generează un token la: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a></p>
-  </div>
-</div>
+<section id="connect">
+  <h1>Panou de administrare</h1>
+  <p>Administrează articolele direct din browser, pe orice dispozitiv. Modificările se publică pe GitHub Pages prin API.</p>
+  <p style="margin-top:14px"><strong>Token GitHub</strong> (permisiune <code>contents: write</code>)</p>
+  <input type="password" id="tok" placeholder="ghp_…" autocomplete="off">
+  <p class="err-msg" id="lerr"></p>
+  <p><button class="btn primary" id="b-login">Conectează</button></p>
+  <p style="font-size:.84rem">Tokenul este stocat în sessionStorage — se șterge la închiderea tab-ului.<br>
+  Generează un token la <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>.</p>
+</section>
 
-<!-- Admin UI -->
-<div id="admin-ui" class="app" hidden>
-  <aside class="sb">
-    <div class="sb-logo">
-      <a href="https://linuxforeducation.github.io" target="_blank">
-        <span class="ico" style="font-family:monospace">&gt;_</span>
-        <span>LfE Admin</span>
-      </a>
+<!-- App -->
+<div id="app" hidden>
+  <aside>
+    <div class="tools">
+      <button class="btn primary" id="b-new">+ Articol nou</button>
+      <input type="search" id="q" placeholder="Caută după titlu…" aria-label="Caută articole">
+      <select id="flabel" aria-label="Filtrează după etichetă"></select>
     </div>
-    <nav class="sb-nav">
-      <a href="#" class="on" data-view="list"><span class="ico">📄</span><span>Articole</span></a>
-      <a href="#" data-view="import"><span class="ico">⬇</span><span>Import Blog</span></a>
-      <a href="#" data-view="settings"><span class="ico">⚙</span><span>Setări</span></a>
-    </nav>
-    <div class="sb-foot" id="sbfoot">
-      <a href="https://linuxforeducation.github.io" target="_blank">↗ Vezi site-ul</a>
-    </div>
+    <div id="count"></div>
+    <ul id="list"></ul>
   </aside>
-
-  <div class="main">
-    <!-- Articles -->
-    <div id="view-list" class="view">
-      <div class="vh">
-        <h2>Articole</h2>
-        <input type="search" id="srch" class="fc" placeholder="🔍 Caută…" style="width:200px">
-        <select id="flbl" class="fc" style="width:160px"><option value="">Toate etichetele</option></select>
-        <button class="btn btn-p" id="btn-new">+ Articol nou</button>
+  <main>
+    <p id="empty">Alege un articol din listă sau apasă „Articol nou".</p>
+    <form id="form" hidden autocomplete="off">
+      <h2 id="f-head">Articol nou</h2>
+      <div class="row">
+        <div class="field"><label for="f-title">Titlu</label><input type="text" id="f-title" required></div>
+        <div class="field"><label for="f-date">Data publicării</label><input type="datetime-local" id="f-date" required></div>
       </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-n" id="st-tot">–</span><span class="stat-l">articole</span></div>
-        <div class="stat"><span class="stat-n" id="st-lbl">–</span><span class="stat-l">etichete</span></div>
-        <div class="stat"><span class="stat-n" id="st-ed">–</span><span class="stat-l">editate local</span></div>
+      <div class="field" id="f-labels-wrap">
+        <span class="lab">Etichete</span>
+        <div class="chips" id="f-labels"></div>
+        <div class="addlabel">
+          <input type="text" id="f-newlabel" placeholder="Etichetă nouă…" aria-label="Etichetă nouă">
+          <button type="button" class="btn" id="b-addlabel">Adaugă</button>
+        </div>
+        <p class="hint">O etichetă nouă apare în meniu imediat ce publici articolul.</p>
       </div>
-      <div id="alist" class="al"></div>
-      <div id="pag" class="pag"></div>
-    </div>
-
-    <!-- Import -->
-    <div id="view-import" class="view" hidden>
-      <div class="vh"><h2>Import din Blogger</h2></div>
-      <p style="color:var(--muted);margin-bottom:14px">
-        Importă articolele din <a href="https://linuxforeducation.blogspot.com" target="_blank">linuxforeducation.blogspot.com</a>.<br>
-        Articolele marcate ca <em>editate local</em> nu vor fi suprascrise. Cele din lista de excluse sunt sărite.
-      </p>
-      <button class="btn btn-s" id="btn-imp">⬇ Pornește importul</button>
-      <div id="ilog" class="ilog" hidden></div>
-    </div>
-
-    <!-- Settings -->
-    <div id="view-settings" class="view" hidden>
-      <div class="vh"><h2>Setări site</h2></div>
-
-      <h3 style="font-size:15px;margin-bottom:10px">Linkuri sociale</h3>
-      <div id="soclist"></div>
-      <button class="btn btn-s btn-sm" id="btn-addsoc" style="margin-top:6px">+ Adaugă link</button>
-
-      <h3 style="font-size:15px;margin:22px 0 8px">Grupuri meniu</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:10px">Fiecare grup apare ca submeniu cu dropdown. Etichetele din grup sunt afișate în submeniu.</p>
-      <div id="grplist"></div>
-      <button class="btn btn-s btn-sm" id="btn-addgrp" style="margin-top:6px">+ Adaugă grup</button>
-
-      <div style="margin-top:22px;display:flex;gap:10px;align-items:center">
-        <button class="btn btn-p" id="btn-saveset">💾 Salvează și publică</button>
-        <span id="setst" style="font-size:13px;color:var(--muted)"></span>
+      <div class="field">
+        <span class="lab">Conținut</span>
+        <div class="bar" id="bar">
+          <button type="button" data-cmd="bold" title="Aldin"><b>B</b></button>
+          <button type="button" data-cmd="italic" title="Cursiv"><i>I</i></button>
+          <span class="sep"></span>
+          <button type="button" data-block="p" title="Paragraf">¶</button>
+          <button type="button" data-block="h2" title="Titlu de secțiune">H2</button>
+          <button type="button" data-block="h3" title="Subtitlu">H3</button>
+          <button type="button" data-block="blockquote" title="Citat">❝</button>
+          <button type="button" data-block="pre" title="Bloc de cod">&lt;/&gt;</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="insertUnorderedList" title="Listă cu buline">• Listă</button>
+          <button type="button" data-cmd="insertOrderedList" title="Listă numerotată">1. Listă</button>
+          <span class="sep"></span>
+          <button type="button" id="b-link" title="Adaugă link">Link</button>
+          <button type="button" id="b-imgurl" title="Imagine de la o adresă web">Imagine (URL)</button>
+          <button type="button" data-cmd="removeFormat" title="Șterge formatarea">Tx</button>
+          <span class="sep"></span>
+          <button type="button" id="b-source" title="Editează codul HTML">HTML</button>
+        </div>
+        <div id="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Conținutul articolului"></div>
+        <textarea id="source" hidden spellcheck="false" aria-label="Cod HTML"></textarea>
       </div>
-    </div>
-  </div>
+      <div class="actions">
+        <button type="submit" class="btn primary" id="b-save">Salvează și publică</button>
+        <button type="button" class="btn" id="b-cancel">Renunță</button>
+        <a class="btn" id="b-view" target="_blank" hidden>Vezi pagina</a>
+        <button type="button" class="btn danger sp" id="b-del" hidden>Șterge articolul</button>
+      </div>
+    </form>
+    <div id="ilog" hidden></div>
+  </main>
 </div>
-
-<!-- Editor overlay -->
-<div id="eov" class="ov" hidden>
-  <div class="ep">
-    <div class="eh">
-      <h3 id="etitle">Articol nou</h3>
-      <button class="btn btn-s btn-sm" id="btn-src">◧ HTML</button>
-      <button class="btn btn-s btn-sm" id="eclose">✕</button>
-    </div>
-    <div class="eb">
-      <div class="fg">
-        <label>Titlu <span style="color:var(--red)">*</span></label>
-        <input type="text" id="f-title" class="fc" placeholder="Titlul articolului…" autocomplete="off">
-      </div>
-      <div style="display:flex;gap:12px">
-        <div class="fg" style="flex:1">
-          <label>Data publicării</label>
-          <input type="datetime-local" id="f-date" class="fc">
-        </div>
-        <div class="fg" style="flex:1">
-          <label>Slug (URL)</label>
-          <input type="text" id="f-slug" class="fc" placeholder="auto-generat…" autocomplete="off">
-        </div>
-      </div>
-      <div class="fg">
-        <label>Etichete <span id="lp-count" style="color:var(--muted);font-weight:400"></span></label>
-        <div id="lp-all" class="lp-all"></div>
-        <div class="lp-add-row">
-          <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă… (Enter pentru a adăuga)" autocomplete="off">
-          <button class="btn btn-s" id="btn-addlbl" style="border-radius:0 0 var(--radius) 0;border-left:1px solid var(--border)">+ Adaugă</button>
-        </div>
-      </div>
-      <div class="fg" style="flex:1;display:flex;flex-direction:column">
-        <label>Conținut</label>
-        <div class="tb" id="tb">
-          <button data-cmd="bold" title="Bold (Ctrl+B)"><b>B</b></button>
-          <button data-cmd="italic" title="Italic (Ctrl+I)"><i>I</i></button>
-          <div class="sep"></div>
-          <button data-cmd="h2">H2</button>
-          <button data-cmd="h3">H3</button>
-          <div class="sep"></div>
-          <button data-cmd="ul">• Listă</button>
-          <button data-cmd="ol">1. Listă</button>
-          <button data-cmd="quote">" Citat</button>
-          <button data-cmd="code">⌨ Cod</button>
-          <div class="sep"></div>
-          <button data-cmd="link">🔗 Link</button>
-          <button data-cmd="img">🖼 Imagine</button>
-          <div class="sep"></div>
-          <button data-cmd="clr" title="Curăță formatare">✗</button>
-        </div>
-        <div id="ec" class="ec" contenteditable="true" spellcheck="false"></div>
-        <textarea id="esrc" class="src" hidden spellcheck="false"></textarea>
-      </div>
-    </div>
-    <div class="ef">
-      <div>
-        <button class="btn btn-d btn-sm" id="btn-del" hidden>🗑 Șterge</button>
-      </div>
-      <div class="ef-right">
-        <span id="est" style="font-size:13px;color:var(--muted)"></span>
-        <div id="eprog" hidden><div class="pw" style="width:200px"><div class="pb" id="epb" style="width:0%"></div></div></div>
-        <button class="btn btn-s" id="ecancel">Anulează</button>
-        <button class="btn btn-p" id="btn-pub">💾 Salvează și publică</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Toasts -->
-<div class="tc" id="tc"></div>
-</div><!-- #app -->
 
 <!-- ═══════════ Generator (inlined) ═══════════ -->
 <script>
-/* Generatorul site-ului Linux for Education.
-   Primește datele (_sursa/site-data.json) și întoarce toate paginile HTML ca text.
-   Rulează atât în browser (panoul de administrare), cât și în Node. */
 (function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory();else root.LFE=factory();})(typeof self!=='undefined'?self:this,function(){
 'use strict';
 var TOKEN='%%ROOT%%';
@@ -379,884 +256,419 @@ return{build:build,slugify:slugify,esc:esc,dateParts:dateParts,TOKEN:TOKEN};
 });
 </script>
 
-<!-- ═══════════ Admin Application ═══════════ -->
+<!-- ═══════════ Application ═══════════ -->
 <script>
+(function(){
 'use strict';
-/* ───────── Config ───────── */
-const REPO     = 'linuxforeducation/linuxforeducation.github.io';
-const API      = 'https://api.github.com';
-const DPATH    = '_sursa/site-data.json';
-const GIT_AUTHOR = { name: 'Adrian Stan', email: 'adi.stan@upb.ro' };
+var $ = function(id){ return document.getElementById(id); };
+var REPO    = 'linuxforeducation/linuxforeducation.github.io';
+var API     = 'https://api.github.com';
+var DPATH   = '_sursa/site-data.json';
+var AUTHOR  = { name: 'Adrian Stan', email: 'adi.stan@upb.ro' };
+var PROTECTED = /^assets\//;
 
-/* ───────── State ───────── */
-let token     = '';
-let siteData  = null;   // current parsed site-data.json
-let lastBuilt = null;   // files from latest build (for diff)
-let editSlug  = null;   // slug of article being edited (null = new)
-let curPage   = 0;
-let srchQ     = '';
-let fltrLbl   = '';
-const PAGE_SZ = 50;
-let pubBusy   = false;
+var token = '', data = null, lastBuilt = null;
+var current = null, isNew = false, dirty = false, busy = false;
+var extraLabels = [], sourceMode = false;
 
-/* ───────── Utilities ───────── */
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+/* ── Utilitare ── */
+function utf8b64(str){var b=new TextEncoder().encode(str),s='';b.forEach(function(c){s+=String.fromCharCode(c);});return btoa(s);}
+function b64utf8(b64){var bin=atob(b64.replace(/\s/g,'')),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return new TextDecoder().decode(a);}
 
-function utf8b64(str) {
-  const bytes = new TextEncoder().encode(str);
-  let bin = '';
-  for (const b of bytes) bin += String.fromCharCode(b);
-  return btoa(bin);
+/* ── Status + progress ── */
+function status(msg, cls, prog){
+  $('status-text').textContent = msg || '';
+  $('status').className = cls || '';
+  $('prog-bar').hidden = prog === undefined;
+  if(prog !== undefined) $('prog-fill').style.width = prog + '%';
+}
+function setBusy(b){
+  busy = b;
+  ['b-save','b-del','b-import','b-rebuild','b-new'].forEach(function(id){var el=$(id);if(el)el.disabled=b;});
 }
 
-function b64utf8(b64) {
-  const bin = atob(b64.replace(/\s/g,''));
-  const bytes = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-  return new TextDecoder().decode(bytes);
-}
-
-/* ───────── Toast ───────── */
-function toast(msg, type = 'inf', dur = 4000) {
-  const c = document.getElementById('tc');
-  const el = document.createElement('div');
-  el.className = 'toast t-' + type;
-  el.textContent = msg;
-  c.appendChild(el);
-  setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, dur);
-}
-
-/* ───────── Progress ───────── */
-let _pb = null;
-function setProgress(pct) { if (_pb) _pb.style.width = pct + '%'; }
-
-/* ───────── GitHub API ───────── */
-async function ghFetch(method, path, body) {
-  const r = await fetch(API + path, {
-    method,
-    headers: {
-      Authorization: 'Bearer ' + token,
-      Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json'
-    },
+/* ── GitHub API ── */
+async function ghFetch(method, path, body){
+  var r = await fetch(API + path, {
+    method: method,
+    headers: {Authorization:'Bearer '+token, Accept:'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28', 'Content-Type':'application/json'},
     body: body != null ? JSON.stringify(body) : undefined
   });
-  if (!r.ok) {
-    let msg = r.statusText;
-    try { msg = (await r.json()).message || msg; } catch(e) {}
-    const err = new Error(msg);
-    err.status = r.status;
-    throw err;
-  }
-  return r.status === 204 ? null : r.json();
+  if(!r.ok){ var msg=r.statusText; try{msg=(await r.json()).message||msg;}catch(e){} var err=new Error(msg); err.status=r.status; throw err; }
+  return r.status===204 ? null : r.json();
 }
 
-async function getFile(path) {
-  // Try Contents API first (works for files ≤ 1 MB)
-  let sha, content;
-  try {
-    const d = await ghFetch('GET', `/repos/${REPO}/contents/${path}`);
+async function getFile(path){
+  var sha, content;
+  try{
+    var d = await ghFetch('GET', '/repos/'+REPO+'/contents/'+path);
     sha = d.sha;
-    if (d.content) { content = b64utf8(d.content); return { content, sha }; }
-  } catch(e) {
-    if (e.status !== 403 && e.status !== 422) throw e;
-  }
-  // Large file — get SHA from tree, then fetch blob
-  if (!sha) {
-    const ref = await ghFetch('GET', `/repos/${REPO}/git/ref/heads/main`);
-    const cm  = await ghFetch('GET', `/repos/${REPO}/git/commits/${ref.object.sha}`);
-    const tr  = await ghFetch('GET', `/repos/${REPO}/git/trees/${cm.tree.sha}?recursive=1`);
-    const item = tr.tree.find(i => i.path === path);
-    if (!item) throw new Error('Fișierul nu există în repo: ' + path);
+    if(d.content){ content = b64utf8(d.content); return {content:content, sha:sha}; }
+  }catch(e){ if(e.status!==403 && e.status!==422) throw e; }
+  if(!sha){
+    var ref = await ghFetch('GET','/repos/'+REPO+'/git/ref/heads/main');
+    var cm  = await ghFetch('GET','/repos/'+REPO+'/git/commits/'+ref.object.sha);
+    var tr  = await ghFetch('GET','/repos/'+REPO+'/git/trees/'+cm.tree.sha+'?recursive=1');
+    var item = tr.tree.find(function(i){return i.path===path;});
+    if(!item) throw new Error('Fișierul nu există: '+path);
     sha = item.sha;
   }
-  const blob = await ghFetch('GET', `/repos/${REPO}/git/blobs/${sha}`);
+  var blob = await ghFetch('GET','/repos/'+REPO+'/git/blobs/'+sha);
   content = b64utf8(blob.content);
-  return { content, sha };
+  return {content:content, sha:sha};
 }
 
-async function commitFiles(files, message) {
-  // files = { [repoPath]: string }
-  const paths = Object.keys(files);
-  if (!paths.length) return null;
-
-  const ref  = await ghFetch('GET', `/repos/${REPO}/git/ref/heads/main`);
-  const headSha = ref.object.sha;
-  const cm   = await ghFetch('GET', `/repos/${REPO}/git/commits/${headSha}`);
-  const treeSha = cm.tree.sha;
-
-  // Create blobs in batches of 8 parallel requests
-  const treeItems = [];
-  const BATCH = 8;
-  for (let i = 0; i < paths.length; i += BATCH) {
-    const batch = paths.slice(i, i + BATCH);
-    const results = await Promise.all(batch.map(async p => {
-      const blob = await ghFetch('POST', `/repos/${REPO}/git/blobs`, {
-        content: utf8b64(files[p]), encoding: 'base64'
-      });
-      return { path: p, mode: '100644', type: 'blob', sha: blob.sha };
+async function commitFiles(files, message, onProgress){
+  var paths = Object.keys(files);
+  if(!paths.length) return null;
+  var ref  = await ghFetch('GET','/repos/'+REPO+'/git/ref/heads/main');
+  var head = ref.object.sha;
+  var cm   = await ghFetch('GET','/repos/'+REPO+'/git/commits/'+head);
+  var items = [], BATCH = 8;
+  for(var i=0;i<paths.length;i+=BATCH){
+    var batch = paths.slice(i, i+BATCH);
+    var res = await Promise.all(batch.map(async function(p){
+      var blob = await ghFetch('POST','/repos/'+REPO+'/git/blobs',{content:utf8b64(files[p]),encoding:'base64'});
+      return {path:p, mode:'100644', type:'blob', sha:blob.sha};
     }));
-    treeItems.push(...results);
-    setProgress(10 + Math.round((i + batch.length) / paths.length * 70));
+    items = items.concat(res);
+    if(onProgress) onProgress(10 + Math.round((i+batch.length)/paths.length*70));
   }
-
-  const tree = await ghFetch('POST', `/repos/${REPO}/git/trees`, { base_tree: treeSha, tree: treeItems });
-  setProgress(85);
-
-  const newCm = await ghFetch('POST', `/repos/${REPO}/git/commits`, {
-    message,
-    tree: tree.sha,
-    parents: [headSha],
-    author: { ...GIT_AUTHOR, date: new Date().toISOString() }
-  });
-  setProgress(95);
-
-  await ghFetch('PATCH', `/repos/${REPO}/git/refs/heads/main`, { sha: newCm.sha });
-  setProgress(100);
+  var tree = await ghFetch('POST','/repos/'+REPO+'/git/trees',{base_tree:cm.tree.sha, tree:items});
+  if(onProgress) onProgress(85);
+  var newCm = await ghFetch('POST','/repos/'+REPO+'/git/commits',{message:message, tree:tree.sha, parents:[head], author:{...AUTHOR, date:new Date().toISOString()}});
+  if(onProgress) onProgress(95);
+  await ghFetch('PATCH','/repos/'+REPO+'/git/refs/heads/main',{sha:newCm.sha});
+  if(onProgress) onProgress(100);
   return newCm.sha;
 }
 
-/* ───────── Load data ───────── */
-async function loadSiteData() {
-  const { content } = await getFile(DPATH);
-  siteData = JSON.parse(content);
-  try { lastBuilt = LFE.build(siteData).files; } catch(e) { lastBuilt = {}; console.error(e); }
-}
+/* ── Publish ── */
+async function publish(what, slugsAffected){
+  setBusy(true);
+  try{
+    status('Se generează paginile…', '', 2);
+    var built = LFE.build(data);
+    status('Se calculează diferențele…', '', 8);
+    var toCommit = {[DPATH]: JSON.stringify(data)};
 
-/* ───────── Build + publish ───────── */
-// Paths to never overwrite — design files managed outside the admin panel
-const PROTECTED = /^assets\//;
-
-async function publish(newData, commitMsg, progressEl, changedSlugs) {
-  // changedSlugs: array of slugs affected (undefined = full rebuild for settings/import)
-  if (pubBusy) { toast('Se publică deja, așteaptă…', 'err'); throw new Error('busy'); }
-  pubBusy = true;
-  _pb = progressEl;
-  setProgress(2);
-
-  try {
-    const toCommit = { [DPATH]: JSON.stringify(newData, null, 2) };
-
-    if (changedSlugs !== undefined) {
-      // Targeted rebuild: only regenerate pages for the affected article(s)
-      // + index.html + label pages for those articles + group pages
-      const built = LFE.build(newData);
-      setProgress(8);
-
-      const affectedPaths = new Set();
-      affectedPaths.add('index.html');
-      if (built.files['despre.html']) affectedPaths.add('despre.html');
-
-      // Pages for affected slugs
-      changedSlugs.forEach(slug => {
-        affectedPaths.add('articole/' + slug + '.html');
+    if(slugsAffected){
+      // Targeted: only regenerate pages for affected slugs + index + all label/group pages
+      Object.keys(built.files).forEach(function(p){
+        if(PROTECTED.test(p)) return;
+        var isArticle = p.startsWith('articole/');
+        var slug = isArticle ? p.replace('articole/','').replace('.html','') : null;
+        if(isArticle && !slugsAffected.includes(slug)) return;
+        if((lastBuilt||{})[p] !== built.files[p]) toCommit[p] = built.files[p];
       });
-
-      // Label and group pages for affected articles
-      const affected = newData.posts.filter(p => changedSlugs.includes(p.slug));
-      const allLabels = new Set(affected.flatMap(p => p.labels || []));
-      // Also include old labels (from previous version) — stored in lastBuilt keys
-      for (const path of Object.keys(lastBuilt || {})) {
-        if (path.endsWith('.html') && !path.startsWith('articole/') && path !== 'index.html' && path !== 'despre.html') {
-          // label/group pages: include if related to affected labels
-          // We include all label/group pages to be safe (they're small)
-          affectedPaths.add(path);
-        }
-      }
-
-      for (const [p, c] of Object.entries(built.files)) {
-        if (PROTECTED.test(p)) continue;
-        if (affectedPaths.has(p) && (lastBuilt || {})[p] !== c) {
-          toCommit[p] = c;
-        }
-      }
-
-      siteData  = newData;
-      lastBuilt = built.files;
     } else {
-      // Full rebuild (import / settings) — diff-based, skip unchanged + protected
-      const built = LFE.build(newData);
-      setProgress(8);
-      for (const [p, c] of Object.entries(built.files)) {
-        if (PROTECTED.test(p)) continue;
-        if ((lastBuilt || {})[p] !== c) toCommit[p] = c;
-      }
-      siteData  = newData;
-      lastBuilt = built.files;
-    }
-
-    const n = Object.keys(toCommit).length;
-    const sha = await commitFiles(toCommit, commitMsg);
-    return { sha, n };
-  } finally {
-    pubBusy = false;
-    _pb = null;
-  }
-}
-
-/* ───────── HTML Sanitizer ───────── */
-function sanitize(html) {
-  const KEEP = new Set(['p','br','strong','em','b','i','u','s','del','mark',
-    'h1','h2','h3','h4','h5','h6','ul','ol','li',
-    'blockquote','pre','code','kbd','samp','var',
-    'a','img','figure','figcaption',
-    'table','thead','tbody','tfoot','tr','th','td',
-    'hr','div','span','details','summary','aside','section','article']);
-  const CUSTOM = ['response-element','source-footnote','elicitations','gem-icon','mat-icon',
-    'google-sheets-html-origin','annotation','thinking-block','search-suggestion',
-    'search-result-block','message-turn','model-response'];
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-
-  CUSTOM.forEach(tag => doc.querySelectorAll(tag).forEach(el => {
-    const p = el.parentNode; if (!p) return;
-    while (el.firstChild) p.insertBefore(el.firstChild, el);
-    el.remove();
-  }));
-  doc.querySelectorAll('script,style,iframe,link,meta,object,embed,noscript').forEach(el => el.remove());
-
-  function cleanNode(node) {
-    if (node.nodeType !== 1) return;
-    for (const a of [...node.attributes]) {
-      const n = a.name.toLowerCase();
-      if (n === 'style' || n.startsWith('on')) { node.removeAttribute(a.name); continue; }
-      if (n === 'class' && node.tagName !== 'PRE' && node.tagName !== 'CODE') { node.removeAttribute('class'); continue; }
-      if (n === 'href' && a.value.trim().toLowerCase().startsWith('javascript')) { node.removeAttribute('href'); continue; }
-    }
-    const tag = node.tagName.toLowerCase();
-    if (!KEEP.has(tag)) {
-      const p = node.parentNode;
-      if (p) { while (node.firstChild) p.insertBefore(node.firstChild, node); node.remove(); return; }
-    }
-    for (const c of [...node.childNodes]) cleanNode(c);
-  }
-  for (const c of [...doc.body.childNodes]) cleanNode(c);
-  doc.querySelectorAll('p').forEach(p => { if (!p.innerHTML.replace(/&nbsp;|\s/g,'').trim()) p.remove(); });
-  return doc.body.innerHTML.trim();
-}
-
-/* ───────── Article list ───────── */
-function getAllLabels() {
-  const s = new Set();
-  (siteData.posts||[]).forEach(p => (p.labels||[]).forEach(l => s.add(l)));
-  (siteData.groups||[]).forEach(g => (g.labels||[]).forEach(l => s.add(l)));
-  return [...s].sort((a,b) => a.localeCompare(b,'ro'));
-}
-
-function getFiltered() {
-  let posts = (siteData.posts||[]).filter(p => !p.page);
-  if (fltrLbl) posts = posts.filter(p => (p.labels||[]).includes(fltrLbl));
-  if (srchQ) {
-    const q = srchQ.toLowerCase();
-    posts = posts.filter(p => (p.title||'').toLowerCase().includes(q) || (p.slug||'').toLowerCase().includes(q));
-  }
-  return posts.sort((a,b) => new Date(b.published) - new Date(a.published));
-}
-
-function renderList() {
-  const posts = getFiltered();
-  const allPosts = (siteData.posts||[]).filter(p => !p.page);
-
-  document.getElementById('st-tot').textContent = allPosts.length;
-  document.getElementById('st-lbl').textContent = getAllLabels().length;
-  document.getElementById('st-ed').textContent  = allPosts.filter(p => p.edited).length;
-
-  // Label filter options
-  const sel = document.getElementById('flbl');
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">Toate etichetele</option>';
-  getAllLabels().forEach(l => {
-    const o = document.createElement('option');
-    o.value = l; o.textContent = l;
-    if (l === cur) o.selected = true;
-    sel.appendChild(o);
-  });
-
-  const list = document.getElementById('alist');
-  list.innerHTML = '';
-  const page = posts.slice(curPage * PAGE_SZ, (curPage + 1) * PAGE_SZ);
-
-  if (!page.length) {
-    list.innerHTML = '<p style="color:var(--muted);padding:20px;text-align:center">Niciun articol găsit.</p>';
-  } else {
-    page.forEach(p => {
-      const row = document.createElement('div');
-      row.className = 'ar';
-      const lbs = (p.labels||[]).slice(0,3).map(l => `<span class="chip">${esc(l)}</span>`).join('');
-      const badge = p.edited ? '<span class="chip" style="background:var(--acc);color:#fff;border-color:var(--acc)">editat</span>' : '';
-      row.innerHTML = `
-        <div class="tit" data-slug="${esc(p.slug)}" title="${esc(p.title)}">${esc(p.title)}</div>
-        <div class="dt">${(p.published||'').slice(0,10)}</div>
-        <div class="lbs">${lbs}${badge}</div>
-        <div class="acts">
-          <button class="btn btn-s btn-sm" data-action="edit" data-slug="${esc(p.slug)}" title="Editează">✏</button>
-          <button class="btn btn-d btn-sm" data-action="del"  data-slug="${esc(p.slug)}" title="Șterge">🗑</button>
-        </div>`;
-      list.appendChild(row);
-    });
-  }
-
-  // Pagination
-  const pages = Math.ceil(posts.length / PAGE_SZ);
-  const pag = document.getElementById('pag');
-  pag.innerHTML = '';
-  if (pages > 1) {
-    for (let i = 0; i < pages; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i + 1;
-      if (i === curPage) btn.classList.add('on');
-      btn.addEventListener('click', () => { curPage = i; renderList(); });
-      pag.appendChild(btn);
-    }
-  }
-
-  document.getElementById('sbfoot').innerHTML =
-    `<div>${allPosts.length} articole · ${getAllLabels().length} etichete</div>
-     <div style="margin-top:4px"><a href="https://linuxforeducation.github.io" target="_blank">↗ Vezi site-ul</a></div>`;
-}
-
-/* ───────── Editor ───────── */
-function openEditor(slug) {
-  editSlug = slug || null;
-  const post = slug ? (siteData.posts||[]).find(p => p.slug === slug) : null;
-
-  document.getElementById('etitle').textContent = post ? 'Editează articol' : 'Articol nou';
-  document.getElementById('btn-del').hidden = !post;
-
-  document.getElementById('f-title').value = post ? post.title : '';
-  delete document.getElementById('f-slug').dataset.manual;
-  document.getElementById('f-slug').value = post ? post.slug : '';
-
-  if (post && post.published) {
-    const d = new Date(post.published);
-    document.getElementById('f-date').value = new Date(d - d.getTimezoneOffset()*60000).toISOString().slice(0,16);
-  } else {
-    const n = new Date();
-    document.getElementById('f-date').value = new Date(n - n.getTimezoneOffset()*60000).toISOString().slice(0,16);
-  }
-
-  _pickedLabels = post ? [...(post.labels||[])] : [];
-
-  const html = post ? (post.html||'') : '';
-  document.getElementById('ec').innerHTML = html;
-  document.getElementById('esrc').value = html;
-  document.getElementById('esrc').hidden = true;
-  document.getElementById('ec').hidden = false;
-  document.getElementById('btn-src').textContent = '◧ HTML';
-  document.getElementById('est').textContent = '';
-  document.getElementById('eprog').hidden = true;
-
-  document.getElementById('eov').hidden = false;
-  // Render labels AFTER overlay is visible so DOM is active
-  setTimeout(() => {
-    _syncLabelPicker();
-    document.getElementById('f-title').focus();
-  }, 0);
-}
-
-function closeEditor() {
-  document.getElementById('eov').hidden = true;
-  editSlug = null;
-}
-
-let _pickedLabels = [];
-
-function renderLabelCbs(selected) {
-  _pickedLabels = [...selected];
-  _syncLabelPicker();
-}
-
-function _syncLabelPicker() {
-  const container = document.getElementById('lp-all');
-  if (!container) return;
-  container.innerHTML = '';
-
-  const all = getAllLabels();
-  const extra = _pickedLabels.filter(l => !all.includes(l));
-  const display = [...all, ...extra];
-
-  if (!display.length) {
-    container.innerHTML = '<span style="color:var(--muted);font-size:13px">Nicio etichetă disponibilă încă.</span>';
-  }
-
-  display.forEach(l => {
-    const pill = document.createElement('span');
-    pill.className = 'lp-pill' + (_pickedLabels.includes(l) ? ' on' : '');
-    pill.textContent = l;
-    pill.addEventListener('click', () => {
-      if (_pickedLabels.includes(l)) {
-        _pickedLabels = _pickedLabels.filter(x => x !== l);
-      } else {
-        _pickedLabels.push(l);
-      }
-      _syncLabelPicker();
-    });
-    container.appendChild(pill);
-  });
-
-  const cnt = document.getElementById('lp-count');
-  if (cnt) cnt.textContent = _pickedLabels.length ? `(${_pickedLabels.length} selectate)` : '';
-}
-
-function getCheckedLabels() {
-  return [..._pickedLabels];
-}
-
-function getEditorHtml() {
-  const src  = document.getElementById('esrc');
-  const rich = document.getElementById('ec');
-  return src.hidden ? rich.innerHTML : src.value;
-}
-
-/* ───────── Save + Publish ───────── */
-async function saveAndPublish() {
-  if (pubBusy) return;
-  const btn  = document.getElementById('btn-pub');
-  const stat = document.getElementById('est');
-  const prog = document.getElementById('eprog');
-  const pb   = document.getElementById('epb');
-
-  const title = document.getElementById('f-title').value.trim();
-  if (!title) { toast('Titlul este obligatoriu.', 'err'); return; }
-
-  btn.disabled = true;
-  stat.textContent = 'Se construiește…';
-  prog.hidden = false;
-  pb.style.width = '0%';
-
-  try {
-    const dateVal   = document.getElementById('f-date').value;
-    const published = dateVal ? new Date(dateVal).toISOString() : new Date().toISOString();
-    const labels    = getCheckedLabels();
-    const rawHtml   = getEditorHtml();
-    const html      = sanitize(rawHtml);
-    let   slugVal   = document.getElementById('f-slug').value.trim();
-
-    const newData = JSON.parse(JSON.stringify(siteData));
-
-    if (editSlug) {
-      const idx = newData.posts.findIndex(p => p.slug === editSlug);
-      if (idx === -1) throw new Error('Articolul nu a fost găsit.');
-      newData.posts[idx] = { ...newData.posts[idx], title, published, labels, html, slug: slugVal || editSlug, edited: true };
-    } else {
-      const datePart = published.slice(0,10);
-      if (!slugVal) slugVal = datePart + '-' + LFE.slugify(title);
-      const slugSet = new Set((newData.posts||[]).map(p => p.slug));
-      let finalSlug = slugVal; let n = 2;
-      while (slugSet.has(finalSlug)) finalSlug = slugVal + '-' + (n++);
-      newData.posts = [...(newData.posts||[]), {
-        id: 'local-' + Date.now(), bid: null, slug: finalSlug,
-        title, published, labels, html, url: '', edited: true
-      }];
-    }
-
-    const t0 = title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim() || title;
-    const msg = (editSlug ? 'Actualizează: ' : 'Adaugă: ') + t0 +
-      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01XVjnnWfxL1eNtNSq5DnKUQ';
-
-    stat.textContent = 'Se publică…';
-    const finalSlug = editSlug || newData.posts[newData.posts.length - 1].slug;
-    const { sha, n } = await publish(newData, msg, pb, [finalSlug]);
-
-    toast(`✅ Publicat! ${n} fișiere · ${sha.slice(0,7)}`, 'ok');
-    closeEditor();
-    renderList();
-  } catch(e) {
-    if (e.message !== 'busy') {
-      toast('Eroare: ' + e.message, 'err', 7000);
-      stat.textContent = '⚠ ' + e.message;
-      console.error(e);
-    }
-  } finally {
-    btn.disabled = false;
-    prog.hidden = true;
-  }
-}
-
-/* ───────── Delete ───────── */
-async function deletePost(slug) {
-  const post = (siteData.posts||[]).find(p => p.slug === slug);
-  if (!post) return;
-  if (!confirm(`Ștergi articolul "${post.title}"?\n\nVa fi eliminat din site și adăugat în lista de excluse (nu va fi reimportat din blog).`)) return;
-
-  const newData = JSON.parse(JSON.stringify(siteData));
-  newData.posts = newData.posts.filter(p => p.slug !== slug);
-  if (post.bid) newData.deleted = [...(newData.deleted||[]), post.bid];
-
-  const t0 = post.title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim() || post.title;
-  try {
-    // Use temp progress
-    const { sha, n } = await publish(newData, 'Șterge: ' + t0 +
-      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null, [slug]);
-    toast(`🗑 Șters și publicat · ${sha.slice(0,7)}`, 'ok');
-    closeEditor();
-    renderList();
-  } catch(e) {
-    toast('Eroare la ștergere: ' + e.message, 'err', 7000);
-  }
-}
-
-/* ───────── Toolbar ───────── */
-function initToolbar() {
-  document.getElementById('tb').addEventListener('click', e => {
-    const btn = e.target.closest('[data-cmd]');
-    if (!btn) return;
-    const ec = document.getElementById('ec');
-    ec.focus();
-    switch (btn.dataset.cmd) {
-      case 'bold':  document.execCommand('bold'); break;
-      case 'italic':document.execCommand('italic'); break;
-      case 'h2':    document.execCommand('formatBlock', false, 'h2'); break;
-      case 'h3':    document.execCommand('formatBlock', false, 'h3'); break;
-      case 'ul':    document.execCommand('insertUnorderedList'); break;
-      case 'ol':    document.execCommand('insertOrderedList'); break;
-      case 'quote': document.execCommand('formatBlock', false, 'blockquote'); break;
-      case 'code': {
-        const sel = window.getSelection();
-        if (sel && !sel.isCollapsed) {
-          document.execCommand('insertHTML', false, '<code>' + sel.toString().replace(/</g,'&lt;') + '</code>');
-        } else {
-          document.execCommand('insertHTML', false, '<pre><code>cod...</code></pre>');
-        }
-        break;
-      }
-      case 'link': {
-        const url = prompt('URL link:');
-        if (url) document.execCommand('createLink', false, url);
-        break;
-      }
-      case 'img': {
-        const url = prompt('URL imagine (gol = upload fișier):');
-        if (url) {
-          document.execCommand('insertHTML', false, `<img src="${url.replace(/"/g,'&quot;')}" alt="">`);
-        } else {
-          const inp = document.createElement('input');
-          inp.type = 'file'; inp.accept = 'image/*';
-          inp.onchange = () => {
-            const file = inp.files[0]; if (!file) return;
-            const fr = new FileReader();
-            fr.onload = ev => document.execCommand('insertHTML', false,
-              `<img src="${ev.target.result.replace(/"/g,'&quot;')}" alt="${esc(file.name)}">`);
-            fr.readAsDataURL(file);
-          };
-          inp.click();
-        }
-        break;
-      }
-      case 'clr': document.execCommand('removeFormat'); break;
-    }
-  });
-
-  document.getElementById('btn-src').addEventListener('click', () => {
-    const ec  = document.getElementById('ec');
-    const src = document.getElementById('esrc');
-    const btn = document.getElementById('btn-src');
-    if (src.hidden) {
-      src.value = ec.innerHTML; src.hidden = false; ec.hidden = true; btn.textContent = '◩ Vizual';
-    } else {
-      ec.innerHTML = src.value; ec.hidden = false; src.hidden = true; btn.textContent = '◧ HTML';
-    }
-  });
-}
-
-/* ───────── Import from Blogger ───────── */
-function startImport() {
-  const log  = document.getElementById('ilog');
-  const btn  = document.getElementById('btn-imp');
-  log.innerHTML = ''; log.hidden = false;
-  btn.disabled  = true;
-
-  let page = 0, newCnt = 0, updCnt = 0, skipCnt = 0;
-  const newData   = JSON.parse(JSON.stringify(siteData));
-  const deleted   = new Set(newData.deleted || []);
-  const byBid     = new Map((newData.posts||[]).filter(p => p.bid).map(p => [p.bid, p]));
-  const bySlug    = new Set((newData.posts||[]).map(p => p.slug));
-
-  function addLog(msg, color) {
-    const p = document.createElement('p');
-    p.textContent = msg;
-    if (color) p.style.color = color;
-    log.appendChild(p);
-    log.scrollTop = log.scrollHeight;
-  }
-
-  function fetchPage() {
-    const startIdx = page * 25 + 1;
-    const url = `https://linuxforeducation.blogspot.com/feeds/posts/default?alt=json&max-results=25&start-index=${startIdx}&orderby=published`;
-    const cbName = '_lfe_imp_' + Date.now();
-
-    const timer = setTimeout(() => {
-      delete window[cbName];
-      addLog('Eroare: timeout la pagina ' + (page + 1), 'var(--red)');
-      finalize();
-    }, 15000);
-
-    window[cbName] = function(feed) {
-      clearTimeout(timer);
-      delete window[cbName];
-      const entries = (feed.feed && feed.feed.entry) || [];
-      addLog(`Pagina ${page + 1}: ${entries.length} articole`);
-      if (!entries.length) { finalize(); return; }
-
-      entries.forEach(entry => {
-        const bid = entry.id.$t.split('.post-').pop() || entry.id.$t;
-        if (deleted.has(bid)) { skipCnt++; return; }
-
-        const title     = entry.title.$t;
-        const published = entry.published.$t;
-        const labels    = (entry.category || []).map(c => c.term);
-        const url       = ((entry.link || []).find(l => l.rel === 'alternate') || {}).href || '';
-        const rawHtml   = (entry.content ? entry.content.$t : entry.summary ? entry.summary.$t : '') || '';
-        const html      = sanitize(rawHtml);
-
-        if (byBid.has(bid)) {
-          const ex = byBid.get(bid);
-          if (ex.edited) { skipCnt++; return; }
-          ex.title = title; ex.published = published; ex.labels = labels; ex.html = html; ex.url = url;
-          updCnt++;
-        } else {
-          const dp = published.slice(0,10);
-          let slug = dp + '-' + LFE.slugify(title);
-          let n = 2; while (bySlug.has(slug)) slug = dp + '-' + LFE.slugify(title) + '-' + (n++);
-          bySlug.add(slug);
-          const np = { id: 'blog-' + bid, bid, slug, title, published, labels, html, url };
-          newData.posts.push(np);
-          byBid.set(bid, np);
-          newCnt++;
-        }
+      Object.keys(built.files).forEach(function(p){
+        if(PROTECTED.test(p)) return;
+        if((lastBuilt||{})[p] !== built.files[p]) toCommit[p] = built.files[p];
       });
+    }
 
-      if (entries.length < 25) finalize(); else { page++; setTimeout(fetchPage, 400); }
-    };
+    var n = Object.keys(toCommit).length;
+    status('Se publică ' + n + ' fișiere…', '', 10);
+    var sha = await commitFiles(toCommit, (what||'Actualizare site') +
+      '\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01XVjnnWfxL1eNtNSq5DnKUQ',
+      function(p){ status('Se publică… '+p+'%', '', p); });
 
-    const sc = document.createElement('script');
-    sc.src = url + '&callback=' + cbName;
-    sc.onerror = () => { clearTimeout(timer); delete window[cbName]; addLog('Eroare JSONP la pagina ' + (page + 1), 'var(--red)'); finalize(); };
-    document.head.appendChild(sc);
-    setTimeout(() => { try { sc.remove(); } catch(e) {} }, 20000);
+    lastBuilt = built.files;
+    renderFilters(); renderList();
+    status((what ? what + ' — ' : '') + n + ' ' + (n===1?'fișier publicat':'fișiere publicate') + ' · ' + sha.slice(0,7), 'ok');
+    return {sha:sha, n:n};
+  }catch(e){ status('Eroare la publicare: '+e.message, 'err'); throw e; }
+  finally{ setBusy(false); }
+}
+$('b-rebuild').onclick = function(){ if(!busy) publish('Site regenerat complet'); };
+
+/* ── Sanitizer ── */
+var VOID={br:1,hr:1,img:1,input:1,meta:1,link:1,source:1,wbr:1,col:1};
+var DROP={script:1,style:1,button:1,svg:1,'mat-icon':1,'gem-icon':1,'gem-icon-button':1,'sources-carousel-inline':1,'source-inline-chip':1,'source-footnote':1,elicitations:1,'follow-up':1,'sider-code-explain':1,iframe:1,noscript:1,form:1,object:1,textarea:1,select:1,template:1};
+var KEEP={p:1,h2:1,h3:1,h4:1,h5:1,h6:1,ul:1,ol:1,li:1,b:1,strong:1,i:1,em:1,u:1,table:1,thead:1,tbody:1,tr:1,td:1,th:1,pre:1,code:1,blockquote:1,sup:1,sub:1,figure:1,figcaption:1,div:1,a:1};
+function escT(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function blogMap(){var m={};data.posts.forEach(function(p){if(p.url)m[p.url.replace(/^https?:\/\//,'')]=p.page==='despre'?'despre.html':'articole/'+p.slug+'.html';});return m;}
+function sanitize(raw){
+  var map=blogMap(),blogHost=(data.blog||'').replace(/^https?:\/\//,'').replace(/\/$/,'');
+  var doc=new DOMParser().parseFromString('<!doctype html><body>'+raw,'text/html'),out=[];
+  function localHref(href){
+    var m=/^\.\.\/((?:articole\/)?[\w.-]+\.html(?:#[\w.-]*)?)$/.exec(href);
+    if(m)return LFE.TOKEN+m[1];
+    m=/^https?:\/\/([^?#]*)/.exec(href);
+    if(m&&blogHost){if(map[m[1]])return LFE.TOKEN+map[m[1]];if(m[1].replace(/\/$/,''===blogHost))return LFE.TOKEN+'index.html';}
+    return null;
   }
-
-  async function finalize() {
-    addLog(`Import terminat: ${newCnt} noi, ${updCnt} actualizate, ${skipCnt} sărite.`, 'var(--acc2)');
-    if (newCnt + updCnt > 0) {
-      addLog('Se publică pe GitHub…', 'var(--muted)');
-      try {
-        const { sha, n } = await publish(newData,
-          `Import Blogger: +${newCnt} noi, ~${updCnt} actualizate\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`, null);
-        addLog(`✅ Publicat! ${n} fișiere · ${sha.slice(0,7)}`, 'var(--acc2)');
-        renderList();
-        toast(`Import publicat: ${newCnt} articole noi!`, 'ok');
-      } catch(e) {
-        addLog('Eroare publicare: ' + e.message, 'var(--red)');
-        toast('Eroare la publicare: ' + e.message, 'err', 8000);
+  function walk(node,pre){
+    node.childNodes.forEach(function(c){
+      if(c.nodeType===3){out.push(escT(pre?c.data:c.data.replace(/ /g,' ')));return;}
+      if(c.nodeType!==1)return;
+      var tag=c.localName,cls=c.classList;
+      if(tag==='br'){out.push('<br>');return;}
+      if(tag==='hr'){out.push('<hr>');return;}
+      if(tag==='img'){
+        var src=c.getAttribute('src')||'',m=/^\.\.\/(imagini\/[^"<>?#]+)$/.exec(src);
+        if(m)src=LFE.TOKEN+m[1];else if(!/^https?:\/\//.test(src))return;
+        out.push('<img src="'+LFE.esc(src)+'" alt="'+LFE.esc(c.getAttribute('alt')||'')+'" loading="lazy" decoding="async">');return;
       }
-    }
-    btn.disabled = false;
-  }
-
-  fetchPage();
-}
-
-/* ───────── Settings ───────── */
-function renderSettings() {
-  // Social links
-  const sl = document.getElementById('soclist');
-  sl.innerHTML = '';
-  (siteData.social || []).forEach((s, i) => {
-    const row = document.createElement('div');
-    row.className = 'sr';
-    row.innerHTML = `
-      <input class="fc" type="text" placeholder="Nume (ex: Facebook)" value="${esc(s.name)}" data-si="${i}" data-sf="name" style="flex:1">
-      <input class="fc" type="text" placeholder="https://…" value="${esc(s.url)}" data-si="${i}" data-sf="url" style="flex:2">
-      <button class="btn btn-d btn-sm" data-rmsoc="${i}">✕</button>`;
-    sl.appendChild(row);
-  });
-
-  // Groups
-  const gl = document.getElementById('grplist');
-  gl.innerHTML = '';
-  (siteData.groups || []).forEach((g, gi) => {
-    const card = document.createElement('div');
-    card.className = 'gc';
-    card.innerHTML = `
-      <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
-        <input class="fc" type="text" placeholder="Nume grup (ex: Tutoriale)" value="${esc(g.name)}" data-gi="${gi}" data-gf="name" style="flex:1">
-        <button class="btn btn-d btn-sm" data-rmgrp="${gi}">✕ Grup</button>
-      </div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:5px">Etichete (una per rând):</div>
-      <textarea class="fc" data-gi="${gi}" data-gf="labels" style="min-height:70px;font-size:13px">${esc((g.labels||[]).join('\n'))}</textarea>`;
-    gl.appendChild(card);
-  });
-}
-
-function collectSettings() {
-  const nd = JSON.parse(JSON.stringify(siteData));
-  const socMap = {};
-  document.querySelectorAll('[data-si]').forEach(inp => {
-    const i = inp.dataset.si;
-    if (!socMap[i]) socMap[i] = {};
-    socMap[i][inp.dataset.sf] = inp.value;
-  });
-  nd.social = Object.values(socMap).filter(s => s.name && s.url);
-
-  const groups = [];
-  document.querySelectorAll('[data-gf="name"]').forEach(inp => {
-    const name = inp.value.trim(); if (!name) return;
-    const labEls = document.querySelectorAll(`[data-gi="${inp.dataset.gi}"][data-gf="labels"]`);
-    const labels = labEls.length ? labEls[0].value.split('\n').map(l => l.trim()).filter(Boolean) : [];
-    groups.push({ name, labels });
-  });
-  nd.groups = groups;
-  return nd;
-}
-
-/* ───────── Init ───────── */
-function init() {
-  /* ── Login ── */
-  const lbtn = document.getElementById('lbtn');
-  const lerr  = document.getElementById('lerr');
-
-  async function doLogin(t) {
-    if (!t) return;
-    lbtn.disabled = true; lbtn.textContent = 'Se verifică…'; lerr.style.display = 'none';
-    token = t;
-    try {
-      await ghFetch('GET', '/repos/' + REPO);  // verify access
-      sessionStorage.setItem('gh_token', t);
-      await loadSiteData();
-      document.getElementById('login-screen').hidden = true;
-      document.getElementById('admin-ui').hidden = false;
-      renderList();
-    } catch(e) {
-      token = '';
-      lerr.textContent = e.status === 401 ? 'Token invalid sau fără drepturi.' : 'Eroare: ' + e.message;
-      lerr.style.display = 'block';
-    } finally {
-      lbtn.disabled = false; lbtn.textContent = 'Conectează';
-    }
-  }
-
-  lbtn.addEventListener('click', () => doLogin(document.getElementById('tok').value.trim()));
-  document.getElementById('tok').addEventListener('keydown', e => { if (e.key === 'Enter') lbtn.click(); });
-
-  const saved = sessionStorage.getItem('gh_token');
-  if (saved) { document.getElementById('tok').value = saved; doLogin(saved); }
-
-  /* ── Navigation ── */
-  document.querySelectorAll('[data-view]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelectorAll('[data-view]').forEach(x => x.classList.remove('on'));
-      a.classList.add('on');
-      document.querySelectorAll('.view').forEach(v => v.hidden = true);
-      document.getElementById('view-' + a.dataset.view).hidden = false;
-      if (a.dataset.view === 'settings') renderSettings();
-      if (a.dataset.view === 'list') renderList();
+      if(VOID[tag]||DROP[tag]||(tag==='div'&&cls.contains('toolbar'))||(tag==='a'&&cls.contains('td-heading-self-link')))return;
+      if(tag==='h1')tag='h2';
+      var close='';
+      if(KEEP[tag]){
+        if(tag==='a'){
+          var href=(c.getAttribute('href')||'').trim(),loc=localHref(href);
+          if(loc){out.push('<a href="'+LFE.esc(loc)+'">');close='</a>';}
+          else if(/^(https?:\/\/|mailto:)/.test(href)){out.push('<a href="'+LFE.esc(href)+'" target="_blank" rel="noopener noreferrer">');close='</a>';}
+        }else if(tag==='table'){out.push('<div class="tw"><table>');close='</table></div>';}
+        else if(tag==='td'||tag==='th'){
+          var ex='';['colspan','rowspan'].forEach(function(k){var v=c.getAttribute(k);if(v&&/^\d+$/.test(v))ex+=' '+k+'="'+(+v)+'"';});
+          out.push('<'+tag+ex+'>');close='</'+tag+'>';
+        }else{out.push('<'+tag+'>');close='</'+tag+'>';}
+      }
+      walk(c,pre||tag==='pre');
+      if(close)out.push(close);
     });
-  });
-
-  /* ── List controls ── */
-  let srchTimer;
-  document.getElementById('srch').addEventListener('input', e => {
-    clearTimeout(srchTimer);
-    srchTimer = setTimeout(() => { srchQ = e.target.value; curPage = 0; renderList(); }, 250);
-  });
-  document.getElementById('flbl').addEventListener('change', e => { fltrLbl = e.target.value; curPage = 0; renderList(); });
-  document.getElementById('btn-new').addEventListener('click', () => openEditor(null));
-
-  document.getElementById('alist').addEventListener('click', e => {
-    const btn = e.target.closest('[data-action]');
-    if (!btn) return;
-    if (btn.dataset.action === 'edit') openEditor(btn.dataset.slug);
-    if (btn.dataset.action === 'del')  deletePost(btn.dataset.slug);
-    const tit = e.target.closest('.tit');
-    if (tit) openEditor(tit.dataset.slug);
-  });
-  document.getElementById('alist').addEventListener('click', e => {
-    const tit = e.target.closest('.tit');
-    if (tit && !e.target.closest('[data-action]')) openEditor(tit.dataset.slug);
-  });
-
-  /* ── Editor controls ── */
-  document.getElementById('eclose').addEventListener('click', closeEditor);
-  document.getElementById('ecancel').addEventListener('click', closeEditor);
-  document.getElementById('btn-pub').addEventListener('click', saveAndPublish);
-  document.getElementById('btn-del').addEventListener('click', () => { if (editSlug) deletePost(editSlug); });
-  document.getElementById('eov').addEventListener('click', e => { if (e.target === document.getElementById('eov')) closeEditor(); });
-
-  document.getElementById('f-title').addEventListener('input', e => {
-    const sf = document.getElementById('f-slug');
-    if (!sf.dataset.manual) {
-      const dp = (document.getElementById('f-date').value || '').slice(0,10) || new Date().toISOString().slice(0,10);
-      sf.value = dp + '-' + LFE.slugify(e.target.value);
-    }
-  });
-  document.getElementById('f-slug').addEventListener('input', e => {
-    e.target.dataset.manual = e.target.value ? '1' : '';
-  });
-  document.getElementById('btn-addlbl').addEventListener('click', () => {
-    const inp = document.getElementById('lp-new');
-    const lbl = inp.value.trim(); if (!lbl) return;
-    if (!_pickedLabels.includes(lbl)) { _pickedLabels.push(lbl); _syncLabelPicker(); }
-    inp.value = '';
-  });
-  document.getElementById('lp-new').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-addlbl').click(); } });
-
-  initToolbar();
-
-  /* ── Import ── */
-  document.getElementById('btn-imp').addEventListener('click', startImport);
-
-  /* ── Settings ── */
-  document.getElementById('btn-saveset').addEventListener('click', async () => {
-    const btn = document.getElementById('btn-saveset');
-    const st  = document.getElementById('setst');
-    btn.disabled = true; st.textContent = 'Se publică…';
-    try {
-      const nd = collectSettings();
-      const { sha, n } = await publish(nd,
-        'Actualizează setările site-ului\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>', null);
-      st.textContent = `✅ Salvat · ${sha.slice(0,7)}`;
-      renderList();
-      toast('Setările au fost salvate și publicate.', 'ok');
-    } catch(e) {
-      st.textContent = '⚠ ' + e.message;
-      toast('Eroare: ' + e.message, 'err', 7000);
-    } finally {
-      btn.disabled = false;
-    }
-  });
-
-  document.getElementById('btn-addsoc').addEventListener('click', () => {
-    const sl = document.getElementById('soclist');
-    const i  = sl.children.length;
-    const row = document.createElement('div'); row.className = 'sr';
-    row.innerHTML = `<input class="fc" type="text" placeholder="Nume" data-si="${i}" data-sf="name" style="flex:1">
-      <input class="fc" type="text" placeholder="https://…" data-si="${i}" data-sf="url" style="flex:2">
-      <button class="btn btn-d btn-sm" data-rmsoc="${i}">✕</button>`;
-    sl.appendChild(row);
-  });
-  document.getElementById('soclist').addEventListener('click', e => {
-    if (e.target.closest('[data-rmsoc]')) e.target.closest('.sr').remove();
-  });
-
-  document.getElementById('btn-addgrp').addEventListener('click', () => {
-    const gl = document.getElementById('grplist');
-    const i  = Date.now();
-    const c  = document.createElement('div'); c.className = 'gc';
-    c.innerHTML = `<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
-      <input class="fc" type="text" placeholder="Nume grup" data-gi="${i}" data-gf="name" style="flex:1">
-      <button class="btn btn-d btn-sm" data-rmgrp="${i}">✕ Grup</button></div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:5px">Etichete (una per rând):</div>
-      <textarea class="fc" data-gi="${i}" data-gf="labels" style="min-height:70px;font-size:13px" placeholder="o etichetă per rând…"></textarea>`;
-    gl.appendChild(c);
-  });
-  document.getElementById('grplist').addEventListener('click', e => {
-    if (e.target.closest('[data-rmgrp]')) e.target.closest('.gc').remove();
-  });
+  }
+  walk(doc.body,false);
+  var h=out.join('').replace(/<p>(?:\s|<br>)*<\/p>/g,''),EMPTY=/<(p|div|b|strong|i|em|u|a|h[2-6]|li|ul|ol|blockquote|code|sup|sub|figure|figcaption)(?: [^>]*)?>\s*<\/\1>/g;
+  for(var i=0;i<10;i++){var nn=h.replace(EMPTY,'');if(nn===h)break;h=nn;}
+  return h.replace(/(?:<br>\s*){3,}/g,'<br><br>').replace(/^(?:\s|<br>)+/,'').trim();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+/* ── Lista articole ── */
+function allLabels(){
+  var c={};
+  (data.groups||[]).forEach(function(g){(g.labels||[]).forEach(function(l){c[l]=0;});});
+  data.posts.forEach(function(p){if(!p.page)(p.labels||[]).forEach(function(l){c[l]=(c[l]||0)+1;});});
+  return Object.keys(c).sort(function(a,b){return c[b]-c[a]||a.localeCompare(b,'ro');}).map(function(l){return{name:l,count:c[l]};});
+}
+function renderFilters(){
+  var sel=$('flabel'),v=sel.value;
+  sel.innerHTML='';
+  sel.add(new Option('Toate etichetele',''));
+  allLabels().forEach(function(l){sel.add(new Option(l.name+' ('+l.count+')',l.name));});
+  sel.value=v; if(sel.selectedIndex<0)sel.value='';
+}
+function fold(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function fmtDate(iso){var d=LFE.dateParts(iso);return('0'+d.d).slice(-2)+'.'+('0'+d.m).slice(-2)+'.'+d.y;}
+function renderList(){
+  var q=fold($('q').value.trim()),fl=$('flabel').value,ul=$('list'),n=0;
+  var posts=data.posts.slice().sort(function(a,b){return Date.parse(b.published)-Date.parse(a.published);});
+  ul.innerHTML='';
+  posts.forEach(function(p){
+    if(q&&fold(p.title).indexOf(q)<0)return;
+    if(fl&&(p.page||(p.labels||[]).indexOf(fl)<0))return;
+    n++;
+    var li=document.createElement('li'),t=document.createElement('span'),m=document.createElement('span');
+    t.className='t'; t.textContent=p.title; m.className='m';
+    m.textContent=fmtDate(p.published)+' · '+(p.page?'Pagina „Despre"':(p.labels||[]).join(', '));
+    li.append(t,m); li.tabIndex=0; li.dataset.id=p.id;
+    if(current&&current.id===p.id)li.className='on';
+    li.onclick=function(){openPost(p.id);};
+    li.onkeydown=function(e){if(e.key==='Enter')openPost(p.id);};
+    ul.append(li);
+  });
+  $('count').textContent=n+' din '+data.posts.filter(function(p){return !p.page;}).length+' articole';
+}
+$('q').oninput=renderList; $('flabel').onchange=renderList;
+
+/* ── Formular ── */
+function toLocalInput(d){var z=function(n){return('0'+n).slice(-2);};return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes());}
+function renderLabelChips(selected){
+  var box=$('f-labels'),names=allLabels().map(function(l){return l.name;});
+  extraLabels.concat(selected).forEach(function(l){if(names.indexOf(l)<0)names.push(l);});
+  box.innerHTML='';
+  names.forEach(function(l){
+    var lab=document.createElement('label'),cb=document.createElement('input');
+    cb.type='checkbox'; cb.value=l; cb.checked=selected.indexOf(l)>-1; cb.onchange=function(){dirty=true;};
+    lab.append(cb,document.createTextNode(l)); box.append(lab);
+  });
+}
+function checkedLabels(){return[].map.call($('f-labels').querySelectorAll('input:checked'),function(c){return c.value;});}
+function leaveOk(){return !dirty||window.confirm('Ai modificări nesalvate. Renunți la ele?');}
+function showForm(post, fresh){
+  current=post; isNew=fresh; dirty=false; extraLabels=[]; setSource(false);
+  $('empty').hidden=true; $('form').hidden=false; $('ilog').hidden=true;
+  $('f-head').textContent=fresh?'Articol nou':(post.page?'Pagina „Despre"':'Editează articolul');
+  $('f-title').value=post.title; $('f-date').value=toLocalInput(new Date(post.published)); $('f-date').dataset.orig=$('f-date').value;
+  $('f-labels-wrap').hidden=!!post.page; renderLabelChips(post.labels||[]);
+  $('editor').innerHTML=(post.html||'<p><br></p>').split(LFE.TOKEN).join('../');
+  $('b-del').hidden=fresh||!!post.page; resetDel();
+  var v=$('b-view'); v.hidden=fresh; if(!fresh)v.href='https://linuxforeducation.github.io/'+(post.page?'despre.html':'articole/'+post.slug+'.html');
+  renderList();
+  if(fresh)$('f-title').focus();
+}
+function closeForm(){current=null; dirty=false; $('form').hidden=true; $('empty').hidden=false; $('ilog').hidden=true; renderList();}
+function openPost(id){
+  if(busy||!leaveOk())return;
+  var p=data.posts.filter(function(x){return x.id===id;})[0]; if(p)showForm(p,false);
+}
+$('b-new').onclick=function(){if(!leaveOk())return; showForm({id:'',title:'',published:new Date().toISOString(),labels:[],html:''},true);};
+$('b-cancel').onclick=function(){if(leaveOk())closeForm();};
+$('f-title').oninput=$('f-date').oninput=$('editor').oninput=$('source').oninput=function(){dirty=true;};
+$('b-addlabel').onclick=function(){
+  var v=$('f-newlabel').value.replace(/\s+/g,' ').trim(); if(!v)return;
+  var sel=checkedLabels(),exist=allLabels().map(function(l){return l.name;}).concat(extraLabels);
+  var same=exist.filter(function(l){return fold(l)===fold(v);})[0];
+  if(same)v=same; else extraLabels.push(v);
+  if(sel.indexOf(v)<0)sel.push(v);
+  renderLabelChips(sel); $('f-newlabel').value=''; dirty=true;
+};
+$('f-newlabel').onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();$('b-addlabel').click();}};
+
+/* ── Editor ── */
+function setSource(on){
+  if(on===sourceMode)return;
+  sourceMode=on;
+  if(on)$('source').value=$('editor').innerHTML; else $('editor').innerHTML=$('source').value;
+  $('source').hidden=!on; $('editor').hidden=on; $('b-source').classList.toggle('on',on);
+}
+function editorHTML(){return sourceMode?$('source').value:$('editor').innerHTML;}
+function cmd(name,val){if(sourceMode)return; $('editor').focus(); document.execCommand(name,false,val); dirty=true;}
+try{document.execCommand('defaultParagraphSeparator',false,'p');}catch(e){}
+$('bar').addEventListener('mousedown',function(e){if(e.target.closest('button'))e.preventDefault();});
+$('bar').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b)return;
+  if(b.dataset.cmd)cmd(b.dataset.cmd); else if(b.dataset.block)cmd('formatBlock',b.dataset.block);
+});
+$('b-source').onclick=function(){setSource(!sourceMode);};
+$('b-link').onclick=function(){var u=window.prompt('Adresa linkului (https://…):','https://');if(u&&/^(https?:\/\/|mailto:)/.test(u))cmd('createLink',u);};
+$('b-imgurl').onclick=function(){var u=window.prompt('Adresa imaginii (https://…):','https://');if(u&&/^https?:\/\//.test(u))cmd('insertImage',u);};
+
+/* ── Salvare ── */
+function uniqueSlug(base){
+  var used={};data.posts.forEach(function(p){used[p.slug]=1;});
+  var s=base,n=2; while(used[s])s=base+'-'+(n++); return s;
+}
+$('form').onsubmit=async function(e){
+  e.preventDefault(); if(busy||!current)return;
+  var title=$('f-title').value.replace(/\s+/g,' ').trim(),labels=checkedLabels(),dv=$('f-date').value;
+  if(!title){status('Completează titlul.','err');return;}
+  if(!dv||isNaN(new Date(dv))){status('Alege data publicării.','err');return;}
+  if(!current.page&&!labels.length){status('Alege cel puțin o etichetă.','err');return;}
+  var html=sanitize(editorHTML());
+  if(!html){status('Articolul nu are conținut.','err');return;}
+  var published=(!isNew&&dv===$('f-date').dataset.orig)?current.published:new Date(dv).toISOString();
+  var slug;
+  if(isNew){
+    var d=LFE.dateParts(published),base=(d.y+'-'+('0'+d.m).slice(-2)+'-'+(LFE.slugify(title).slice(0,60).replace(/-+$/,'')||'articol'));
+    slug=uniqueSlug(base);
+    current={id:slug,slug:slug,title:title,published:published,labels:labels,url:'',html:html,edited:true};
+    data.posts.push(current);
+  }else{
+    slug=current.slug;
+    current.title=title; current.published=published; current.html=html; current.edited=true;
+    if(!current.page)current.labels=labels;
+  }
+  var t0=title.replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim()||title;
+  try{
+    await publish((isNew?'Adaugă: ':'Actualizează: ')+t0, [slug]);
+    showForm(current,false);
+  }catch(err){}
+};
+
+/* ── Ștergere ── */
+function resetDel(){var b=$('b-del');b.classList.remove('sure');b.textContent='Șterge articolul';}
+$('b-del').onclick=async function(){
+  if(!current||isNew||busy)return;
+  if(!this.classList.contains('sure')){this.classList.add('sure');this.textContent='Confirmă ștergerea';setTimeout(resetDel,5000);return;}
+  var p=current,slug=p.slug;
+  data.posts=data.posts.filter(function(x){return x!==p;});
+  if(p.bid)data.deleted.push(p.bid);
+  closeForm();
+  var t0=(p.title||'').replace(/^[^\p{L}\p{N}„"(]+/u,'').replace(/\s*!+$/,'').trim()||p.title;
+  try{await publish('Șterge: '+t0, [slug]);}catch(err){}
+};
+
+/* ── Import din blog ── */
+function jsonp(url){
+  return new Promise(function(res,rej){
+    var cb='__lfe_cb'+Date.now()+Math.floor(Math.random()*1e6),s=document.createElement('script');
+    var done=function(){delete window[cb];s.remove();clearTimeout(t);};
+    var t=setTimeout(function(){done();rej(new Error('blogul nu a răspuns'));},30000);
+    window[cb]=function(d){done();res(d);};
+    s.onerror=function(){done();rej(new Error('blogul nu a putut fi contactat'));};
+    s.src=url+'&callback='+cb; document.head.append(s);
+  });
+}
+$('b-import').onclick=async function(){
+  if(busy||!leaveOk())return;
+  closeForm();
+  var log=$('ilog');
+  log.innerHTML=''; log.hidden=false;
+  function addLog(msg,color){var p=document.createElement('p');p.textContent=msg;if(color)p.style.color=color;log.appendChild(p);log.scrollTop=log.scrollHeight;}
+  setBusy(true);
+  try{
+    status('Se citește blogul…','',2);
+    var entries=[],start=1,total=1;
+    while(entries.length<total){
+      var r=await jsonp(data.blog+'feeds/posts/default?alt=json-in-script&max-results=150&start-index='+start);
+      var f=r.feed,e=f.entry||[]; total=+f.openSearch$totalResults.$t;
+      entries=entries.concat(e); if(!e.length)break; start+=e.length;
+      addLog('Se citește blogul… '+entries.length+' din '+total+' articole.');
+      status('Se citește blogul… '+entries.length+'/'+total,'',Math.round(entries.length/total*40));
+    }
+    var byBid={},gone={},fresh=[],changed=[];
+    data.posts.forEach(function(p){if(p.bid)byBid[p.bid]=p;});
+    (data.deleted||[]).forEach(function(b){gone[b]=1;});
+    entries.forEach(function(e){
+      var bid=e.id.$t.split('post-')[1],alt=(e.link||[]).filter(function(l){return l.rel==='alternate';})[0];
+      var rec={bid:bid,title:e.title.$t.replace(/\s+/g,' ').trim(),published:e.published.$t,updated:e.updated.$t,
+        labels:(e.category||[]).map(function(c){return c.term;}),url:alt?alt.href:'',raw:e.content?e.content.$t:(e.summary?e.summary.$t:'')};
+      var have=byBid[bid];
+      if(gone[bid+':seen'])return; gone[bid+':seen']=1;
+      if(have){if(!have.edited&&have.updated!==rec.updated)changed.push([have,rec]);}
+      else if(!gone[bid]&&rec.labels.length)fresh.push(rec);
+    });
+    fresh.forEach(function(rec){
+      var d=LFE.dateParts(rec.published),base=(rec.url.split('/').pop()||'').replace(/\.html$/,'')||LFE.slugify(rec.title).slice(0,60);
+      rec.slug=rec.id=uniqueSlug(d.y+'-'+('0'+d.m).slice(-2)+'-'+base);
+      data.posts.push(rec);
+    });
+    fresh.forEach(function(rec){rec.html=sanitize(rec.raw);delete rec.raw;});
+    changed.forEach(function(c){var p=c[0],rec=c[1];p.title=rec.title;p.labels=p.page?p.labels:rec.labels;p.updated=rec.updated;p.html=sanitize(rec.raw);});
+    addLog('Import terminat: '+fresh.length+' articole noi, '+changed.length+' actualizate.');
+    if(!fresh.length&&!changed.length){status('Niciun articol nou pe blog.','ok');return;}
+    await publish('Import Blogger: +'+fresh.length+' noi, ~'+changed.length+' actualizate');
+    addLog('✅ Publicat pe GitHub!','green');
+  }catch(e){status('Importul nu a reușit: '+e.message,'err');addLog('Eroare: '+e.message,'red');}
+  finally{setBusy(false);}
+};
+
+/* ── Login ── */
+async function doLogin(tok){
+  if(!tok)return;
+  token=tok;
+  $('lerr').textContent='';
+  $('b-login').disabled=true; $('b-login').textContent='Se verifică…';
+  try{
+    await ghFetch('GET','/repos/'+REPO);
+    status('Se încarcă datele…','',5);
+    var res = await getFile(DPATH);
+    data = JSON.parse(res.content);
+    data.posts = data.posts||[]; data.deleted = data.deleted||[];
+    try{lastBuilt=LFE.build(data).files;}catch(e){lastBuilt={};}
+    sessionStorage.setItem('gh_token',tok);
+    $('connect').hidden=true; $('app').hidden=false;
+    $('b-import').hidden=!data.blog; $('b-rebuild').hidden=false; $('b-logout').hidden=false;
+    renderFilters(); renderList(); closeForm();
+    status('Conectat · '+data.posts.filter(function(p){return !p.page;}).length+' articole','ok');
+  }catch(e){
+    token='';
+    $('lerr').textContent = e.status===401?'Token invalid sau fără drepturi de scriere.':'Eroare: '+e.message;
+  }finally{
+    $('b-login').disabled=false; $('b-login').textContent='Conectează';
+  }
+}
+$('b-login').onclick=function(){doLogin($('tok').value.trim());};
+$('tok').onkeydown=function(e){if(e.key==='Enter')$('b-login').click();};
+$('b-logout').onclick=function(){sessionStorage.removeItem('gh_token');token='';data=null;lastBuilt=null;$('app').hidden=true;$('connect').hidden=false;status('');$('tok').value='';};
+
+var saved=sessionStorage.getItem('gh_token');
+if(saved){$('tok').value=saved; doLogin(saved);}
+
+window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+})();
 </script>
 </body>
 </html>
