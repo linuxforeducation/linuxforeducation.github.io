@@ -102,17 +102,13 @@ textarea.fc{resize:vertical;min-height:90px}
 .src:focus{outline:none;border-color:var(--acc)}
 
 /* Label picker */
-.lp-chips{display:flex;flex-wrap:wrap;gap:5px;min-height:28px;margin-bottom:6px}
-.lp-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--acc);border:1px solid var(--acc2);border-radius:20px;font-size:13px;color:#fff}
-.lp-chip button{background:none;border:none;color:#fff;cursor:pointer;font-size:15px;line-height:1;padding:0;opacity:.75}
-.lp-chip button:hover{opacity:1}
-.lp-empty{font-size:12px;color:var(--muted);align-self:center}
-.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.lp-sel{width:100%;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px;cursor:pointer}
-.lp-sel:focus{outline:none;border-color:var(--acc)}
-.lp-add-row{display:flex;gap:6px}
-.lp-new{flex:1;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;font-size:13px}
-.lp-new:focus{outline:none;border-color:var(--acc)}
+.lp-all{display:flex;flex-wrap:wrap;gap:5px;max-height:160px;overflow-y:auto;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none}
+.lp-pill{padding:4px 11px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--muted);user-select:none;transition:all .12s}
+.lp-pill:hover{border-color:#6e7681;color:var(--text)}
+.lp-pill.on{background:var(--acc);border-color:var(--acc2);color:#fff}
+.lp-add-row{display:flex;gap:0;border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+.lp-new{flex:1;padding:7px 11px;background:var(--bg3);border:none;color:var(--text);font:inherit;font-size:13px}
+.lp-new:focus{outline:none}
 .lp-new::placeholder{color:var(--muted)}
 
 /* Toast */
@@ -262,22 +258,11 @@ textarea.fc{resize:vertical;min-height:90px}
         </div>
       </div>
       <div class="fg">
-        <label>Etichete selectate</label>
-        <div id="lp-chips" class="lp-chips"><span class="lp-empty">Nicio etichetă selectată</span></div>
-        <div class="lp-grid">
-          <div>
-            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Alege din lista existentă</label>
-            <select id="lp-sel" class="lp-sel">
-              <option value="">— selectează —</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Sau adaugă etichetă nouă</label>
-            <div class="lp-add-row">
-              <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă…" autocomplete="off">
-              <button class="btn btn-s btn-sm" id="btn-addlbl">+</button>
-            </div>
-          </div>
+        <label>Etichete <span id="lp-count" style="color:var(--muted);font-weight:400"></span></label>
+        <div id="lp-all" class="lp-all"></div>
+        <div class="lp-add-row">
+          <input type="text" id="lp-new" class="lp-new" placeholder="Etichetă nouă… (Enter pentru a adăuga)" autocomplete="off">
+          <button class="btn btn-s" id="btn-addlbl" style="border-radius:0 0 var(--radius) 0;border-left:1px solid var(--border)">+ Adaugă</button>
         </div>
       </div>
       <div class="fg" style="flex:1;display:flex;flex-direction:column">
@@ -778,38 +763,35 @@ function renderLabelCbs(selected) {
 }
 
 function _syncLabelPicker() {
-  // Render chips
-  const chips = document.getElementById('lp-chips');
-  chips.innerHTML = '';
-  if (!_pickedLabels.length) {
-    const em = document.createElement('span');
-    em.className = 'lp-empty'; em.textContent = 'Nicio etichetă selectată';
-    chips.appendChild(em);
+  const container = document.getElementById('lp-all');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const all = getAllLabels();
+  const extra = _pickedLabels.filter(l => !all.includes(l));
+  const display = [...all, ...extra];
+
+  if (!display.length) {
+    container.innerHTML = '<span style="color:var(--muted);font-size:13px">Nicio etichetă disponibilă încă.</span>';
   }
-  _pickedLabels.forEach(l => {
-    const chip = document.createElement('span');
-    chip.className = 'lp-chip';
-    chip.textContent = l;
-    const rm = document.createElement('button');
-    rm.type = 'button'; rm.textContent = '×'; rm.title = 'Elimină';
-    rm.addEventListener('click', () => {
-      _pickedLabels = _pickedLabels.filter(x => x !== l);
+
+  display.forEach(l => {
+    const pill = document.createElement('span');
+    pill.className = 'lp-pill' + (_pickedLabels.includes(l) ? ' on' : '');
+    pill.textContent = l;
+    pill.addEventListener('click', () => {
+      if (_pickedLabels.includes(l)) {
+        _pickedLabels = _pickedLabels.filter(x => x !== l);
+      } else {
+        _pickedLabels.push(l);
+      }
       _syncLabelPicker();
     });
-    chip.appendChild(rm);
-    chips.appendChild(chip);
+    container.appendChild(pill);
   });
 
-  // Repopulate dropdown — only labels not already picked
-  const sel = document.getElementById('lp-sel');
-  const prev = sel.value;
-  sel.innerHTML = '<option value="">+ Alege etichetă existentă…</option>';
-  getAllLabels().filter(l => !_pickedLabels.includes(l)).forEach(l => {
-    const o = document.createElement('option');
-    o.value = l; o.textContent = l;
-    sel.appendChild(o);
-  });
-  if (prev && [...sel.options].some(o => o.value === prev)) sel.value = prev;
+  const cnt = document.getElementById('lp-count');
+  if (cnt) cnt.textContent = _pickedLabels.length ? `(${_pickedLabels.length} selectate)` : '';
 }
 
 function getCheckedLabels() {
@@ -1207,11 +1189,6 @@ function init() {
   });
   document.getElementById('f-slug').addEventListener('input', e => {
     e.target.dataset.manual = e.target.value ? '1' : '';
-  });
-  document.getElementById('lp-sel').addEventListener('change', e => {
-    const val = e.target.value; if (!val) return;
-    if (!_pickedLabels.includes(val)) { _pickedLabels.push(val); _syncLabelPicker(); }
-    e.target.value = '';
   });
   document.getElementById('btn-addlbl').addEventListener('click', () => {
     const inp = document.getElementById('lp-new');
