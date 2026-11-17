@@ -355,12 +355,16 @@ async function publish(what, slugsAffected){
     var toCommit = {[DPATH]: JSON.stringify(data)};
 
     if(slugsAffected){
-      // Targeted: only regenerate pages for affected slugs + index + all label/group pages
+      // Targeted: always commit the saved article page; diff-check everything else
       Object.keys(built.files).forEach(function(p){
         if(PROTECTED.test(p)) return;
         var isArticle = p.startsWith('articole/');
-        var slug = isArticle ? p.replace('articole/','').replace('.html','') : null;
-        if(isArticle && !slugsAffected.includes(slug)) return;
+        var aSlug = isArticle ? p.replace('articole/','').replace('.html','') : null;
+        if(isArticle && slugsAffected.includes(aSlug)){
+          toCommit[p] = built.files[p]; // always include the target article
+          return;
+        }
+        if(isArticle) return; // skip other article pages
         if((lastBuilt||{})[p] !== built.files[p]) toCommit[p] = built.files[p];
       });
     } else {
