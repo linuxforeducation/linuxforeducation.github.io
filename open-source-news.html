@@ -22,10 +22,27 @@
 <header class="page-head">
   <p class="eyebrow">Etichetă</p>
   <h1>Open Source News</h1>
-  <p class="lead">7 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
+  <p class="lead">8 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
   <label class="filter"><span>Caută în Open Source News</span><input type="search" id="filtru" placeholder="Filtrează după titlu sau text…" autocomplete="off"></label>
 </header>
 <div class="posts" id="lista">
+<article class="post" id="2026-11-domeniul-codeberg-org-a-fost-suspendat-de-registrarul-namesi">
+<details>
+<summary>
+  <img class="pt" src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/codeberg-goes-offline-1024x576.jpg" alt="" loading="lazy" decoding="async">
+  <span class="ps">
+    <span class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time></span>
+    <span class="pt-title" role="heading" aria-level="2">Domeniul Codeberg.org a fost suspendat de registrarul NameSilo, blocând accesul la mii de proiecte open-source</span>
+    <span class="excerpt">Platforma non-profit de găzduire Git Codeberg — una dintre cele mai populare alternative open-source la GitHub — a devenit complet inaccesibilă pe 18 noiembrie 2026, după ce registrarul NameSilo a suspendat…</span>
+    <span class="more">Citește articolul</span>
+  </span>
+</summary>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/codeberg-goes-offline-1024x576.jpg" alt="Codeberg Domain Suspended by NameSilo, Disrupting Open-Source Projects" loading="lazy" decoding="async"></p><p>Platforma non-profit de găzduire Git <b>Codeberg</b> — una dintre cele mai populare alternative open-source la GitHub — a devenit complet inaccesibilă pe 18 noiembrie 2026, după ce registrarul <b>NameSilo</b> a suspendat brusc domeniul <code>codeberg.org</code> și l-a plasat în starea <b>clientHold</b>.</p><h3>Cronologia incidentului și cauza tehnică (<code>clientHold</code>)</h3><ul><li><p><b>Dispariția domeniului din cont:</b> Întreruperea a debutat pe 18 noiembrie, echipa Codeberg confirmând pe Mastodon că domeniul a dispărut pur și simplu din panoul de administrare NameSilo, fără nicio explicație prealabilă.</p></li><li><p><b>Cauze excluse:</b> Administratorii au verificat rapid și au exclus expirarea domeniului din cauza neplății, autentificările neautorizate în contul de registrar sau modificările de istoric (care apărea complet gol în privința acestei acțiuni).</p></li><li><p><b>Efectul <code>clientHold</code>:</b> Ulterior, NameSilo a confirmat suspendarea și a transferat cazul către departamentul <i>Abuse</i> pentru investigații, fără a oferi un motiv concret. Statutul <b>clientHold</b> elimină înregistrările domeniului din sistemul global DNS — prin urmare, chiar dacă serverele fizice Codeberg sunt perfect funcționale, toate cererile către <code>codeberg.org</code> eșuează la nivelul rezoluției DNS.</p></li><li><p><b>Integritatea datelor:</b> Echipa subliniază că nu există niciun indiciu privind compromiterea depozitelor de cod sau o breșă de securitate în infrastructura internă a platformei.</p></li></ul><h3>Impactul asupra ecosistemului open-source</h3><p>Suspendarea afectează atât interfața web, cât și toate operațiunile Git de bază (<code>clone</code>, <code>fetch</code>, <code>push</code>) și fluxurile CI/CD pentru proiecte majore găzduite pe Codeberg, printre care:</p><ul><li><p><b>Forgejo</b>, <b>Zig</b>, <b>GNU Guix</b>, <b>Gentoo</b> (aflat în plin proces de migrare de pe GitHub);</p></li><li><p><b>SysVinit</b>, <b>Genode</b>, <b>OpenRGB</b>, <b>Libreboot</b>, <b>Toybox</b> și <b>River</b>.</p></li></ul><h3>De ce nu s-a folosit domeniul alternativ <code>codeberg.eu</code></h3><p>Inițial, echipa a evaluat activarea domeniului de rezervă <b><code>codeberg.eu</code></b> ca soluție temporară, dar a renunțat la această idee din motive tehnice majore:</p><ul><li><p><b>Limitări arhitecturale:</b> Suportul multi-domeniu ar afecta mecanismele de autentificare <b>2FA</b> (WebAuthn/TOTP legate de domeniu), indexarea SEO și ar forța zeci de mii de dezvoltatori să își modifice manual adresele <code>git remote</code> și dependențele din proiecte.</p></li><li><p><b>Complexitate:</b> Implementarea unui mecanism fiabil de fallback pe un al doilea domeniu reprezintă o modificare arhitecturală amplă, imposibil de realizat în câteva ore.</p></li></ul>
+</div>
+<p class="post-foot"><a class="chip" href="open-source-news.html">Open Source News</a><a href="articole/2026-11-domeniul-codeberg-org-a-fost-suspendat-de-registrarul-namesi.html">Pagina articolului</a></p>
+</details>
+</article>
 <article class="post" id="2026-10-moxnox-10-sistem-de-operare-open-source">
 <details>
 <summary>
