@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apache NetBeans 32 a fost lansat: Suport GlassFish 8, îmbunătățiri Java/JDK 27 și actualizări pentru Gradle, Docker și Git · Linux for Education</title>
+<meta name="description" content="Echipa Apache NetBeans a anunțat lansarea versiunii 32 , cea mai nouă ediție a mediului de dezvoltare integrat (IDE) gratuit și open-source pentru Java, PHP și alte limbaje de programare. Actualizarea extinde…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Apache NetBeans 32 a fost lansat: Suport GlassFish 8, îmbunătățiri Java/JDK 27 și actualizări pentru Gradle, Docker și Git</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-5hzao75hzao75hza-mwoth1ud.jpg" alt="" loading="lazy" decoding="async"></p><p>Echipa <b>Apache NetBeans</b> a anunțat lansarea versiunii <b>32</b>, cea mai nouă ediție a mediului de dezvoltare integrat (IDE) gratuit și open-source pentru Java, PHP și alte limbaje de programare. Actualizarea extinde suportul pentru serverele Jakarta EE, rafinează editarea și depanarea Java și actualizează componentele interne pentru Gradle, Maven, Docker și Git.</p><h3>1. Jakarta EE, GlassFish 8 și servere de aplicații</h3><ul><li><p><b>Suport extins GlassFish 8:</b> IDE-ul recunoaște acum versiunile <b>8.0.1 până la 8.0.4</b>, facilitând dezvoltarea și testarea aplicațiilor Jakarta EE.</p></li><li><p><b>Îmbunătățiri JSF (Jakarta Server Faces):</b> Include suport pentru spații de nume URN personalizate ale componentelor, rezolvare mai precisă a bean-urilor Expression Language și avertismente pentru atribute duplicate în etichetele Faces.</p></li><li><p><b>Apache Tomcat și JavaFX:</b> Componentele integrate <b>Apache Tomcat</b> au fost actualizate la versiunea <b>11.0.26</b>, iar dezvoltatorii JavaFX primesc biblioteca <b>OpenJFX FXML</b> pentru definițiile interfețelor grafice bazate pe XML.</p></li></ul><h3>2. Editare Java, depanare și unelte de build (Gradle 9.8 / Maven)</h3><ul><li><p><b>Editare și indexare Java:</b> Completarea automată a codului (<i>code completion</i>) a fost îmbunătățită pentru tipurile de intersecție (<i>intersection types</i>), mesajele de eroare sunt mai clare atunci când procesoarele de adnotări eșuează, iar indexarea surselor Java și suportul pentru opțiunea <code>--patch-module</code> au fost remediate.</p></li><li><p><b>Depanare interactivă:</b> Consola de depanare (<i>debugging console</i>) oferă acum referințe clicabile către variabilele de tip obiect.</p></li><li><p><b>Gradle 9.8 și Maven:</b> Integrarea <b>Gradle</b> a fost actualizată la versiunea <b>9.8</b>. Pentru <b>Maven</b>, actualizarea remediază vizualizarea modelului efectiv POM, asigură compatibilitatea editorului cu <b>JDK 27</b> și introduce o pauză automată la descărcarea indecșilor de la distanță atunci când sunt atinse limitele de rată (<i>rate limits</i>).</p></li></ul><h3>3. Docker, Git (JGit 7.7.1), PHP și interfața IDE-ului</h3><ul><li><p><b>Integrare Docker:</b> Dezvoltatorii pot descărca (<i>pull</i>) versiuni actualizate ale imaginilor de container direct dintr-o etichetă existentă, iar fereastra de dialog <i>Run</i> permite definirea directă a variabilelor de mediu.</p></li><li><p><b>Git și semnare SSH:</b> Biblioteca <b>JGit</b> a fost actualizată la versiunea <b>7.7.1</b>, alături de componentele Bouncy Castle și Apache Mina SSH. Actualizarea aduce modificări pentru semnarea commit-urilor prin <b>SSH</b> și elimină încadrarea automată a liniilor (<i>automatic line wrapping</i>) din fereastra de dialog pentru mesajele de commit.</p></li><li><p><b>PHP, Web și UI:</b> Dezvoltatorii PHP primesc remedieri pentru formatarea enumerărilor (<code>enum</code>) ale căror nume coincid cu cuvinte cheie rezervate și o corecție pentru suprascrierea constructorilor. Editorul adaugă suport pentru pseudo-clasa CSS <code>:host-context</code>, îmbunătățește parsarea fișierelor XML cu marcaj BOM UTF-8 și actualizează motorul de indexare <b>Lucene</b> la versiunea <b>10.5.1</b>. În interfață, proiectele imbricate (<i>nested projects</i>) sunt afișate grupat cu indentare, sortarea în vizualizările <i>Projects</i> și <i>Files</i> este mai consistentă, iar IDE-ul reține dimensiunile ferestrelor de administrare a proiectelor.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-shelly-3-4-a-fost-lansat-suport-integrat-pentru-actualizari.html"><small>← Mai nou</small>Shelly 3.4 a fost lansat: Suport integrat pentru actualizări de firmware (fwupd / LVFS), tabele personalizabile și remedieri pentru pachetele split din AUR</a><a class="r" href="../articole/2026-11-valkey-9-2-a-fost-lansat-snapshot-uri-fara-procese-fork-arbo.html"><small>Mai vechi →</small>Valkey 9.2 a fost lansat: Snapshot-uri fără procese fork, arbori B+ pentru Sorted Sets, compresie a replicării și caching distribuit pentru AI</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

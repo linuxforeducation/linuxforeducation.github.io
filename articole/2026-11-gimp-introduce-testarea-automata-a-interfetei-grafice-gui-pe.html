@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIMP introduce testarea automată a interfeței grafice (GUI) pentru Linux X11 și Wayland · Linux for Education</title>
+<meta name="description" content="Echipa de dezvoltare a editorului grafic open-source GIMP a implementat o infrastructură de testare automată a interfeței cu utilizatorul ( automated GUI testing ), concepută pentru a detecta erorile vizuale…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>GIMP introduce testarea automată a interfeței grafice (GUI) pentru Linux X11 și Wayland</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/gimp-automated-gui-testing-1024x576.jpg" alt="GIMP Adds Automated UI Testing for Linux X11 and Wayland" loading="lazy" decoding="async"></p><p>Echipa de dezvoltare a editorului grafic open-source <b>GIMP</b> a implementat o infrastructură de testare automată a interfeței cu utilizatorul (<i>automated GUI testing</i>), concepută pentru a detecta erorile vizuale și regresiile de funcționalitate înainte ca acestea să ajungă în versiunile publice.</p><h3>De ce era necesară testarea la nivel de interfață</h3><p>Până acum, proiectul se baza preponderent pe teste unitare (<i>unit tests</i>) și verificări care apelau direct codul intern. Deși eficiente pentru validarea componentelor izolate, aceste metode nu puteau surprinde erorile care apar doar atunci când utilizatorul interacționează efectiv cu meniurile, ferestrele de dialog sau butoanele aplicației.</p><p>Noua infrastructură pornește o instanță reală a programului GIMP, simulează acțiuni concrete prin intermediul interfeței grafice și verifică dacă rezultatul final corespunde așteptărilor.</p><h3>Ce acoperă primele 13 teste automate</h3><p>Implementarea inițială cuprinde <b>13 scenarii automate</b> care validează fluxurile de lucru esențiale:</p><ul><li><p><b>Pornire și dialoguri:</b> Verifică lansarea corectă a aplicației, comportamentul ferestrei de bun venit (<i>Welcome dialog</i>) și salvarea corectă a modificărilor efectuate în meniul <i>Preferences</i>.</p></li><li><p><b>Creare și export:</b> Testează crearea imaginilor noi la dimensiuni specifice și exportul corect în format <b>PNG</b>.</p></li><li><p><b>Straturi și istoric:</b> Validează crearea și ștergerea straturilor (<i>layers</i>), aplatizarea imaginii (<i>image flattening</i>), precum și funcțiile <i>Undo</i> și <i>Redo</i>.</p></li><li><p><b>Unelte și vizualizare:</b> Verifică inversarea culorilor de prim-plan și fundal (<i>foreground/background</i>), controalele de zoom și interacțiunea cu trusa de unelte (inclusiv selectarea și utilizarea uneltei <i>Bucket Fill</i>).</p></li></ul><h3>Cum funcționează tehnic: <code>dogtail</code>, sesiuni headless și suport Wayland</h3><ul><li><p><b>Bazat pe arborele de accesibilitate (<code>dogtail</code>):</b> Sistemul utilizează <b>dogtail</b>, un framework de testare GUI scris în Python. În loc să compare capturi de ecran la nivel de pixeli (metodă fragilă la schimbări de temă sau rezoluție), <code>dogtail</code> identifică și acționează butoanele și meniurile prin intermediul <b>metadatelor de accesibilitate</b> (aceleași API-uri folosite de cititoarele de ecran).</p></li><li><p><b>Execuție fără monitor fizic (<i>headless</i>):</b> Testele pot rula complet automatizat pe serverele CI/CD prin lansarea GIMP într-o sesiune desktop temporară ascunsă.</p></li><li><p><b>Limitare la Linux (X11 și Wayland):</b> În prezent, testarea automată GUI este suportată exclusiv pe <b>Linux</b>, acoperind atât sesiunile <b>X11</b>, cât și <b>Wayland</b>. Sistemele Windows și macOS sunt excluse momentan, deoarece framework-ul <code>dogtail</code> nu oferă suport pentru aceste platforme.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-tails-7-17-1-actualizare-de-urgenta-ce-elimina-temporar-ublo.html"><small>← Mai nou</small>Tails 7.17.1: Actualizare de urgență ce elimină temporar uBlock Origin din cauza unei vulnerabilități critice XSS</a><a class="r" href="../articole/2026-11-kde-koko-26-12-vizualizatorul-de-imagini-se-apropie-de-inloc-2.html"><small>Mai vechi →</small>KDE Koko 26.12: Vizualizatorul de imagini se apropie de înlocuirea Gwenview cu noi unelte de editare și management al fișierelor</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

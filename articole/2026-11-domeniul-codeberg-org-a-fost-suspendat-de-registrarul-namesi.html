@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domeniul Codeberg.org a fost suspendat de registrarul NameSilo, blocând accesul la mii de proiecte open-source · Linux for Education</title>
+<meta name="description" content="Platforma non-profit de găzduire Git Codeberg — una dintre cele mai populare alternative open-source la GitHub — a devenit complet inaccesibilă pe 18 noiembrie 2026, după ce registrarul NameSilo a suspendat…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html" aria-current="page">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../open-source-news.html">Open Source News</a></div>
+  <h1>Domeniul Codeberg.org a fost suspendat de registrarul NameSilo, blocând accesul la mii de proiecte open-source</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/codeberg-goes-offline-1024x576.jpg" alt="Codeberg Domain Suspended by NameSilo, Disrupting Open-Source Projects" loading="lazy" decoding="async"></p><p>Platforma non-profit de găzduire Git <b>Codeberg</b> — una dintre cele mai populare alternative open-source la GitHub — a devenit complet inaccesibilă pe 18 noiembrie 2026, după ce registrarul <b>NameSilo</b> a suspendat brusc domeniul <code>codeberg.org</code> și l-a plasat în starea <b>clientHold</b>.</p><h3>Cronologia incidentului și cauza tehnică (<code>clientHold</code>)</h3><ul><li><p><b>Dispariția domeniului din cont:</b> Întreruperea a debutat pe 18 noiembrie, echipa Codeberg confirmând pe Mastodon că domeniul a dispărut pur și simplu din panoul de administrare NameSilo, fără nicio explicație prealabilă.</p></li><li><p><b>Cauze excluse:</b> Administratorii au verificat rapid și au exclus expirarea domeniului din cauza neplății, autentificările neautorizate în contul de registrar sau modificările de istoric (care apărea complet gol în privința acestei acțiuni).</p></li><li><p><b>Efectul <code>clientHold</code>:</b> Ulterior, NameSilo a confirmat suspendarea și a transferat cazul către departamentul <i>Abuse</i> pentru investigații, fără a oferi un motiv concret. Statutul <b>clientHold</b> elimină înregistrările domeniului din sistemul global DNS — prin urmare, chiar dacă serverele fizice Codeberg sunt perfect funcționale, toate cererile către <code>codeberg.org</code> eșuează la nivelul rezoluției DNS.</p></li><li><p><b>Integritatea datelor:</b> Echipa subliniază că nu există niciun indiciu privind compromiterea depozitelor de cod sau o breșă de securitate în infrastructura internă a platformei.</p></li></ul><h3>Impactul asupra ecosistemului open-source</h3><p>Suspendarea afectează atât interfața web, cât și toate operațiunile Git de bază (<code>clone</code>, <code>fetch</code>, <code>push</code>) și fluxurile CI/CD pentru proiecte majore găzduite pe Codeberg, printre care:</p><ul><li><p><b>Forgejo</b>, <b>Zig</b>, <b>GNU Guix</b>, <b>Gentoo</b> (aflat în plin proces de migrare de pe GitHub);</p></li><li><p><b>SysVinit</b>, <b>Genode</b>, <b>OpenRGB</b>, <b>Libreboot</b>, <b>Toybox</b> și <b>River</b>.</p></li></ul><h3>De ce nu s-a folosit domeniul alternativ <code>codeberg.eu</code></h3><p>Inițial, echipa a evaluat activarea domeniului de rezervă <b><code>codeberg.eu</code></b> ca soluție temporară, dar a renunțat la această idee din motive tehnice majore:</p><ul><li><p><b>Limitări arhitecturale:</b> Suportul multi-domeniu ar afecta mecanismele de autentificare <b>2FA</b> (WebAuthn/TOTP legate de domeniu), indexarea SEO și ar forța zeci de mii de dezvoltatori să își modifice manual adresele <code>git remote</code> și dependențele din proiecte.</p></li><li><p><b>Complexitate:</b> Implementarea unui mecanism fiabil de fallback pe un al doilea domeniu reprezintă o modificare arhitecturală amplă, imposibil de realizat în câteva ore.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-nginx-remediaza-10-vulnerabilitati-de-securitate-inclusiv-ci.html"><small>← Mai nou</small>Nginx remediază 10 vulnerabilități de securitate, inclusiv cinci critice din grupul „NGINX2Shell” (RCE fără autentificare)</a><a class="r" href="../articole/2026-11-redict-fork-ul-redis-se-inchide-definitiv-pe-masura-ce-valke.html"><small>Mai vechi →</small>Redict (fork-ul Redis) se închide definitiv pe măsură ce Valkey câștigă teren; utilizatorii sunt îndrumați să migreze la Valkey</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

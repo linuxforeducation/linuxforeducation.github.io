@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireshark 4.6.10 a fost lansat: Remedierea a 39 de vulnerabilități de securitate (inclusiv RCE în LoRaWAN), corecții de memorie și clarificări extcap pe Linux · Linux for Education</title>
+<meta name="description" content="Analizorul de protocoale de rețea Wireshark a primit versiunea de mentenanță 4.6.10 , o actualizare majoră axată pe securitate care remediază 39 de vulnerabilități în disectoarele de protocoale, parserele de…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Wireshark 4.6.10 a fost lansat: Remedierea a 39 de vulnerabilități de securitate (inclusiv RCE în LoRaWAN), corecții de memorie și clarificări extcap pe Linux</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/wireshark4610-1024x576.jpg" alt="Wireshark 4.6.10 Packet Analyzer Fixes 39 Security Vulnerabilities" loading="lazy" decoding="async"></p><p>Analizorul de protocoale de rețea <b>Wireshark</b> a primit versiunea de mentenanță <b>4.6.10</b>, o actualizare majoră axată pe securitate care remediază <b>39 de vulnerabilități</b> în disectoarele de protocoale, parserele de fișiere de captură și componentele interne. Deși nu introduce suport pentru protocoale noi, ediția este critică pentru administratorii de rețea și analiștii care inspectează trafic live sau fișiere PCAP din surse externe.</p><h3>1. Vulnerabilitate RCE în LoRaWAN și blocaje (DoS) în disectoare</h3><ul><li><p><b>Execuție de cod la distanță (RCE) în LoRaWAN:</b> Cea mai severă problemă corectată este o vulnerabilitate RCE provocată de o eroare de trunchiere numerică (<i>numeric truncation error</i>) în timpul decriptării pachetelor <b>LoRaWAN</b>.</p></li><li><p><b>Blocaje și bucle infinite (DoS):</b> Majoritatea celorlalte vulnerabilități permiteau blocarea aplicației (<i>crash</i>) sau intrarea în bucle infinite la procesarea unor pachete malițioase. Printre disectoarele afectate se numără:</p><ul><li><p><b>Kafka</b> (<code>CVE-2026-130455</code> — buclă infinită);</p></li><li><p><b>RTSE</b>, <b>NBAP</b>, <b>Matter</b>, <b>IEEE 1609.2</b>, <b>OpenWire</b>, <b>PROFINET</b> și <b>SDP</b>, alături de motorul central de disecție a pachetelor (<i>core packet dissection engine</i>).</p></li></ul></li></ul><h3>2. Scurgeri de memorie, divulgare de informații și parsere de fișiere</h3><ul><li><p><b>Probleme de memorie:</b> Disectorul <b>TLS</b> primește un patch pentru o scurgere de memorie (<i>memory leak</i>, urmărită ca <code>CVE-2026-130449</code>), iar disectorul <b>SCTP</b> remediază o vulnerabilitate de divulgare a informațiilor din heap (<i>heap information disclosure</i>).</p></li><li><p><b>Parsere de fișiere de captură:</b> Au fost eliminate erorile de securitate din parserele pentru formatele <b>ERF</b>, <b>Android Logcat</b>, <b>PEAK CAN TRC</b>, <b>Ascend</b> și <b>Tektronix K12xx</b>, protejând sistemul la deschiderea capturilor provenite din surse neîncredere.</p></li><li><p><b>Alte corecții funcționale:</b> S-au remediat un crash în gestionarea excepțiilor <b>Lua</b>, o eroare prin care mesajele criptate <b>NAS-EPS</b> erau disecate incorect ca text simplu (<i>plaintext</i>), precum și artefactele de afișare ale separatorilor de pachete atunci când se folosește tema <b>KDE Breeze</b>.</p></li></ul><h3>3. Schimbări importante pentru Linux (<code>extcap</code>) și actualizări Windows/macOS</h3><ul><li><p><b>Directorul implicit <code>extcap</code> pe Linux:</b> Notele de lansare clarifică o modificare arhitecturală din ramura Wireshark 4.6 privind utilitarele externe de captură (<b>extcap</b>). Pe sistemele Unix-like, acestea sunt căutate acum implicit în directorul <code>libexec</code> (de regulă <code>/usr/libexec/wireshark/extcap</code>), ceea ce poate necesita ajustări pentru pachetele third-party. Calea poate fi suprascrisă prin variabila de mediu <code>WIRESHARK_EXTCAP_DIR</code> (distribuțiile fără director <code>libexec</code>, precum Alpine Linux, păstrează căile anterioare).</p></li><li><p><b>Actualizări Windows și macOS:</b> Instalatoarele includ acum biblioteca <b>Brotli 1.2.1</b> (remediind <code>CVE-2026-111497</code>), iar versiunea pentru Windows actualizează driverul de captură <b>Npcap</b> de la 1.88 la <b>1.89</b>.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-shelly-3-3-1-a-fost-lansat-gestionare-mai-sigura-a-actualiza.html"><small>← Mai nou</small>Shelly 3.3.1 a fost lansat: Gestionare mai sigură a actualizărilor AppImage, remediere temă pe KDE Plasma și consum redus de memorie în TUI</a><a class="r" href="../articole/2026-11-nginx-remediaza-10-vulnerabilitati-de-securitate-inclusiv-ci.html"><small>Mai vechi →</small>Nginx remediază 10 vulnerabilități de securitate, inclusiv cinci critice din grupul „NGINX2Shell” (RCE fără autentificare)</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

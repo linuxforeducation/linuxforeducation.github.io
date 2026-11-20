@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FFmpeg 9.1 „Gauss” a fost lansat: Encodare AAC îmbunătățită, codare video Vulkan, interpolare de cadre NVIDIA și suport extins pentru formate · Linux for Education</title>
+<meta name="description" content="Proiectul FFmpeg a lansat oficial versiunea 9.1 (nume de cod „Gauss” ), cea mai nouă ediție a popularului framework multimedia open-source pentru înregistrarea, conversia și streaming-ul conținutului…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>FFmpeg 9.1 „Gauss” a fost lansat: Encodare AAC îmbunătățită, codare video Vulkan, interpolare de cadre NVIDIA și suport extins pentru formate</h1>
+</header>
+<div class="prose">
+<img src="../imagini/gemini-generated-image-6v8b4q6v8b4q6v8b-mwou7apv.jpg" alt="" loading="lazy" decoding="async"><p>Proiectul <b>FFmpeg</b> a lansat oficial versiunea <b>9.1</b> (nume de cod <b>„Gauss”</b>), cea mai nouă ediție a popularului framework multimedia open-source pentru înregistrarea, conversia și streaming-ul conținutului audio-video. Actualizarea aduce îmbunătățiri majore pentru encoderul nativ AAC, noi capabilități de accelerare hardware prin <b>Vulkan</b>, <b>NVIDIA</b> și <b>AMD</b>, precum și suport extins pentru formate de imagine și standardul LCEVC.</p><h3>1. Îmbunătățiri audio: Encoder AAC nativ, xHE-AAC și DSD</h3><ul><li><p><b>Encoder AAC nativ revizuit:</b> Encoderul AAC integrat în FFmpeg a primit optimizări extinse pentru o calitate superioară a sunetului.</p></li><li><p><b>Suport xHE-AAC:</b> A fost introdusă codarea <b>xHE-AAC</b> prin intermediul bibliotecii externe <code>libfdk-xhe-aac</code>.</p></li><li><p><b>Formate audio de înaltă rezoluție:</b> Sunt acum suportate decodarea și demuxarea <b>DVD-Audio LPCM</b>, alături de un nou encoder <b>DSD</b> (<i>Direct Stream Digital</i>).</p></li></ul><h3>2. Accelerare GPU și video: Vulkan, NVIDIA Optical Flow și AMD AMF</h3><ul><li><p><b>Codare video Vulkan (APV):</b> După introducerea decodării accelerate hardware în FFmpeg 9.0, versiunea 9.1 adaugă un encoder bazat pe <b>Vulkan</b> pentru formatul <b>Advanced Professional Video (APV)</b>.</p></li><li><p><b>NVIDIA (<code>fruc_vulkan</code> și NVDEC):</b> Utilizatorii de plăci grafice NVIDIA primesc filtrul <code>fruc_vulkan</code> pentru interpolarea cadrelor video (<i>frame interpolation</i>) accelerată prin flux optic (<i>optical flow</i>), precum și suport pentru accelerarea hardware <b>NVDEC CUARRAY</b>.</p></li><li><p><b>AMD și inferență DNN:</b> Pentru hardware-ul AMD, noul filtru <code>vqe_amf</code> oferă acces la tehnologia <i>AMF Video Quality Enhancer</i>. În paralel, backend-ul <b>ONNX Runtime DNN</b> primește suport de inferență <i>zero-copy</i> prin D3D12 DirectML pe sistemele Windows compatibile.</p></li></ul><h3>3. Procesare de imagini, LCEVC și unelte pentru dezvoltatori</h3><ul><li><p><b>Suport extins pentru imagini:</b> FFmpeg 9.1 poate coda și decoda texturi <b>ASTC</b> (prin <code>libastcenc</code>, cu muxere/demuxere pentru <code>.astc</code> și containere <b>KTX 1.0</b>), adaugă suport pentru formatul <b>JPEG Multi-Picture Format (MPF)</b>, un decodor pentru fișiere RAW <b>Panasonic RW2</b> și un nou filtru <b>gainmap</b> (utilizat pentru imagini HDR).</p></li><li><p><b>LCEVC (<i>Low Complexity Enhancement Video Coding</i>):</b> Introduce gestionarea <i>dual-track</i> LCEVC direct în linia de comandă, muxarea pistelor LCEVC în containere <b>MPEG-TS</b> și un filtru dedicat de fuzionare a datelor (<i>payload-merging bitstream filter</i>).</p></li><li><p><b>API-uri și protocoale noi:</b> Dezvoltatorii primesc un API de filtrare <i>bitstream</i> bazat pe grafuri (<i>graph-based</i>), filtre noi (<code>trim</code>, <code>side_data</code>, <code>jpegapp</code>), suport pentru partiționarea datelor <b>H.264</b>, un protocol <b>libcurl</b>, un muxer pentru protocolul de afișare inline a imaginilor în <b>iTerm2</b>, selecție îmbunătățită a dispozitivelor AVFoundation prin identificatori unici/serii USB și noi decodoare/demuxere (<b>Rhetorex ADPCM</b>, <b>ADPCM IMA Citrix</b>, <b>Infinity IMM6</b>, <b>MVR</b>).</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><span></span><a class="r" href="../articole/2026-11-shelly-3-4-a-fost-lansat-suport-integrat-pentru-actualizari.html"><small>Mai vechi →</small>Shelly 3.4 a fost lansat: Suport integrat pentru actualizări de firmware (fwupd / LVFS), tabele personalizabile și remedieri pentru pachetele split din AUR</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

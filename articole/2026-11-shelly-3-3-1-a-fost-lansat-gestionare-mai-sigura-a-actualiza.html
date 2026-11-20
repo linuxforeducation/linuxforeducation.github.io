@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelly 3.3.1 a fost lansat: Gestionare mai sigură a actualizărilor AppImage, remediere temă pe KDE Plasma și consum redus de memorie în TUI · Linux for Education</title>
+<meta name="description" content="Managerul grafic de pachete Shelly — dedicat distribuției Arch Linux și derivatelor sale — a primit actualizarea de mentenanță 3.3.1 . Noua versiune perfecționează fluxul de actualizare și eliminare a…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Shelly 3.3.1 a fost lansat: Gestionare mai sigură a actualizărilor AppImage, remediere temă pe KDE Plasma și consum redus de memorie în TUI</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-qj93meqj93meqj93-mwot4u28.jpg" alt="" loading="lazy" decoding="async"></p><p>Managerul grafic de pachete <b>Shelly</b> — dedicat distribuției <b>Arch Linux</b> și derivatelor sale — a primit actualizarea de mentenanță <b>3.3.1</b>. Noua versiune perfecționează fluxul de actualizare și eliminare a pachetelor <b>AppImage</b>, rezolvă problemele de afișare GTK sub KDE Plasma, extinde comanda de reparare a bazei de date și reduce amprenta de memorie a interfeței din terminal (TUI).</p><h3>1. Actualizări și mentenanță AppImage cu protecție la erori</h3><ul><li><p><b>Verificare proaspătă la „Upgrade All”:</b> Apăsarea butonului <i>Upgrade All</i> din pagina AppImage declanșează acum o verificare nouă în timp real prin utilitarul CLI al Shelly, în loc să se bazeze pe rezultatele unei scanări mai vechi. Utilizatorii pot controla acest comportament prin noua opțiune <i>„Always Recheck AppImage Updates on Upgrade All”</i> (când este dezactivată, se actualizează doar aplicațiile deja detectate).</p></li><li><p><b>Păstrarea versiunii în numele fișierului și Rollback:</b> Aplicațiile actualizate își păstrează acum numărul versiunii în formatul <code>Name-Version.AppImage</code> pentru o identificare ușoară. Shelly actualizează automat intrările desktop (<code>.desktop</code>) și pictogramele asociate, șterge fișierul vechi și oferă <b>protecție de tip rollback</b> în cazul în care actualizarea eșuează.</p></li><li><p><b>Dezinstalare transparentă:</b> Dialogul de eliminare a unui pachet AppImage afișează acum explicit dacă vor fi șterse și fișierele de configurare ale aplicației, preluând implicit preferința globală a utilizatorului.</p></li></ul><h3>2. Integrare KDE Plasma și repararea bazei de date (<code>--repair-db</code>)</h3><ul><li><p><b>Remediere temă GTK pe KDE Plasma:</b> Versiunea 3.3.1 corectează o problemă de stilizare GTK care afecta tema integrată <b>Pearl</b>, vizibilă în special în mediul desktop <b>KDE Plasma</b>.</p></li><li><p><b>Deblocarea cache-ului utilizatorului (<code>shelly utility --repair-db</code>):</b> Comanda de reparare identifică și elimină acum nu doar blocajele (<i>locks</i>) de la nivel de sistem ale bazei de date de pachete, ci și blocajele vechi din cache-ul de verificare a actualizărilor al utilizatorului. Utilitarul raportează căile inspectate și solicită privilegii elevate (<code>sudo</code>/polkit) doar dacă este necesară intervenția asupra bazei de date de sistem.</p></li></ul><h3>3. Optimizări de memorie în TUI și împachetare PKGBUILD</h3><ul><li><p><b>Consum redus de RAM în interfața terminal:</b> Interfața textuală (<b>TUI</b>) a fost optimizată prin eliminarea câmpurilor de date neutilizate și simplificarea procesării informațiilor despre pachete, scăzând semnificativ vârful de consum de memorie la navigarea prin colecții mari de pachete.</p></li><li><p><b>Pachet separat <code>shelly-tui</code> în AUR/PKGBUILD:</b> Interfața TUI este inclusă oficial în rețetele de împachetare <code>PKGBUILD</code> ale proiectului. Utilizatorii o pot instala separat prin pachetul <code>shelly-tui</code> (care depinde de <code>shelly-cli</code>), în timp ce pachetul complet <code>shelly</code> le include pe ambele.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-debian-infiinteaza-o-echipa-dedicata-hardware-ului-de-gaming.html"><small>← Mai nou</small>Debian înființează o echipă dedicată hardware-ului de gaming: Teste și optimizări pentru console portabile, compatibilitate de ultimă generație și o viitoare „Blend” OEM</a><a class="r" href="../articole/2026-11-wireshark-4-6-10-a-fost-lansat-remedierea-a-39-de-vulnerabil.html"><small>Mai vechi →</small>Wireshark 4.6.10 a fost lansat: Remedierea a 39 de vulnerabilități de securitate (inclusiv RCE în LoRaWAN), corecții de memorie și clarificări extcap pe Linux</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

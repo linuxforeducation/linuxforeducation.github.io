@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bottles 67.7 a fost lansat: Verificări inteligente pentru NTSync/Esync, instalare fiabilă a dependențelor și remedieri GTK/libadwaita · Linux for Education</title>
+<meta name="description" content="La scurt timp după ediția 67.6, echipa Bottles a publicat actualizarea de mentenanță 67.7 pentru aplicația open-source de gestionare a mediilor Wine/Proton pe Linux. Noua versiune se concentrează pe eliminarea…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Bottles 67.7 a fost lansat: Verificări inteligente pentru NTSync/Esync, instalare fiabilă a dependențelor și remedieri GTK/libadwaita</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/bottles676-1-1024x576.jpg" alt="Bottles 67.7 Improves Windows App Compatibility on Linux" loading="lazy" decoding="async"></p><p>La scurt timp după ediția 67.6, echipa <b>Bottles</b> a publicat actualizarea de mentenanță <b>67.7</b> pentru aplicația open-source de gestionare a mediilor Wine/Proton pe Linux. Noua versiune se concentrează pe eliminarea blocajelor din procesul de instalare a dependențelor Windows, validarea automată a suportului hardware/kernel pentru sincronizarea <b>NTSync</b> și remedierea mai multor erori de interfață.</p><h3>Instalarea dependențelor și inițializarea corectă a prefixelor</h3><ul><li><p><b>Detectarea versiunii de Windows în prezența jurnalelor <code>stderr</code>:</b> Anterior, Bottles putea eșua în identificarea corectă a versiunii simulate de Windows atunci când Wine emitea mesaje de diagnosticare sau scria la <code>stderr</code>, blocând instalarea dependențelor (precum librăriile Visual C++ sau .NET). Versiunea 67.7 parsează corect aceste ieșiri și permite rularea normală a instalatoarelor.</p></li><li><p><b>Inițializare sigură la prima deschidere:</b> Lansarea aplicației pentru prima dată direct cu un fișier executabil (<code>.exe</code>/<code>.msi</code>) sau un URL de fișier nu mai provoacă erori de inițializare.</p></li><li><p><b>Prevenirea mediilor corupte:</b> Dacă aplicația nu poate pregăti profilul de utilizator necesar la crearea unui recipient (<i>bottle</i>), procesul se oprește imediat, evitând generarea unor prefixe configurate parțial.</p></li></ul><h3>Sincronizare în jocuri: Validare NTSync și avertismente Esync</h3><p>Pentru a evita erorile de rulare cauzate de combinații incompatibile între kernel și rulorul Wine:</p><ul><li><p><b>Verificare dublă NTSync:</b> Recipientele configurate pentru gaming verifică acum dacă <b>atât</b> rulorul Wine selectat, <b>cât și</b> nucleul Linux suportă driverul <b>NTSync</b> înainte de a-l activa efectiv.</p></li><li><p><b>Avertismente pentru Esync:</b> Bottles avertizează explicit utilizatorul atunci când selectează un rulor care nu suportă <b>Esync</b>, clarificând potențialele limitări de compatibilitate sau performanță.</p></li></ul><h3>Gestionarea fonturilor, interfața GTK și cataloage actualizate</h3><ul><li><p><b>Optimizarea fonturilor:</b> S-au eliminat reîmprospătările repetate ale listei de fonturi atunci când utilitarul <code>wineboot</code> modifică directorul de fonturi din prefix, iar mirror-ul de descărcare pentru fontul <b>Courier New</b> a fost actualizat.</p></li><li><p><b>Corecții GTK și <code>libadwaita</code>:</b> S-au remediat erorile vizuale legate de suprapunerea <i>drag-and-drop</i>, ecranul afișat când lista de import este goală (<i>empty state</i>) și butonul de resurse al instalatorului. Totodată, s-a corectat curățarea sesiunilor de timp de joc (<i>playtime</i>) atunci când statisticile de utilizare sunt dezactivate.</p></li><li><p><b>Traduceri și cataloage:</b> A fost adăugată limba letonă în selectorul de limbă, traducerile în suedeză au fost actualizate, iar cataloagele experimentale <b>Soda</b> și cele pentru instalatoarele <b>Microsoft Office</b> au primit cele mai recente definiții.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-thundermail-se-apropie-de-statutul-unei-alternative-complete.html"><small>← Mai nou</small>Thundermail se apropie de statutul unei alternative complete la Gmail: Webmail maturizat, domenii proprii și calendar integrat</a><a class="r" href="../articole/2026-11-tails-7-17-1-actualizare-de-urgenta-ce-elimina-temporar-ublo.html"><small>Mai vechi →</small>Tails 7.17.1: Actualizare de urgență ce elimină temporar uBlock Origin din cauza unei vulnerabilități critice XSS</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelly 3.4 a fost lansat: Suport integrat pentru actualizări de firmware (fwupd / LVFS), tabele personalizabile și remedieri pentru pachetele split din AUR · Linux for Education</title>
+<meta name="description" content="La doar câteva ore după publicarea versiunii de mentenanță 3.3.1, dezvoltatorii managerului grafic de pachete Shelly (dedicat Arch Linux și derivatelor sale) au lansat versiunea majoră 3.4 . Principala noutate…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Shelly 3.4 a fost lansat: Suport integrat pentru actualizări de firmware (fwupd / LVFS), tabele personalizabile și remedieri pentru pachetele split din AUR</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-e5jn9ne5jn9ne5jn-1-mwou1h9j.jpg" alt="" loading="lazy" decoding="async"></p><p>La doar câteva ore după publicarea versiunii de mentenanță 3.3.1, dezvoltatorii managerului grafic de pachete <b>Shelly</b> (dedicat <b>Arch Linux</b> și derivatelor sale) au lansat versiunea majoră <b>3.4</b>. Principala noutate este o pagină dedicată administrării firmware-ului hardware prin intermediul <b>fwupd</b> și <b>LVFS</b>, însoțită de o interfață mai flexibilă și de corectarea compilării pachetelor <i>split</i> din AUR.</p><h3>1. Administrarea firmware-ului prin <code>fwupd</code> și LVFS</h3><p>Shelly 3.4 introduce o pagină opțională <b>Firmware</b> care permite instalarea, retrogradarea (<i>downgrade</i>) și reinstalarea firmware-ului pentru componentele hardware suportate (inclusiv <b>UEFI/BIOS</b> și periferice), folosind ca sursă <b>Linux Vendor Firmware Service (LVFS)</b>:</p><ul><li><p><b>Activare la cerere și integrare D-Bus:</b> Funcția este dezactivată implicit și poate fi activată din ecranul inițial de bun venit sau ulterior din <i>Settings</i>. Dacă pachetul <code>fwupd</code> lipsește din sistem, Shelly îl instalează automat la nevoie, iar activarea prin <b>D-Bus</b> elimină necesitatea pornirii manuale a unui serviciu systemd separat.</p></li><li><p><b>Protecții și verificări de siguranță:</b> Înainte de scrierea firmware-ului (<i>flashing</i>), Shelly afișează un dialog explicit de confirmare cu versiunea vizată, dimensiunea descărcării, timpul estimat și avertismentul privind indisponibilitatea temporară a dispozitivului. Pentru sistemele cu <b>criptare completă a discului</b> (<i>full-disk encryption</i>), utilizatorul trebuie să confirme explicit că deține cheile de recuperare (<i>recovery keys</i>) înainte de a continua.</p></li><li><p><b>Monitorizare în timp real:</b> Descărcările sunt verificate prin sume de control (<i>checksum</i>), progresul este afișat în timp real, sistemul monitorizează starea bateriei și întreruperile daemon-ului <code>fwupd</code>, iar la final oferă opțiunea de repornire imediată sau amânată.</p></li></ul><h3>2. Personalizarea interfeței și finisaje ale temei Pearl</h3><ul><li><p><b>Coloane configurabile în tabele:</b> Tabelele de pachete permit acum afișarea, ascunderea sau reordonarea coloanelor prin <i>drag-and-drop</i>. Preferințele sunt salvate individual pentru fiecare tabel și restaurate la repornirea aplicației.</p></li><li><p><b>Redesign și tema Pearl:</b> Paginile <i>Settings</i> și <i>Flatpak</i> au fost reproiectate, barele de unelte au fost uniformizate, iar tema integrată <b>Pearl</b> a primit corecții atât în modul luminos, cât și în cel întunecat (fundaluri rotunjite ale listelor, anteturi de tabele, margini de butoane și spațieri).</p></li></ul><h3>3. Compilarea corectă a pachetelor <i>split</i> din AUR</h3><ul><li><p><b>Rezolvarea directorului de lucru:</b> Anterior, instalarea unui singur pachet dintr-un set <i>split-package</i> din <b>Arch User Repository (AUR)</b> putea eșua deoarece funcțiile ulterioare <code>package()</code> rulau dintr-un director de lucru greșit.</p></li><li><p><b>Comportament aliniat cu <code>makepkg</code>:</b> Shelly 3.4 compilează acum întregul set <i>split-package</i> într-o singură trecere (urmând comportamentul standard al <code>makepkg</code>), dar instalează efectiv doar pachetele solicitate de utilizator.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-ffmpeg-9-1-gauss-a-fost-lansat-encodare-aac-imbunatatita-cod.html"><small>← Mai nou</small>FFmpeg 9.1 „Gauss” a fost lansat: Encodare AAC îmbunătățită, codare video Vulkan, interpolare de cadre NVIDIA și suport extins pentru formate</a><a class="r" href="../articole/2026-11-apache-netbeans-32-a-fost-lansat-suport-glassfish-8-imbunata.html"><small>Mai vechi →</small>Apache NetBeans 32 a fost lansat: Suport GlassFish 8, îmbunătățiri Java/JDK 27 și actualizări pentru Gradle, Docker și Git</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

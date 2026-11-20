@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redict (fork-ul Redis) se închide definitiv pe măsură ce Valkey câștigă teren; utilizatorii sunt îndrumați să migreze la Valkey · Linux for Education</title>
+<meta name="description" content="Proiectul Redict , fork-ul open-source al bazei de date in-memory Redis lansat în martie 2024 de Drew DeVault , a fost declarat oficial închis ( deprecated ). Versiunea 7.3.6 reprezintă ultima lansare a…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Redict (fork-ul Redis) se închide definitiv pe măsură ce Valkey câștigă teren; utilizatorii sunt îndrumați să migreze la Valkey</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/redict-redis-fork-deprecated-1024x576.jpg" alt="Redict Redis Fork Shuts Down as Valkey Gains Ground" loading="lazy" decoding="async"></p><p>Proiectul <b>Redict</b>, fork-ul open-source al bazei de date in-memory Redis lansat în martie 2024 de <b>Drew DeVault</b>, a fost declarat oficial închis (<i>deprecated</i>). Versiunea <b>7.3.6</b> reprezintă ultima lansare a proiectului, dezvoltarea oprindu-se definitiv după puțin peste doi ani și jumătate de existență.</p><h3>Contextul închiderii: Ascensiunea Valkey și schimbările de licență Redis</h3><ul><li><p><b>Originea proiectului (Martie 2024):</b> Redict a fost creat pornind de la baza de cod <b>Redis 7.2.4</b> sub licența strictă copyleft <b>LGPL-3.0-only</b>, ca reacție imediată la decizia controversată a companiei Redis Inc. de a abandona modelul open-source clasic. Scopul lui DeVault a fost coagularea comunității în jurul unei alternative protejate împotriva viitoarelor schimbări unilaterale de licențiere.</p></li><li><p><b>Lipsa unei comunități sustenabile:</b> Potrivit anunțului oficial, proiectul nu a reușit să atragă o masă critică de contribuitori și utilizatori din două motive majore: succesul masiv al proiectului <b>Valkey</b> (susținut de Linux Foundation și marile companii cloud) și revenirea ulterioară a Redis la o licență open-source copyleft.</p></li></ul><h3>Recomandarea oficială: Migrarea către Valkey, nu revenirea la Redis</h3><p>Echipa de mentenanță recomandă explicit utilizatorilor existenți să migreze către <b>Valkey</b>, considerând că acesta oferă cele mai solide perspective de dezvoltare pe termen lung (chiar dacă folosește o licență permisivă BSD, în locul uneia copyleft).</p><ul><li><p><b>De ce este evitat în continuare Redis:</b> Deși Redis a revenit la o licență open-source copyleft, Drew DeVault avertizează că acordul de contribuție (<i>Contributor License Agreement</i> — CLA) impus de companie permite în continuare modificarea unilaterală a licenței în viitor, motiv pentru care nu recomandă întoarcerea la produsul original.</p></li></ul><h3>Procedura simplificată de migrare la Valkey</h3><p>Deoarece atât Redict, cât și Valkey provin din aceeași bază de cod (Redis 7.2.4) și păstrează compatibilitatea formatului de date și a configurațiilor, tranziția este directă:</p><ol><li><p><b>Sisteme instalate prin managerul de pachete:</b> Se înlocuiește pachetul <code>redict</code> cu <code>valkey</code> și se mută sau se redenumește fișierul de configurare din <code>/etc/redict.conf</code> în <code>/etc/valkey.conf</code>.</p></li><li><p><b>Infrastructuri containerizate:</b> Se înlocuiește imaginea de container Redict cu imaginea oficială <b>Valkey</b>, montând același fișier de configurare adaptat.</p></li></ol>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-domeniul-codeberg-org-a-fost-suspendat-de-registrarul-namesi.html"><small>← Mai nou</small>Domeniul Codeberg.org a fost suspendat de registrarul NameSilo, blocând accesul la mii de proiecte open-source</a><a class="r" href="../articole/2026-11-thundermail-se-apropie-de-statutul-unei-alternative-complete.html"><small>Mai vechi →</small>Thundermail se apropie de statutul unei alternative complete la Gmail: Webmail maturizat, domenii proprii și calendar integrat</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

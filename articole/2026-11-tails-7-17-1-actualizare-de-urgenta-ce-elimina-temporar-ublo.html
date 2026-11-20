@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tails 7.17.1: Actualizare de urgență ce elimină temporar uBlock Origin din cauza unei vulnerabilități critice XSS · Linux for Education</title>
+<meta name="description" content="Tails , distribuția Linux axată pe anonimat și confidențialitate, a lansat ediția de urgență 7.17.1 pentru a remedia o vulnerabilitate severă de securitate din extensia uBlock Origin integrată în Tor Browser…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html" aria-current="page">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../linux-distro.html">Linux Distro</a></div>
+  <h1>Tails 7.17.1: Actualizare de urgență ce elimină temporar uBlock Origin din cauza unei vulnerabilități critice XSS</h1>
+</header>
+<div class="prose">
+<p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2026/11/tails7171-1024x576.jpg" alt="Tails 7.17.1 Emergency Update Removes uBlock Origin Over Security Flaw" loading="lazy" decoding="async"></p><p><b>Tails</b>, distribuția Linux axată pe anonimat și confidențialitate, a lansat ediția de urgență <b>7.17.1</b> pentru a remedia o vulnerabilitate severă de securitate din extensia <b>uBlock Origin</b> integrată în Tor Browser. Ca măsură imediată de protecție, dezvoltatorii au eliminat complet extensia din această versiune până la remedierea definitivă a problemei.</p><h3>Detaliile vulnerabilității: Universal XSS (one-click)</h3><p>Problema de securitate vizează un atac de tip <b>one-click universal Cross-Site Scripting (XSS)</b>:</p><ul><li><p><b>Mecanismul atacului:</b> Vulnerabilitatea permite unui site malițios să injecteze cod JavaScript arbitrar în contextul altor site-uri web vizitate de utilizator, putând modifica comportamentul paginilor și fura sau manipula date sensibile.</p></li><li><p><b>Nivel de risc:</b> Dezvoltatorii avertizează că exploatarea este relativ ușor de realizat de către un site web malițios prin simpla păcălire a utilizatorului să acceseze o pagină compromisă, deși până în prezent nu au fost raportate atacuri active în practică.</p></li><li><p><b>Niveluri de securitate afectate:</b> Vulnerabilitatea afectează nivelurile <b>Standard</b> și <b>Safer</b> din Tor Browser, în timp ce nivelul maxim (<b>Safest</b>, care dezactivează implicit JavaScript) nu este vulnerabil.</p></li><li><p><b>Protecție prin natura amnezică a Tails:</b> Echipa subliniază că o simplă repornire a sistemului Tails șterge automat orice configurație malițioasă a extensiei uBlock Origin care ar fi putut fi injectată în timpul sesiunii. Extensia urmează să fie reintrodusă imediat ce patch-ul de securitate va fi disponibil.</p></li></ul><h3>Actualizări de kernel și compatibilitate hardware</h3><p>Pe lângă eliminarea preventivă a extensiei uBlock Origin, Tails 7.17.1 include îmbunătățiri sub capotă:</p><ul><li><p><b>Linux Kernel 6.12.117:</b> Nucleul a fost actualizat la versiunea <code>6.12.117</code>.</p></li><li><p><b>Firmware nou:</b> Pachetele actualizate de firmware extind compatibilitatea cu componente hardware recente, în special plăci grafice și adaptoare wireless (Wi-Fi).</p></li></ul><h3>Procedura de actualizare și păstrarea datelor (Persistent Storage)</h3><ul><li><p><b>Utilizatori existenți (Tails 7.0 sau mai nou):</b> Actualizarea la 7.17.1 este disponibilă automat și păstrează intact partiția criptată <b>Persistent Storage</b>. În cazul în care actualizarea automată întâmpină erori, se poate utiliza procedura de upgrade manual.</p></li><li><p><b>Instalare nouă:</b> Pentru utilizatorii noi, sunt disponibile imagini USB și ISO (pentru DVD sau mașini virtuale). Dezvoltatorii reamintesc că scrierea unei imagini noi peste un stick USB existent va șterge complet datele din <i>Persistent Storage</i>, fiind obligatorie folosirea fluxului de upgrade.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-bottles-67-7-a-fost-lansat-verificari-inteligente-pentru-nts.html"><small>← Mai nou</small>Bottles 67.7 a fost lansat: Verificări inteligente pentru NTSync/Esync, instalare fiabilă a dependențelor și remedieri GTK/libadwaita</a><a class="r" href="../articole/2026-11-gimp-introduce-testarea-automata-a-interfetei-grafice-gui-pe.html"><small>Mai vechi →</small>GIMP introduce testarea automată a interfeței grafice (GUI) pentru Linux X11 și Wayland</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valkey 9.2 a fost lansat: Snapshot-uri fără procese fork, arbori B+ pentru Sorted Sets, compresie a replicării și caching distribuit pentru AI · Linux for Education</title>
+<meta name="description" content="Valkey , alternativa open-source la Redis susținută de Linux Foundation, a atins disponibilitatea generală ( General Availability ) pentru versiunea 9.2 . Această ediție majoră introduce snapshot-uri realizate…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-20">20 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Valkey 9.2 a fost lansat: Snapshot-uri fără procese fork, arbori B+ pentru Sorted Sets, compresie a replicării și caching distribuit pentru AI</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-1f6tmm1f6tmm1f6t-mwotdknt.jpg" alt="" loading="lazy" decoding="async"></p><p><b>Valkey</b>, alternativa open-source la Redis susținută de Linux Foundation, a atins disponibilitatea generală (<i>General Availability</i>) pentru versiunea <b>9.2</b>. Această ediție majoră introduce snapshot-uri realizate fără bifurcarea proceselor (<i>forkless snapshots</i>), o arhitectură bazată pe arbori B+ pentru seturile ordonate, reducerea cu până la 65% a traficului de replicare și un nou tip de date orientat spre sarcinile de inferență AI.</p><h3>1. Snapshot-uri fără <code>fork()</code> (eliminarea vârfurilor de memorie RAM)</h3><ul><li><p><b>Execuție pe fir de execuție în fundal (<i>background thread</i>):</b> În mod tradițional, crearea unui snapshot pe instanțe intens solicitate presupune pornirea unui proces separat (<code>fork()</code>), ceea ce generează creșteri temporare masive ale consumului de memorie din cauza operațiunilor <i>copy-on-write</i> (uneori dublând necesarul de RAM). Valkey 9.2 realizează acum snapshot-urile printr-un fir de execuție în fundal.</p></li><li><p><b>Dimensionare predictibilă a infrastructurii:</b> Această schimbare elimină vârfurile temporare de memorie atât la backup-urile periodice, cât și la pregătirea snapshot-urilor pentru sincronizarea noilor replici, permițând administratorilor să dimensioneze memoria RAM strict pe baza sarcinii reale de lucru.</p></li></ul><h3>2. Performanță pentru Sorted Sets și compresia replicării</h3><ul><li><p><b>Arhitectură B+ tree pentru Sorted Sets:</b> Seturile ordonate (<i>sorted sets</i> — utilizate frecvent pentru clasamente, sisteme de ranking și cozi de priorități) folosesc acum o structură bazată pe <b>arbori B+</b> pentru colecțiile mari. În testele cu milioane de intrări, aceasta oferă actualizări cu până la <b>105% mai rapide</b> și o eficiență a memoriei cu <b>36% – 43% mai bună</b>.</p></li><li><p><b>Compresie continuă a fluxului de replicare:</b> Noul mecanism de compresie a fluxului reduce traficul continuu de replicare cu <b>50% – 65%</b>, iar opțiunea integrată de compresie <b>LZ4</b> poate micșora fișierele de backup cu până la <b>80%</b>. Noile replici se sincronizează cu aproximativ <b>35% mai repede</b>, cu un cost redus de procesare (2% – 4% dintr-un nucleu CPU per replică).</p></li></ul><h3>3. Noul tip de date <code>Path Hash</code> și caching KV distribuit pentru AI</h3><ul><li><p><b>Tipul nativ <code>Path Hash</code>:</b> Conceput pentru căutări ierarhice rapide, permite aplicațiilor să identifice cel mai lung prefix potrivit (<i>longest matching prefix</i>) și locația datelor din cache printr-o singură comandă. În sistemele de inferență AI, <code>Path Hash</code> funcționează ca un index ușor care indică spre blocurile de context deja calculate și păstrate în memoria GPU sau a gazdei.</p></li><li><p><b>Caching KV distribuit (proiect complementar):</b> Odată cu Valkey 9.2, a fost anunțată o capabilitate open-source separată de caching distribuit cheie-valoare destinată sarcinilor AI. Integrată inițial cu <b>LMCache</b> (compatibil cu motoarele de inferență <b>vLLM</b> și <b>SGLang</b>), aceasta permite serverelor multi-GPU să partajeze contextul calculat anterior, reducând costurile de inferență cu până la <b>40%</b> și latența <i>time-to-first-token</i> cu până la <b>80%</b>.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-apache-netbeans-32-a-fost-lansat-suport-glassfish-8-imbunata.html"><small>← Mai nou</small>Apache NetBeans 32 a fost lansat: Suport GlassFish 8, îmbunătățiri Java/JDK 27 și actualizări pentru Gradle, Docker și Git</a><a class="r" href="../articole/2026-11-php-8-6-a-fost-lansat-aplicare-partiala-a-functiilor-api-mod.html"><small>Mai vechi →</small>PHP 8.6 a fost lansat: Aplicare parțială a funcțiilor, API modern de tip Polling (Io\Poll), securitate implicită consolidată și optimizări de performanță</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
