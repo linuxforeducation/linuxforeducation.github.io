@@ -22,10 +22,28 @@
 <header class="page-head">
   <p class="eyebrow">Etichetă</p>
   <h1>Linux Distro</h1>
-  <p class="lead">33 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
+  <p class="lead">34 articole, de la cel mai nou la cel mai vechi. Apasă pe un titlu pentru a citi articolul complet.</p>
   <label class="filter"><span>Caută în Linux Distro</span><input type="search" id="filtru" placeholder="Filtrează după titlu sau text…" autocomplete="off"></label>
 </header>
 <div class="posts" id="lista">
+<article class="post" id="2026-11-debian-13-8-trixie-a-fost-lansat-150-de-actualizari-de-secur">
+<details>
+<summary>
+  <img class="pt" src="imagini/gemini-generated-image-8m51te8m51te8m51-mwupi8wd.jpg" alt="" loading="lazy" decoding="async">
+  <span class="ps">
+    <span class="meta"><time datetime="2026-11-24">24 noiembrie 2026</time></span>
+    <span class="pt-title" role="heading" aria-level="2">Debian 13.8 „Trixie” a fost lansat: 150 de actualizări de securitate, remediere Secure Boot, kernel 6.12.117 și patch-uri critice pentru glibc, MariaDB și Sudo</span>
+    <span class="excerpt">Proiectul Debian a anunțat disponibilitatea versiunii Debian 13.8 , a opta actualizare de mentenanță ( point release ) a seriei stabile Debian 13 „Trixie” . Ediția integrează 150 de patch-uri de securitate și…</span>
+    <span class="more">Citește articolul</span>
+  </span>
+</summary>
+<div class="prose">
+<p><img src="imagini/gemini-generated-image-8m51te8m51te8m51-mwupi8wd.jpg" alt="" loading="lazy" decoding="async"></p><p>Proiectul <b>Debian</b> a anunțat disponibilitatea versiunii <b>Debian 13.8</b>, a opta actualizare de mentenanță (<i>point release</i>) a seriei stabile <b>Debian 13 „Trixie”</b>. Ediția integrează <b>150 de patch-uri de securitate</b> și <b>122 de remedieri de erori</b>, acoperind componente esențiale ale sistemului precum nucleul Linux, <code>glibc</code>, GRUB, microcodul Intel, dar și servicii critice de rețea și baze de date.</p><h3>1. Nucleul sistemului, Secure Boot și <code>glibc</code></h3><ul><li><p><b>Vulnerabilități de memorie și Secure Boot:</b> Remediază multiple vulnerabilități de tip <i>use-after-free</i> (care puteau provoca blocări de tip <i>denial-of-service</i>) și o vulnerabilitate de ocolire a mecanismului <b>Secure Boot</b> identificată ca <b>CVE-2026-97876</b>.</p></li><li><p><b>Actualizări majore în <code>glibc</code>:</b> Rezolvă numeroase probleme de securitate (depășiri de buffer, scrieri în afara limitelor, <i>stack overflows</i> și erori de concurență), elimină blocajele aplicațiilor în timpul conversiilor UTF-32 și îmbunătățește detecția funcțiilor CPU pe procesoarele Intel.</p></li><li><p><b>Kernel Linux și microcod Intel:</b> Programul de instalare Debian (<i>Debian installer</i>) a fost reconstruit cu noua interfață ABI a nucleului <b>Linux 6.12.117+deb13</b>, iar pachetul de microcod Intel primește o nouă versiune upstream cu remedieri pentru vulnerabilități la nivel de procesor.</p></li><li><p><b>Desktop (KDE KWin):</b> Managerul de ferestre <b>KWin</b> din KDE primește corecții pentru gestionarea culorilor pe <b>Wayland</b> și elimină crash-urile care apăreau la deconectarea monitoarelor.</p></li></ul><h3>2. Servicii de infrastructură, baze de date și rețelistică</h3><ul><li><p><b>MariaDB (versiune stabilă nouă):</b> Include o versiune upstream actualizată care remediază vulnerabilități critice de execuție de cod, ocolire a autorizării, <i>path traversal</i> și injecție SQL, alături de erori de colationare și crash-uri.</p></li><li><p><b>Rsync, Sudo, OpenSSL și ClamAV:</b> <b>Rsync</b> primește un patch pentru o vulnerabilitate de epuizare neautentificată a resurselor, <b>Sudo</b> remediază o problemă de securitate legată de manipularea variabilei de mediu <code>TZ</code>, iar <b>OpenSSL</b> și <b>ClamAV</b> sunt actualizate la cele mai recente ediții stabile.</p></li><li><p><b>Rețelistică și Cloud:</b> Ruterele software <b>BIRD 2</b> și <b>BIRD 3</b> primesc corecții pentru calculul timerelor BGP, gestionarea cheilor de autentificare și validarea FlowSpec; alte pachete actualizate includ <b>ModSecurity</b>, <b>ProFTPD</b>, <b>SSSD</b> și componente <b>OpenStack</b>.</p></li><li><p><b>Actualizări cumulative de aplicații:</b> Sunt integrate toate actualizările de securitate publicate anterior pentru <b>Firefox ESR</b>, <b>Chromium</b>, <b>LibreOffice</b>, <b>Nginx</b>, <b>PHP 8.4</b> și <b>Flatpak</b>.</p></li></ul><h3>3. Actualizare și imagini ISO disponibile</h3><ul><li><p><b>Upgrade pentru sistemele existente:</b> Utilizatorii care rulează deja Debian 13 pot prelua toate pachetele noi prin comenzile standard:</p><div><div><div><div>Bash</div><pre><code>sudo apt update &amp;&amp; sudo apt full-upgrade
+</code></pre></div></div></div></li><li><p><b>Imagini ISO pentru instalări noi:</b></p><ul><li><p><b>Imagini <code>netinst</code>:</b> Disponibile pentru <b>6 arhitecturi</b> (<code>amd64</code>, <code>arm64</code>, <code>armhf</code>, <code>ppc64el</code>, <code>riscv64</code> și <code>s390x</code>), ideale pentru servere sau instalări personalizate.</p></li><li><p><b>Imagini Live:</b> Disponibile exclusiv pentru arhitectura <b>AMD64</b>, cu medii desktop preinstalate (<b>GNOME</b>, <b>KDE</b>, <b>LXDE</b>, <b>Xfce</b>, <b>Cinnamon</b> și <b>MATE</b>).</p></li></ul></li></ul>
+</div>
+<p class="post-foot"><a class="chip" href="linux-distro.html">Linux Distro</a><a href="articole/2026-11-debian-13-8-trixie-a-fost-lansat-150-de-actualizari-de-secur.html">Pagina articolului</a></p>
+</details>
+</article>
 <article class="post" id="2026-11-debian-infiinteaza-o-echipa-dedicata-hardware-ului-de-gaming">
 <details>
 <summary>
