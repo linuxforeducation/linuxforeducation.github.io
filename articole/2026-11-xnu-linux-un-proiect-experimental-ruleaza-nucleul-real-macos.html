@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XNU Linux: Un proiect experimental rulează nucleul real macOS direct ca modul de kernel Linux (xnu.ko) · Linux for Education</title>
+<meta name="description" content="Proiectul experimental XNU Linux (dezvoltat de Heyang Zhou, unul dintre creatorii Deno Deploy) demonstrează o abordare neconvențională pentru rularea aplicațiilor macOS pe Linux: în loc să utilizeze…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-24">24 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>XNU Linux: Un proiect experimental rulează nucleul real macOS direct ca modul de kernel Linux (xnu.ko)</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-f3hbef3hbef3hbef-mwuq6fwc.jpg" alt="" loading="lazy" decoding="async"></p><p>Proiectul experimental <b>XNU Linux</b> (dezvoltat de Heyang Zhou, unul dintre creatorii Deno Deploy) demonstrează o abordare neconvențională pentru rularea aplicațiilor macOS pe Linux: în loc să utilizeze virtualizarea tradițională sau straturi de traducere a apelurilor de sistem (precum Darling), acesta compilează nucleul open-source <b>XNU</b> al Apple și îl încarcă direct ca un <b>modul de kernel Linux (<code>xnu.ko</code>)</b>, permițând proceselor macOS să ruleze nativ alături de cele Linux.</p><h3>1. Arhitectura hibridă: Modulele <code>xnu.ko</code> și <code>fki.ko</code></h3><ul><li><p><b>Execuție fără hypervisor între nuclee:</b> Odată încărcat într-un kernel Linux ARM64, modulul <code>xnu.ko</code> are acces direct la procesor și la unitatea de gestionare a memoriei (MMU), astfel încât ambele sisteme de operare partajează aceleași nuclee CPU fără a fi separate de un hypervisor.</p></li><li><p><b>Foreign Kernel Interface (<code>fki.ko</code>):</b> Un al doilea modul de kernel Linux, numit <code>fki.ko</code>, oferă o interfață prin care XNU primește acces la memorie, timere, operațiuni cu fișiere, rețelistică și alte resurse gestionate de Linux. Fiecare CPU găzduit al XNU rulează ca un fir de execuție al kernelului Linux (<i>kernel thread</i>) fixat (<i>pinned</i>) pe un nucleu fizic al gazdei, în timp ce Linux administrează hardware-ul de bază și redirecționează excepțiile relevante către XNU.</p></li><li><p><b>Extensii de kernel și accelerare grafică (Metal → Vulkan):</b> Proiectul include extensii de kernel pentru stocare (folosind o imagine de disc găzduită pe Linux), afișaj, tastatură/mouse, rețea Ethernet și grafică — subsistemul grafic traducând API-ul <b>Metal</b> de la Apple către <b>Vulkan</b> și accesând GPU-ul gazdei prin driverul <b>Venus</b> din <b>Mesa</b>.</p></li></ul><h3>2. Ce funcționează și care sunt limitările actuale</h3><ul><li><p><b>Mediul macOS funcțional:</b> Conform documentației, dezvoltatorul a reușit să pornească <b>macOS 27.2.1</b> până la un desktop complet funcțional peste un kernel standard <b>Ubuntu Linux</b>, rulând componente precum <code>loginwindow</code>, <code>WindowServer</code>, <b>Dock</b>, <b>Finder</b>, <b>Safari</b> și <b>Chrome</b>, alături de căutarea <b>Spotlight</b> și accesul la sistemul de fișiere.</p></li><li><p><b>Cerințe hardware stricte:</b> În prezent, XNU Linux necesită un mediu Linux <b>ARM64</b> cu suport pentru autentificarea pointerilor (<i>pointer authentication</i>), ceea ce îl restricționează la dispozitive <b>Apple Silicon (M1 sau mai nou)</b>. Configurația documentată rulează Linux într-o mașină virtuală folosind <code>krunkit</code> sau <code>Tart</code> (deci există un strat de virtualizare sub Linux, dar niciun hypervisor suplimentar între Linux și nucleul XNU încărcat).</p></li><li><p><b>Cerințe de memorie și licențiere:</b> Necesită cel puțin <b>16 GB RAM</b> (dintre care 8 GB rezervați pentru kernelul macOS găzduit) și o instalare separată de macOS creată cu installer-ul oficial Apple, depozitul proiectului nedistribuind binare proprietare Apple.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-mozilla-thunderbird-161-a-fost-lansat-insigne-cu-mesaje-neci.html"><small>← Mai nou</small>Mozilla Thunderbird 161 a fost lansat: Insigne cu mesaje necitite pe bara de activități din Linux, remedieri Exchange/IMAP și actualizare Thundermail 2.0.30</a><a class="r" href="../articole/2026-11-kubernetes-1-38-alocare-a-resurselor-la-nivel-de-pod-evacuar.html"><small>Mai vechi →</small>Kubernetes 1.38: Alocare a resurselor la nivel de Pod, evacuare coordonată prin EvictionRequest și cerințe noi pentru runtime-uri și cgroups</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OBS Studio 33.0.2 a fost lansat: Corecții de crash-uri pe Linux (CEF 150), remedieri pentru înregistrarea Hybrid MP4 și WebGPU pe Windows · Linux for Education</title>
+<meta name="description" content="OBS Studio a primit versiunea de mentenanță 33.0.2 , a doua actualizare din seria 33.0 a popularei aplicații open-source pentru înregistrare video și streaming live. Actualizarea rezolvă erori critice de…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-24">24 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>OBS Studio 33.0.2 a fost lansat: Corecții de crash-uri pe Linux (CEF 150), remedieri pentru înregistrarea Hybrid MP4 și WebGPU pe Windows</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-p7ijbrp7ijbrp7ij-mwuoy4x6.jpg" alt="" loading="lazy" decoding="async"></p><p><b>OBS Studio</b> a primit versiunea de mentenanță <b>33.0.2</b>, a doua actualizare din seria 33.0 a popularei aplicații open-source pentru înregistrare video și streaming live. Actualizarea rezolvă erori critice de stabilitate, îmbunătățește fiabilitatea surselor de tip browser (<i>browser sources</i>) și corectează problemele de înregistrare și sunet pe Linux, Windows și macOS.</p><h3>1. Surse Browser (CEF 150) și îmbunătățiri specifice platformelor</h3><p>Actualizarea vine în contextul trecerii majore la <b>Chromium Embedded Framework (CEF) 150</b> (de la versiunea 127) realizate în OBS Studio 33.0:</p><ul><li><p><b>Linux:</b> Remediază un crash legat de alocarea memoriei în sursele de tip browser.</p></li><li><p><b>Windows:</b> Activează suportul <b>WebGPU</b> pentru sursele browser (permițând rularea conținutului web care folosește acest API grafic modern în cadrul OBS) și rezolvă un crash legat de browser la pornirea aplicației.</p></li><li><p><b>macOS:</b> Corectează funcția <i>Screen Capture</i> pe Mac-urile cu procesoare Intel, elimină un crash cauzat de solicitările de acces Bluetooth din sursele browser și împiedică apariția neașteptată a procesului <i>OBS Helper</i> în macOS Dock.</p></li><li><p><b>Windows și macOS:</b> Controlerele de jocuri continuă să funcționeze atunci când fereastra OBS pierde focusul, iar potențialele crash-uri generate de solicitările de tip <i>passkey</i> în sursele browser au fost eliminate.</p></li></ul><h3>2. Înregistrare Hybrid MP4, sunet DeckLink și integrare YouTube</h3><ul><li><p><b>Împărțirea automată a fișierelor Hybrid MP4:</b> S-a remediat o eroare prin care înregistrările în format <b>Hybrid MP4</b> nu erau împărțite conform intervalelor de timp configurate (funcție esențială pentru sesiunile lungi de înregistrare).</p></li><li><p><b>Sunet DeckLink:</b> Au fost eliminate întreruperile frecvente ale sunetului (<i>audio dropouts</i>) la utilizarea hardware-ului de ieșire <b>DeckLink</b>.</p></li><li><p><b>Integrare YouTube:</b> S-a corectat o problemă prin care setării <i>AutoStop</i> îi era atribuită incorect valoarea setării <i>AutoStart</i>.</p></li></ul><h3>3. Stabilitate generală și remedieri de interfață</h3><ul><li><p><b>Camera virtuală și ferestre de dialog:</b> Au fost rezolvate crash-urile care puteau apărea la inițializarea și oprirea camerei virtuale (<i>virtual camera</i>), problemele legate de <i>vertex buffers</i>, precum și închiderea forțată a aplicației atunci când OBS este închis în timp ce un dialog nativ de dispozitiv sau un dialog secundar (precum selectorul de fonturi) rămâne deschis.</p></li><li><p><b>Alte corecții:</b> Grupurile de surse duplicate nu își mai pierd numele, intrările repetate din jurnal (<i>log</i>) sunt trunchiate corect și a fost eliminat un crash la clic dreapta pe anumite câmpuri numerice.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-apprise-2-3-a-fost-lansat-sase-servicii-noi-de-notificare-wh.html"><small>← Mai nou</small>Apprise 2.3 a fost lansat: Șase servicii noi de notificare (WhatsApp AWS, Instagram, Azure), funcția url_fields() și protecție pentru token-urile OAuth</a><a class="r" href="../articole/2026-11-noctalia-5-6-a-fost-lansat-scalare-fractionara-mai-precisa-s.html"><small>Mai vechi →</small>Noctalia 5.6 a fost lansat: Scalare fracționară mai precisă, scalare globală a fonturilor, pornire mai rapidă prin pidfd și autenticarea ecranului de blocare separată în noctalia-pam-helper</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

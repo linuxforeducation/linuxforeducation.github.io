@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apprise 2.3 a fost lansat: Șase servicii noi de notificare (WhatsApp AWS, Instagram, Azure), funcția url_fields() și protecție pentru token-urile OAuth · Linux for Education</title>
+<meta name="description" content="Apprise , biblioteca și utilitarul open-source bazat pe Python care permite aplicațiilor și scripturilor să trimită notificări către zeci de platforme printr-o interfață unificată, a primit versiunea 2.3…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-24">24 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Apprise 2.3 a fost lansat: Șase servicii noi de notificare (WhatsApp AWS, Instagram, Azure), funcția url_fields() și protecție pentru token-urile OAuth</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/gemini-generated-image-hl208shl208shl20-mwup07pb.jpg" alt="" loading="lazy" decoding="async"></p><p><b>Apprise</b>, biblioteca și utilitarul open-source bazat pe Python care permite aplicațiilor și scripturilor să trimită notificări către zeci de platforme printr-o interfață unificată, a primit versiunea <b>2.3</b>. Actualizarea introduce o nouă funcție destinată dezvoltatorilor pentru construirea interfețelor de configurare, adaugă suport pentru șase servicii noi de mesagerie/push, îmbunătățește criptarea PushWard și întărește securitatea jurnalelor de depanare.</p><h3>1. Funcția <code>url_fields()</code> și configurare simplificată pentru dezvoltatori</h3><ul><li><p><b>Conversie bidirecțională URL ↔ câmpuri de formular (<code>url_fields()</code>):</b> Cea mai importantă adăugire tehnică permite transformarea URL-urilor specifice serviciilor de notificare în câmpuri de formular lizibile și reconstruirea lor ulterioară, eliminând nevoia ca utilizatorii finali să compună manual șiruri URL complexe.</p></li><li><p><b>Pregătire pentru Apprise-API și Apprise Mobile 0.8:</b> Această funcționalitate stă la baza viitoarelor actualizări pentru <b>Apprise-API</b> și <b>Apprise Mobile 0.8</b> (Android și iOS), permițând componentei <i>URL Builder</i> din aplicația mobilă să încarce URL-urile existente direct în câmpuri editabile.</p></li></ul><h3>2. Șase servicii noi de notificare și actualizări ale plugin-urilor existente</h3><ul><li><p><b>Integrări noi în Apprise 2.3.0:</b></p><ul><li><p><b>WhatsApp</b> (prin <i>AWS End User Messaging Social</i>);</p></li><li><p><b>Mesaje directe Instagram</b> (<i>Instagram Direct Messages</i>);</p></li><li><p><b>Email Azure Communication Services</b>;</p></li><li><p><b>Pushplus</b>;</p></li><li><p><b>OpsiMate</b>;</p></li><li><p><b>Notificări push Notify!</b>.</p></li></ul></li><li><p><b>Îmbunătățiri pentru servicii existente:</b> <b>PushWard</b> primește suport pentru <b>criptare end-to-end</b>, alături de opțiuni pentru confirmări (<i>acknowledgments</i>), amânare (<i>snoozing</i>), fire de discuție (<i>threads</i>), subtitluri și restrângerea notificărilor. De asemenea, <b>Feishu</b> și <b>Lark</b> pot afișa acum conținutul Markdown sub formă de carduri interactive.</p></li></ul><h3>3. Securitate, formatare și fiabilitatea livrării</h3><ul><li><p><b>Protecția token-urilor OAuth în log-uri:</b> Include o remediere de securitate și modificări care împiedică apariția token-urilor de acces <b>OAuth</b> în jurnalele de depanare (<i>debug logs</i>).</p></li><li><p><b>Livrare și formatare fără blocaje:</b> Descărcările lente ale atașamentelor nu mai blochează trimiterea notificărilor, iar integrarea <b>Telegram</b> primește corecții pentru gestionarea spoilerelor în <code>MarkdownV2</code> și plasarea legendelor (<i>captions</i>) la albume.</p></li><li><p><b>Șabloane UTF-8 și parsare strictă:</b> Șabloanele pentru Discord, Slack, Telegram și Workflows sunt citite explicit ca <b>UTF-8</b>, sunt corectate erorile legate de substituenții <i>case-sensitive</i> și parametrii scriși cu majuscule, iar conversia Markdown-to-HTML pentru blocurile de cod delimitate (<i>fenced code blocks</i>), parsarea nativă a URL-urilor și reîncercările pentru integrarea <b>Trigv</b> au fost îmbunătățite.</p></li></ul>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-calibre-9-19-a-fost-lansat-verificare-gramaticala-offline-re.html"><small>← Mai nou</small>Calibre 9.19 a fost lansat: Verificare gramaticală offline, rescrierea frazelor cu rețele neurale locale și motor îmbunătățit de conversie PDF</a><a class="r" href="../articole/2026-11-obs-studio-33-0-2-a-fost-lansat-corectii-de-crash-uri-pe-lin.html"><small>Mai vechi →</small>OBS Studio 33.0.2 a fost lansat: Corecții de crash-uri pe Linux (CEF 150), remedieri pentru înregistrarea Hybrid MP4 și WebGPU pe Windows</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
