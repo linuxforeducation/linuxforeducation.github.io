@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 Cum să descarci fișierele ISO Linux Mint și să le verifici integritatea · Linux for Education</title>
+<meta name="description" content="Descărcarea unei imagini ISO Linux Mint și verificarea integrității și autenticității acesteia înainte de instalare reprezintă pași esențiali pentru a evita fișierele corupte sau modificate malițios. Procesul…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top on" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html" aria-current="page">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-25">25 noiembrie 2026</time><a class="chip" href="../linux-mint.html">Linux Mint</a></div>
+  <h1>01 Cum să descarci fișierele ISO Linux Mint și să le verifici integritatea</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/how-to-linux-mint-ghid-mww2eixc.png" alt="" loading="lazy" decoding="async"></p><p>Descărcarea unei imagini ISO Linux Mint și verificarea integrității și autenticității acesteia înainte de instalare reprezintă pași esențiali pentru a evita fișierele corupte sau modificate malițios. Procesul implică obținerea imaginii de pe un server oficial, verificarea sumei de control SHA256 și validarea semnăturii criptografice GPG.</p><h2>1. Descărcarea imaginii ISO și a fișierelor de verificare</h2><ol><li><p><b>Accesează site-ul oficial:</b> Intră pe <a href="https://linuxmint.com/download.php" target="_blank" rel="noopener noreferrer">linuxmint.com</a> și alege ediția dorită (<b>Cinnamon</b>, <b>MATE</b> sau <b>Xfce</b>).</p></li><li><p><b>Alege un mirror de descărcare:</b> Selectează un server geografic apropiat (sau descarcă prin torrent oficial) pentru a obține fișierul <code>.iso</code>.</p></li><li><p><b>Descarcă fișierele de verificare:</b> De pe aceeași pagină sau din directorul serverului mirror, salvează în <b>același folder</b> cu imaginea ISO următoarele două fișiere:</p><ul><li><p><code>sha256sum.txt</code> — conține sumele de control SHA256 pentru imaginile oficiale.</p></li><li><p><code>sha256sum.txt.gpg</code> — semnătura digitală care garantează că fișierul cu sume de control nu a fost falsificat.</p></li></ul></li></ol><h2>2. Verificarea integrității (SHA256)</h2><p>Verificarea integrității confirmă faptul că fișierul ISO nu a suferit erori în timpul descărcării.</p><p>Deschide terminalul, navighează în directorul în care ai salvat fișierele (de regulă <code>~/Downloads</code>) și rulează comanda:</p><div><div><div><div>Bash</div><pre><code>cd ~/Downloads
+sha256sum -c sha256sum.txt 2&gt;&amp;1 | grep OK
+</code></pre></div></div></div><ul><li><p><b>Rezultat așteptat:</b> Terminalul trebuie să afișeze numele fișierului tău ISO urmat de <code>: OK</code> (de exemplu: <code>linuxmint-22-cinnamon-64bit.iso: OK</code>).</p></li><li><p>Dacă nu apare niciun rezultat sau primești un mesaj de eroare, fișierul este corupt și trebuie descărcat din nou.</p></li></ul><h2>3. Verificarea autenticității (Semnătura GPG)</h2><p>Chiar dacă suma SHA256 corespunde, trebuie să te asiguri că fișierul <code>sha256sum.txt</code> provine într-adevăr de la echipa Linux Mint.</p><h3>Pasul 1: Importă cheia publică de semnare Linux Mint</h3><p>Rulează în terminal comanda de mai jos pentru a descărca cheia oficială de pe serverul de chei Ubuntu:</p><div><div><div><div>Bash</div><pre><code>gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key "27DE B156 44C6 B3CF 3BD7  D291 300F 846B A25B AE09"
+</code></pre></div></div></div><h3>Pasul 2: Verifică semnătura fișierului <code>sha256sum.txt</code></h3><p>Execută comanda de verificare GPG:</p><div><div><div><div>Bash</div><pre><code>gpg --verify sha256sum.txt.gpg sha256sum.txt
+</code></pre></div></div></div><ul><li><p><b>Rezultat așteptat:</b> Mesajul trebuie să includă linia:<code>gpg: Good signature from "Linux Mint ISO Signing Key &lt;root@linuxmint.com&gt;"</code></p></li><li><p><b>Notă:</b> Avertismentul <i>"This key is not certified with a trusted signature!"</i> este normal atâta timp cât amprenta cheii (<i>Primary key fingerprint</i>) afișată la final corespunde exact cu <code>27DE B156 44C6 B3CF 3BD7  D291 300F 846B A25B AE09</code>.</p></li></ul><h2>4. Pașii următori</h2><p>Odată ce ambele verificări (SHA256 și GPG) au confirmat validitatea imaginii, poți scrie în siguranță fișierul ISO pe un stick USB bootabil folosind instrumentul <b>USB Image Writer</b> (preinstalat în Linux Mint) sau utilitare precum <b>BalenaEtcher</b> ori <b>Ventoy</b>.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-02-cum-sa-creezi-un-stick-usb-bootabil-cu-linux-mint.html"><small>← Mai nou</small>02 Cum să creezi un stick USB bootabil cu Linux Mint</a><a class="r" href="../articole/2026-11-cisco-si-openai-lanseaza-shirudo-o-platforma-open-source-de.html"><small>Mai vechi →</small>Cisco și OpenAI lansează Shirudo, o platformă open-source de securitate Linux bazată pe eBPF și inteligență artificială</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
