@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>openSUSE Agama 26 va permite instalări Linux complet automatizate, controlate prin inteligență artificială · Linux for Education</title>
+<meta name="description" content="Dezvoltatorii Agama , programul de instalare Linux de nouă generație al proiectului openSUSE și succesorul tradiționalului sistem YaST, au anunțat integrarea suportului pentru agenți AI în viitoarea versiune…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-25">25 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>openSUSE Agama 26 va permite instalări Linux complet automatizate, controlate prin inteligență artificială</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/opensuse-agama-26-instalari-automate-mww0ya13.png" alt="" loading="lazy" decoding="async"></p><p>Dezvoltatorii <b>Agama</b>, programul de instalare Linux de nouă generație al proiectului openSUSE și succesorul tradiționalului sistem YaST, au anunțat integrarea suportului pentru agenți AI în viitoarea versiune <b>Agama 26</b>. Noua funcționalitate va permite utilizatorilor și administratorilor de sistem să configureze și să instaleze distribuții Linux folosind comenzi în limbaj natural.</p><h3>Cum funcționează integrarea AI prin serverul MCP</h3><p>Noua capabilitate se bazează pe un server <b>MCP</b> (<i>Model Context Protocol</i>) integrat direct în Agama, care le oferă asistenților AI externi o interfață structurată pentru a configura, executa și monitoriza procesul de instalare a sistemului de operare.</p><p>De exemplu, un utilizator îi va putea cere unui asistent AI să instaleze openSUSE Tumbleweed cu mediul desktop GNOME, să configureze o unitate NVMe cu sistemul de fișiere Btrfs și să creeze un cont de utilizator, fără a mai parcurge manual ecranele clasice de configurare.</p><h3>Două moduri de operare</h3><p>Agama 26 va pune la dispoziție două moduri distincte de utilizare a agenților AI:</p><ol><li><p><b>Modul asistat (supervizat):</b> Agentul AI are permisiunea doar de a pregăti profilul și setările de instalare, lăsând aprobarea finală și pornirea efectivă a procesului în seama unui operator uman.</p></li><li><p><b>Modul complet automatizat (nesupravegheat):</b> Permite agenților AI să deruleze instalări cap-coadă — inclusiv formatarea discurilor și repornirea sistemului — fiind ideal pentru provizionarea automată a infrastructurilor server.</p></li></ol><h3>Măsuri de securitate și disponibilitate</h3><p>Având în vedere natura critică și potențial distructivă a operațiunilor de instalare a unui sistem de operare, dezvoltatorii au implementat mai multe mecanisme de protecție:</p><ul><li><p><b>Validare strictă:</b> Configurațiile generate sunt verificate prin JSON Schema și controale pentru detectarea parametrilor invalizi din punct de vedere tehnic.</p></li><li><p><b>Controlul accesului:</b> Interfața folosește tokenuri dedicate de autentificare și pune la dispoziție instrumente de diagnosticare.</p></li><li><p><b>Fără acces direct la shell:</b> Agenții AI nu primesc acces direct la terminal și nu pot apela utilitare de partiționare la nivel scăzut; toate solicitările sunt procesate exclusiv prin mecanismele interne ale Agama.</p></li><li><p><b>Dezactivat implicit:</b> Serverul MCP va fi oprit în mod implicit, astfel încât utilizatorii care preferă instalările clasice nu vor observa nicio schimbare în fluxul lor obișnuit de lucru.</p></li></ul><p>Deși funcționalitatea va debuta oficial odată cu lansarea versiunii <b>Agama 26</b>, cei interesați o pot testa deja prin intermediul imaginilor de instalare <i>nightly</i> ale proiectului.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-ipfire-2-29-core-update-206-consolideaza-securitatea-interfe.html"><small>← Mai nou</small>IPFire 2.29 Core Update 206 consolidează securitatea interfeței web și adaugă suport extins pentru traduceri prin Weblate</a><a class="r" href="../articole/2026-11-flatpak-1-18-6-remediaza-doua-vulnerabilitati-grave-de-secur.html"><small>Mai vechi →</small>Flatpak 1.18.6 remediază două vulnerabilități grave de securitate: escaladare la privilegii de root și evadare din sandbox</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

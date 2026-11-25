@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flatpak 1.18.6 remediază două vulnerabilități grave de securitate: escaladare la privilegii de root și evadare din sandbox · Linux for Education</title>
+<meta name="description" content="chipa de dezvoltare a lansat Flatpak 1.18.6 , o actualizare de securitate critică ce rezolvă două vulnerabilități majore care ar putea permite aplicațiilor malițioase sau compromise să obțină privilegii de…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-25">25 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>Flatpak 1.18.6 remediază două vulnerabilități grave de securitate: escaladare la privilegii de root și evadare din sandbox</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/flatpak-1-18-6-securitate-mww0vyrt.png" alt="" loading="lazy" decoding="async"></p><p>chipa de dezvoltare a lansat <b>Flatpak 1.18.6</b>, o actualizare de securitate critică ce rezolvă două vulnerabilități majore care ar putea permite aplicațiilor malițioase sau compromise să obțină privilegii de administrator (<code>root</code>) ori să ocolească izolarea oferită de mediul sandbox.</p><h3>Detaliile vulnerabilităților remediate</h3><ul><li><p><b>CVE-2026-133842 (Severitate critică – Escaladare a privilegiilor):</b> Această problemă vizează mecanismul <code>extra-data</code> din Flatpak, utilizat pentru descărcarea resurselor suplimentare în timpul instalării unei aplicații. În anumite condiții, o aplicație, un runtime sau o extensie malițioasă instalată la nivel de sistem putea determina Flatpak să lase pe sistemul gazdă un fișier executabil cu permisiuni <code>setuid root</code>. Un atacator local ar fi putut exploata ulterior acest executabil pentru a obține acces deplin de tip <code>root</code>.</p></li><li><p><b>CVE-2026-133845 (Severitate ridicată – Evadare din sandbox):</b> Vulnerabilitatea afectează modul în care serviciul <code>flatpak-portal</code> gestionează descriptorii de fișiere la lansarea proceselor într-un subsandbox. Eroarea permitea unei aplicații compromise — chiar și uneia fără permisiuni speciale — să acceseze magistrala D-Bus de sesiune nefiltrată, reușind astfel să evadeze complet din izolarea sandboxului.</p></li></ul><h3>Disponibilitate și versiuni afectate</h3><p>Corecțiile au fost integrate în <b>Flatpak 1.18.6</b> (ramura stabilă) și în <b>Flatpak 1.19.4</b> (ramura de dezvoltare). Inițial, aceste remedieri au fost pregătite pentru versiunile 1.18.5 și 1.19.3, însă acele lansări au fost înlocuite imediat după ce procesul lor de publicare a eșuat.</p><p>De asemenea, patch-urile de securitate au fost portate înapoi (<i>backported</i>) către ramura mai veche <b>Flatpak 1.16.x</b>, utilizată de distribuțiile cu suport pe termen lung (LTS), precum Debian 13. Întrucât această ramură nu mai este întreținută oficial de dezvoltatorii principali, nu va exista o lansare oficială nouă din partea lor, responsabilitatea livrării pachetelor actualizate revenind administratorilor fiecărei distribuții Linux.</p><p>Având în vedere gravitatea celor două breșe de securitate, utilizatorilor de Linux li se recomandă să își actualizeze pachetele Flatpak imediat ce acestea devin disponibile în depozitele oficiale ale distribuției pe care o folosesc.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-opensuse-agama-26-va-permite-instalari-linux-complet-automat.html"><small>← Mai nou</small>openSUSE Agama 26 va permite instalări Linux complet automatizate, controlate prin inteligență artificială</a><a class="r" href="../articole/2026-11-peppermint-os-lanseaza-prima-sa-editie-bazata-pe-void-linux.html"><small>Mai vechi →</small>Peppermint OS lansează prima sa ediție bazată pe Void Linux: Model rolling-release cu XBPS, runit, server grafic XLibre și noul Peppermint Software Center</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

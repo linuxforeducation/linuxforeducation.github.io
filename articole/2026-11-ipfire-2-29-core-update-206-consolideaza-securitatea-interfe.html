@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPFire 2.29 Core Update 206 consolidează securitatea interfeței web și adaugă suport extins pentru traduceri prin Weblate · Linux for Education</title>
+<meta name="description" content="Distribuția firewall open-source IPFire a lansat 2.29 Core Update 206 , o actualizare majoră de întreținere și securitate care întărește arhitectura interfeței de administrare web, remediază vulnerabilități de…">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6b4f'/%3E%3Cpath d='M8 10l6 6-6 6M16 22h8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="logo" aria-hidden="true">&gt;_</span><span>Linux for Education</span></a>
+    <div class="social"><a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a><a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="meniu">Meniu</button>
+  </div>
+  <nav id="meniu" class="site-nav" aria-label="Etichete"><div class="wrap nav-in"><a href="../index.html">Acasă</a><a href="../stiri.html">Știri</a><a href="../software.html" aria-current="page">Software</a><a href="../linux-distro.html">Linux Distro</a><a href="../open-source-news.html">Open Source News</a><a href="../games.html">Games</a><a href="../recenzie.html">Recenzie</a><a href="../newsletter.html">Newsletter</a><a href="../office.html">Office</a><div class="dd"><a class="dd-top" href="../tutoriale.html">Tutoriale <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../linux.html">Linux</a><a href="../debian.html">Debian</a><a href="../linux-mint.html">Linux Mint</a><a href="../arch-linux.html">Arch Linux</a></div></div><div class="dd"><a class="dd-top" href="../cursuri.html">Cursuri <span aria-hidden="true">▾</span></a><div class="dd-menu"><a href="../inkscape.html">Inkscape</a><a href="../scilab.html">Scilab</a><a href="../smath.html">SMath</a><a href="../libreoffice-calc.html">LibreOffice Calc</a><a href="../libreoffice-writer.html">LibreOffice Writer</a><a href="../libreoffice-impress.html">LibreOffice Impress</a><a href="../libreoffice-math.html">LibreOffice Math</a><a href="../libreoffice-draw.html">LibreOffice Draw</a><a href="../libreoffice-base.html">LibreOffice Base</a></div></div></div></nav>
+</header>
+<main id="continut" class="wrap">
+<article class="single">
+<header class="page-head">
+  <div class="meta"><time datetime="2026-11-25">25 noiembrie 2026</time><a class="chip" href="../software.html">Software</a></div>
+  <h1>IPFire 2.29 Core Update 206 consolidează securitatea interfeței web și adaugă suport extins pentru traduceri prin Weblate</h1>
+</header>
+<div class="prose">
+<p><img src="../imagini/ipfire-2-29-core-update-206-mww10m1y.png" alt="" loading="lazy" decoding="async"></p><p>Distribuția firewall open-source <b>IPFire</b> a lansat <b>2.29 Core Update 206</b>, o actualizare majoră de întreținere și securitate care întărește arhitectura interfeței de administrare web, remediază vulnerabilități de tip <i>command injection</i> și modernizează sistemul de localizare a platformei.</p><h3>Securitate consolidată pentru interfața web și rețea</h3><p>Principala noutate din punct de vedere al securității vizează eliminarea invocării directe a unui shell din operațiunile interne ale interfeței web. Prin această modificare structurală, interfața de administrare nu mai lansează procese shell pentru a rula comenzi, a citi fișiere sau a identifica procese active, eliminând astfel o întreagă clasă de posibile atacuri prin injecție de comenzi.</p><p>Pe lângă această măsură arhitecturală, Core Update 206 aduce și alte îmbunătățiri importante de securitate:</p><ul><li><p><b>Remedierea extensiei WIO:</b> Au fost corectate două vulnerabilități de tip <i>command injection</i> în add-on-ul <b>WIO</b> (<i>Who Is Online</i>), care ar fi putut permite unui atacator să execute comenzi shell cu privilegiile utilizatorului serverului web.</p></li><li><p><b>Curățarea certificatelor:</b> Certificatele rădăcină cunoscute ca fiind compromise au fost eliminate din depozitul sistemului.</p></li><li><p><b>Restricționarea traficului DNS:</b> Conexiunile de ieșire ale resolverului DNS sunt acum limitate strict la porturile dedicate DNS.</p></li><li><p><b>Optimizarea inspecției Suricata:</b> Sistemul de prevenire a intruziunilor (IPS) Suricata nu mai încearcă să inspecteze traficul ESP criptat, evitând procesarea inutilă a pachetelor care nu pot fi analizate.</p></li></ul><h3>Sistem nou de traducere și program de instalare optimizat</h3><p>IPFire a înlocuit vechiul sistem intern de localizare cu <b>GNU gettext</b>, rescriind șirurile de text sub formă de propoziții complete și coerente, administrate acum printr-o instanță <b>Weblate</b> dedicată.</p><p>De asemenea, programul de instalare a primit îmbunătățiri vizibile:</p><ul><li><p>Include traduceri noi pentru <b>română</b>, maghiară și suedeză (iar portugheza europeană a fost înlocuită cu portugheza braziliană).</p></li><li><p>Consola folosește acum un font capabil să afișeze corect toate diacriticele din alfabetul limbii române.</p></li><li><p>Imaginea de instalare are o dimensiune mai redusă datorită compresiei <b>Zstandard (zstd)</b> și eliminării driverelor grafice neutilizate.</p></li></ul><h3>Suport pentru LoongArch și pachete actualizate</h3><p>Actualizarea introduce suport oficial de compilare pentru arhitectura <b>LoongArch (<code>loongarch64</code>)</b>, revine de la <code>dracut-ng</code> la <code>dracut</code> pentru generarea imaginilor <i>initramfs</i> și permite agentului Zabbix să colecteze metrici direct din Suricata.</p><p>Printre componentele de bază actualizate se numără:</p><ul><li><p><b>Nucleul Linux:</b> 6.18.64</p></li><li><p><b>Servicii și sistem:</b> <code>systemd</code> 261.3, <code>BIND</code> 9.20.29</p></li><li><p><b>Securitate și VPN:</b> <code>Suricata</code> 8.0.8, <code>OpenSSL</code> 3.6.5, <code>OpenSSH</code> 10.5p1, <code>OpenVPN</code> 2.7.7, <code>strongSwan</code> 6.1.0</p></li></ul><p>Utilizatorii existenți pot instala <b>Core Update 206</b> direct din interfața web de administrare sau prin intermediul managerului de pachete <code>pakfire</code>.</p>
+</div>
+</article>
+<nav class="pn" aria-label="Alte articole"><a href="../articole/2026-11-cisco-si-openai-lanseaza-shirudo-o-platforma-open-source-de.html"><small>← Mai nou</small>Cisco și OpenAI lansează Shirudo, o platformă open-source de securitate Linux bazată pe eBPF și inteligență artificială</a><a class="r" href="../articole/2026-11-opensuse-agama-26-va-permite-instalari-linux-complet-automat.html"><small>Mai vechi →</small>openSUSE Agama 26 va permite instalări Linux complet automatizate, controlate prin inteligență artificială</a></nav>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <p><strong>Linux for Education</strong> — Învățăm Linux. Dezvoltăm competențe digitale. Construim încredere.</p>
+  <p>Urmărește-ne: <a href="https://www.facebook.com/linux.for.education" target="_blank" rel="me noopener">Facebook</a> · <a href="https://mstdn.ro/@linuxwebzine" target="_blank" rel="me noopener">Mastodon</a></p>
+</div></footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
